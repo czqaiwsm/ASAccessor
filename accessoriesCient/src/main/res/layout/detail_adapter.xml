@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@null"
+              android:descendantFocusability="blocksDescendants"
+              android:layout_gravity="center">
+
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+    >
+        <TextView android:id="@+id/detailContent"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="支付张老师课程"
+                  android:layout_centerVertical="true"
+                  android:textColor="@color/color_small_gray"
+                  android:layout_marginLeft="@dimen/msg_margin"
+                  android:textSize="@dimen/teach_font_size"/>
+        <RelativeLayout android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:gravity="center_vertical"
+                        android:layout_marginRight="@dimen/_10dp">
+            <TextView android:id="@+id/time"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textSize="@dimen/app_text_size_min"
+                      android:text="2016-03-13"
+                      android:layout_alignParentRight="true"
+                      android:textColor="@color/color_small_gray"
+            />
+            <TextView android:id="@+id/price"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textSize="@dimen/app_text_size_min"
+                      android:layout_alignEnd="@+id/time"
+                      android:layout_marginTop="4dp"
+                      android:text="-30"
+                      android:textColor="@color/login_normal"
+                      android:layout_below="@+id/time"
+            />
+        </RelativeLayout>
+
+        <View android:layout_width="match_parent"
+              android:layout_height="0.5dp"
+              android:background="@color/color_small_gray"
+              android:layout_below="@+id/detailContent"
+              android:layout_marginRight="@dimen/msg_margin"
+              android:layout_marginLeft="@dimen/msg_margin"
+              android:layout_marginTop="20dp"
+              android:layout_marginBottom="20dp"
+        />
+    </RelativeLayout>
+</LinearLayout>

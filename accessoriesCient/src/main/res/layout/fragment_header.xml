@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/header_layout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/header_bar_height"
+                android:background="@color/login_normal">
+
+    <TextView
+            android:id="@+id/header_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center_vertical"
+            android:textColor="@color/white"
+            android:textSize="@dimen/app_text_size_most"/>
+
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+        <ImageView
+                android:id="@+id/header_left_icon"
+                android:layout_width="@dimen/header_bar_height"
+                android:layout_height="@dimen/header_bar_height"
+                android:background="@drawable/item_click_select"
+                android:scaleType="center"
+                android:src="@drawable/head_back"
+                android:visibility="gone"
+                />
+    </LinearLayout>
+
+    <ImageView
+            android:id="@+id/header_right_icon"
+            android:layout_width="@dimen/header_bar_height"
+            android:layout_height="@dimen/header_bar_height"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/item_click_select"
+            android:scaleType="center"
+            android:visibility="gone"
+            />
+
+    <ImageView
+            android:id="@+id/header_right_more"
+            android:layout_centerVertical="true"
+            android:layout_width="@dimen/header_bar_height"
+            android:layout_height="@dimen/header_bar_height"
+            android:padding="12dip"
+            android:layout_toLeftOf="@id/header_right_icon"
+            android:background="@drawable/item_click_select"
+            android:src="@android:drawable/ic_menu_share"
+            android:visibility="gone"
+            />
+
+    <TextView
+            android:id="@+id/header_rignt_text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/item_click_select"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/app_text_size_min"
+            android:paddingRight="@dimen/app_text_size_min"
+            android:textSize="@dimen/app_text_size_first"
+            android:textColor="@color/white"
+            android:visibility="gone"/>
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="0.0dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/color_gray"/>
+
+</RelativeLayout>

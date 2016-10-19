@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+              android:background="@color/white"
+     >
+  <LinearLayout  android:id="@+id/comMsgLL"
+                 android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="vertical"
+                 android:padding="6dp">
+      <LinearLayout
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center_horizontal"
+              android:orientation="vertical" >
+
+          <TextView
+                  android:id="@+id/comtime"
+                  style="@style/chat_text_date_style"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text=""/>
+      </LinearLayout>
+
+      <RelativeLayout
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="5dp"
+              android:layout_marginTop="5dp" >
+
+          <com.accessories.city.view.RoundImageView
+                  android:id="@+id/comhead"
+                  android:layout_width="52dp"
+                  android:layout_height="52dp"
+                  android:layout_centerVertical="true"
+                  android:src="@drawable/aot"
+                  android:layout_toLeftOf="@+id/img"
+                  android:layout_alignParentLeft="true"
+                  android:layout_alignParentTop="true"
+                  android:clickable="true"
+                  android:adjustViewBounds="true" />
+
+          <TextView
+                  android:id="@+id/com_chatcontent"
+                  style="@style/chat_content_date_style"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginLeft="10dp"
+                  android:layout_toRightOf="@id/comhead"
+                  android:background="@drawable/chatfrom_bg" />
+
+
+          <TextView
+                  android:id="@+id/com_username"
+                  style="@style/chat_text_name_style"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_alignParentLeft="true"
+                  android:layout_below="@id/comhead"
+                  android:layout_toLeftOf="@id/com_chatcontent" />
+      </RelativeLayout>
+      
+  </LinearLayout>
+    <LinearLayout android:id="@+id/sendMsgLL"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:padding="6dp" >
+
+        <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+
+            <TextView
+                    android:id="@+id/sendtime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="2dp"
+                    android:textColor="#ffffff"
+                    android:textSize="12sp"
+                    android:background="#bfbfbf"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp" >
+
+
+            <com.accessories.city.view.RoundImageView
+                    android:id="@+id/sendUserHead"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/aot"
+                    android:layout_toLeftOf="@+id/img"
+                    android:clickable="true"
+                    android:adjustViewBounds="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    />
+
+            <TextView
+                    android:id="@+id/sendcontent"
+                    android:layout_toLeftOf="@id/sendUserHead"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/chatto_bg"
+                    android:textSize="15sp"
+                    android:textColor="#ff000000"
+                    android:gravity="left|center"
+                    android:minHeight="50dp"
+                    android:lineSpacingExtra="2dp"
+                    android:clickable="true"
+                    android:focusable="true"/>
+
+
+
+            <TextView
+                    android:id="@+id/send_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/sendUserHead"
+                    android:layout_alignParentRight="true"
+                    android:layout_toRightOf="@id/sendcontent"
+                    android:textSize="15sp"
+                    android:gravity="center"
+                    android:textColor="#818181"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</LinearLayout>

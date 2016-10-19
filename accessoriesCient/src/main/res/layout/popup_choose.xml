@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+        >
+
+<RelativeLayout android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/main_round_bg"
+                android:layout_marginTop="60dp">
+
+
+    <LinearLayout android:id="@+id/centerCity"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:layout_marginTop="4dp"
+            >
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:text="请选择上课次数"
+                  android:gravity="center"
+                  android:layout_marginLeft="@dimen/_10dp"
+                  android:textColor="@color/white"
+                  android:padding="@dimen/_10dp"
+                  android:textSize="16sp"
+                />
+    </LinearLayout>
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:id="@+id/rl"
+    >
+        <TextView
+                android:id="@+id/cancel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="取消"
+                android:background="@drawable/pay_selector"
+                android:textSize="@dimen/app_text_size_most"
+                android:textColor="@android:color/white"
+                android:gravity="center_horizontal"
+                android:paddingBottom="7dp"
+                android:paddingTop="7dp"
+                android:layout_marginRight="@dimen/_10dp"
+                android:layout_marginLeft="@dimen/_10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+
+        />
+    </RelativeLayout>
+    <LinearLayout android:id="@+id/ll"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:layout_below="@+id/centerCity"
+                  android:layout_above="@+id/rl"
+    >
+        <com.accessories.city.view.CustomListView
+                android:id="@+id/callListView"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:divider="@null"
+                android:dividerHeight="0dip"
+                android:scrollbars="none"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="@dimen/_10dp"
+                android:layout_marginLeft="@dimen/_10dp"
+                android:background="@drawable/white_round_bg"
+        />
+    </LinearLayout>
+
+</RelativeLayout>
+
+
+</RelativeLayout>

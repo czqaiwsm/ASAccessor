@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                   >
+        <ImageView
+                android:id="@+id/head_photo"
+                android:layout_width="@dimen/round_img_size"
+                android:layout_height="@dimen/round_img_size"
+                android:layout_margin="@dimen/msg_margin"
+                android:scaleType="fitXY"
+                android:src="@drawable/rr"
+                />
+
+        <TextView android:id="@+id/Name"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textColor="@color/black"
+                  android:layout_toRightOf="@+id/head_photo"
+                  android:textSize="@dimen/msg_name"
+                  android:layout_alignTop="@+id/head_photo"
+                  android:singleLine="true"
+                  android:text="大众轮胎"
+                />
+        <TextView android:id="@+id/msg_content"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textColor="@color/color_gray"
+                  android:layout_toRightOf="@+id/head_photo"
+                  android:layout_below="@+id/Name"
+                  android:layout_marginTop="3dp"
+                  android:ellipsize="end"
+                  android:maxLines="3"
+                  android:layout_marginRight="@dimen/msg_margin"
+                  android:lineSpacingExtra="3dp"
+                  android:textSize="@dimen/msg_time"
+                  android:text="大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎"
+                />
+
+        <TextView android:id="@+id/time"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textColor="@color/color_gray"
+                  android:layout_toRightOf="@+id/head_photo"
+                  android:layout_marginTop="3dp"
+                  android:textSize="@dimen/msg_time"
+                  android:text="2016-03-16"
+                  android:visibility="gone"
+                  android:layout_alignBottom="@id/head_photo"
+                />
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line"
+                android:background="@color/bg_line"
+                android:layout_below="@+id/head_photo"
+                android:layout_alignLeft="@+id/head_photo"
+                android:layout_marginRight="@dimen/msg_margin"
+                />
+    </RelativeLayout>
+</LinearLayout>

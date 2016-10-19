@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center">
+
+
+    <RelativeLayout android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:background="@drawable/wait_layer_back"
+            >
+        <RelativeLayout android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center">
+            <FrameLayout android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_centerHorizontal="true"
+                         android:id="@+id/frame"
+                    >
+                <ImageView android:layout_width="@dimen/wait_layer120"
+                           android:layout_height="@dimen/wait_layer120"
+                           android:background="@drawable/ym_progress"
+                           android:id="@+id/progress1"
+                        />
+                <ImageView android:layout_width="@dimen/wait_layer120"
+                           android:layout_height="@dimen/wait_layer120"
+                           android:background="@drawable/ym_progress_icon"
+                        />
+            </FrameLayout>
+            <TextView  android:id="@+id/tipText"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:text="正在加载..."
+                      android:textSize="16sp"
+                      android:gravity="center"
+                      android:textColor="#007E95"
+                      android:layout_below="@+id/frame"
+                      android:layout_marginTop="5dp"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--聊天-->
+    <color name="common_bottom_bar_normal_bg">#2d2f31</color>
+    <color name="common_bottom_bar_selected_bg">#161718</color>
+    <color name="common_botton_bar_blue">#2ea7e0</color>
+    <color name="common_bg">#fcfcfc</color>
+    <color name="bottom_bar_normal_bg">#2D2F31</color>
+    <color name="main_txt_black">#5E5E5E</color>
+    <color name="bg_color">#F4F4F4</color>
+
+    <color name="found_focus">#FFbebebe</color>
+    <color name="found_press">#FFb17f67</color>
+    <color name="found_normal">#FF757069</color>
+
+    <!--<color name="bg_header">#004D93</color>
+    <color name="bg_header_focus">#003B93</color>
+    <color name="orange_bg_home_header">#004D93</color>-->
+    <color name="login_normal">#0099FF</color>
+    <color name="login_focus">#0587dd</color>
+    <color name="white">#FFFFFF</color>
+    <color name="item_click_color">#33000000</color>
+    <color name="list_item_click_color2">#33000000</color>
+    <color name="home_line">#66272636</color>
+    <color name="home_bottom_text_normal">#272636</color>
+    <color name="home_focus">#FFE9E9E9</color>
+    <color name="bg_line">@color/gray_txt</color>
+    <color name="gray_txt">#B4B4B4</color>
+
+    <!-- gray  主大字体的颜色 -->
+    <color name="color_gray">#4C4C4C</color>
+    <color name="color_light_gray">#DADAD9</color>
+    <color name="frame_content_color">#FFFFFF</color>
+    <color name="gray_bg_divider_search">#DFDFDF</color>
+    <!-- gray  小字体的颜色 -->
+    <color name="color_small_gray">#969596</color>
+    <color name="color_litter_gray">#F8F8F8</color>
+    <color name="c_77000000">#77000000</color>
+    <color name="c_646464">#646464</color>
+    <color name="transparent">#00000000</color>
+    <color name="white_bg_home">#eeeeee</color>
+
+    <!-- dialog -->
+    <color name="list_item_click_color">#e9e9e9</color>
+    <color name="color_gray2">#bebebe</color>
+    <color name="TextColorBlack">#565656</color>
+
+    <!-- 微信支付 -->
+    <color name="navpage">#FFE1E8EB</color>
+
+    <!-- tab color -->
+    <color name="tab_focus_bg_color">#FFFFFF</color>
+    <!--<color name="tab_normal_bg_color">#0276B1</color>
+
+    <color name="bg_header">#004D93</color>
+    <color name="bg_header_focus">#003B93</color>-->
+    <color name="orange_bg_home_header">#004D93</color>
+    <color name="tab_content_bg_color">#ffffffff</color>
+    <color name="black">#222222</color>
+
+    <color name="teach_txt_color">#7B7B7B</color>
+    <color name="teach_txt_color2">#474747</color>
+
+    <color name="course_txt">#FF646464</color>
+    <color name="course_solid">#FF127AE9 </color>
+    <color name="bg_main">#F0F0F0</color>
+
+
+    <color name="schedule_txt_color">#FF606060</color>
+    <color name="home_txt_color">#FFB1B1B1</color>
+
+    <!-- dialog -->
+    <color name="dialog_title">#ffeb8e5f</color>
+    <color name="dialog_line">#88cb7145</color>
+    <color name="dialog_content">#ffeb8c5f</color>
+    <color name="dialog_disable_btn">#ffeeeeee</color>
+    <color name="dialog_ok_btn">#aaeb8c5f</color>
+    <color name="dialog_ok_btn_pressed">#ffeb8c5f</color>
+    <color name="dialog_cancel_btn">#aab5b5b5</color>
+    <color name="dialog_cancel_btn_pressed">#ffa5a5a5</color>
+    <color name="dialog_background">#fff8f8f8</color>
+    <color name="certify_txt">#FF414141</color>
+    <color name="certify_txt2">#FF7A7A7A</color>
+    <color name="alph_white_0.5">#ae888888</color>
+    
+</resources>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+>
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/head"
+
+    >
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:orientation="vertical"
+                      android:weightSum="2">
+            <LinearLayout android:id="@+id/guideLL"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/banner_height"
+                            >
+                <include layout="@layout/guide"/>
+            </LinearLayout>
+
+            <RadioGroup android:id="@+id/rgTab"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginTop="5dp"
+                        android:padding="@dimen/line"
+                        android:orientation="horizontal"
+                    >
+
+                <RadioButton
+                        android:id="@+id/login"
+                        android:layout_width="match_parent"
+                        android:layout_height="fill_parent"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="全车件"
+                        android:checked="true"
+                        android:textColor="@color/tab_text_color"
+                        android:background="@drawable/head_left_selector"
+                        android:textSize="18sp"
+                        android:layout_weight="1"
+                        />
+                <RadioButton
+                        android:id="@+id/register"
+                        android:layout_width="match_parent"
+                        android:layout_height="fill_parent"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="单项件"
+                        android:checked="false"
+                        android:textColor="@color/tab_text_color"
+                        android:background="@drawable/head_right_selector"
+                        android:textSize="18sp"
+                        android:layout_weight="1"
+                        />
+
+            </RadioGroup>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:layout_marginTop="5dp"
+                          android:background="@color/bg_color">
+                <com.accessories.city.view.GridViewForScrollView
+                        android:id="@+id/callGridView"
+                        android:layout_below="@+id/head"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:scrollbars="none"
+                        android:listSelector="@drawable/item_click"
+                        android:numColumns="4"
+                        android:gravity="center"
+                />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView >
+
+</RelativeLayout>

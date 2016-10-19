@@ -1,0 +1,163 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <include layout="@layout/fragment_header" />
+
+    <com.accessories.city.view.FlowScrollView
+        android:id="@+id/scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white_bg_home"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+
+            <RelativeLayout
+                android:id="@+id/changePass_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_click"
+                android:layout_marginTop="@dimen/dp_15"
+                android:padding="@dimen/app_text_size_min" >
+                <TextView
+                    android:id="@+id/nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/change_pass"
+                    android:textColor="@color/color_small_gray"
+                    android:textSize="@dimen/pc_txt_size" />
+
+                <TextView
+                    android:id="@+id/nick_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:drawablePadding="@dimen/app_text_size_min"
+                    android:drawableRight="@drawable/arrow_right"
+                    android:gravity="center_vertical|right"
+                    android:singleLine="true"
+                    android:textColor="@color/color_small_gray"
+                    android:textSize="@dimen/pc_txt_size" />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/service_pro_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_click"
+                android:layout_marginTop="@dimen/dp_15"
+                android:padding="@dimen/app_text_size_min" >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/servic_protocol"
+                    android:textColor="@color/color_small_gray"
+                    android:textSize="@dimen/pc_txt_size" />
+
+                <TextView
+                    android:id="@+id/account_sexname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:drawablePadding="@dimen/app_text_size_min"
+                    android:drawableRight="@drawable/arrow_right"
+                    android:gravity="center_vertical|right"
+                    android:singleLine="true"
+                    android:textColor="@color/color_small_gray"
+                    android:textSize="@dimen/pc_txt_size"
+                    />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/clear_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_click"
+                android:layout_marginTop="@dimen/dp_15"
+                android:padding="@dimen/app_text_size_min" >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="清理缓存"
+                    android:textColor="@color/color_small_gray"
+                    android:textSize="@dimen/pc_txt_size" />
+
+                <TextView
+                    android:id="@+id/clearSize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:drawablePadding="@dimen/app_text_size_min"
+                    android:drawableRight="@drawable/arrow_right"
+                    android:gravity="center_vertical|right"
+                    android:singleLine="true"
+                    android:textColor="@color/color_small_gray"
+                    android:textSize="@dimen/pc_txt_size"
+                    />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/about_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_click"
+                android:layout_marginTop="@dimen/dp_15"
+                android:padding="@dimen/app_text_size_min" >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/about_me"
+                    android:textColor="@color/color_small_gray"
+                    android:textSize="@dimen/pc_txt_size" />
+
+                <TextView
+                    android:id="@+id/account_cityname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:drawablePadding="@dimen/app_text_size_min"
+                    android:drawableRight="@drawable/arrow_right"
+                    android:gravity="center_vertical|right"
+                    android:singleLine="true"
+                    android:textColor="@color/color_small_gray"
+                    android:textSize="@dimen/pc_txt_size"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="20dp"
+                            >
+                <TextView
+                        android:id="@+id/exitLogin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/login_selector2"
+                        android:gravity="center"
+                        android:paddingBottom="12dp"
+                        android:paddingTop="12dp"
+                        android:text="退出登录"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/app_text_size_most" />
+            </RelativeLayout>
+
+        </LinearLayout>
+    </com.accessories.city.view.FlowScrollView>
+
+</LinearLayout>

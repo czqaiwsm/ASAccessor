@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <include layout="@layout/fragment_header"/>
+    <ExpandableListView
+            android:id="@+id/callListView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:divider="@null"
+            android:dividerHeight="0dip"
+            android:scrollbars="none"
+            android:background="@color/white"
+            android:listSelector="@drawable/item_click"
+            android:cacheColorHint="#00000000"
+            android:layout_marginTop="@dimen/header_bar_height"
+    />
+    <TextView android:id="@+id/noData"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textColor="@color/login_focus"
+              android:text="暂无数据..."
+              android:textSize="@dimen/no_data_txt"
+              android:layout_gravity="center"
+              android:visibility="gone"
+              android:layout_marginTop="@dimen/header_bar_height"
+            />
+</FrameLayout>

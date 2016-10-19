@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@null"
+              android:layout_gravity="center">
+
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginTop="4dp">
+        <ImageView android:id="@+id/courseImg"
+                   android:layout_width="100dp"
+                   android:layout_height="100dp"
+                />
+        <TextView android:id="@+id/couseName"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_below="@+id/courseImg"
+                  android:layout_alignLeft="@+id/courseImg"
+                  android:layout_alignRight="@+id/courseImg"
+                  android:gravity="center"
+                  android:textSize="14sp"
+                  android:textStyle="bold"
+                  android:layout_marginTop="2dp"
+                  android:textColor="@android:color/black"
+                android:text="数学"/>
+    </RelativeLayout>
+</LinearLayout>
