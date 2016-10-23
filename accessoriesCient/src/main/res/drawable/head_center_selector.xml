@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/head_center_no"  android:state_checked="true"/>
+
+    <!--default color-->
+    <item >
+        <layer-list >
+            <item >
+                <shape>
+                    <!-- 背景填充色 -->
+                    <solid android:color="@color/login_normal"/>
+                </shape>
+            </item>
+            <item android:top="@dimen/line_bound" android:bottom="@dimen/line_bound">
+                <shape>
+                    <!-- 背景填充色 -->
+                    <solid android:color="@color/white"/>
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+    <!--default color-->
+</selector>

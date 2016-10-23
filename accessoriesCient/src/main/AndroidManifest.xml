@@ -158,6 +158,10 @@
                   android:screenOrientation="portrait"/>
         <activity android:name=".activity.center.SellerInfoActivity"
                   android:screenOrientation="portrait"/>
+        <activity android:name=".activity.center.WidthdrawInfoActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.center.QueryCarActivity"
+                  android:screenOrientation="portrait"/>
 
 
 

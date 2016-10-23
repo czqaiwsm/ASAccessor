@@ -74,11 +74,87 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/wallet_layout"
+                android:id="@+id/wdrawRl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
                 android:background="@drawable/item_click"
+                android:padding="@dimen/app_text_size_min" >
+                <ImageView android:layout_width="@dimen/pc_img_size"
+                           android:layout_height="@dimen/pc_img_size"
+                           android:layout_centerVertical="true"
+                           android:id="@+id/wdrawImg"
+                           android:background="@drawable/wallet"
+                           android:layout_marginRight="@dimen/_10dp"
+                        />
+                <TextView
+                    android:id="@+id/wdrawNameTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="提现"
+                    android:textColor="@color/color_gray"
+                    android:layout_toRightOf="@+id/wdrawImg"
+                    android:textSize="@dimen/pc_txt_size" />
+
+                <TextView
+                    android:id="@+id/wdrawTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/wdrawNameTv"
+                    android:drawablePadding="@dimen/app_text_size_min"
+                    android:drawableRight="@drawable/arrow_right"
+                    android:gravity="center_vertical|right"
+                    android:singleLine="true"
+                    android:textColor="@color/color_small_gray"
+                    android:textSize="@dimen/app_text_size_second" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/queryCarRl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/item_click"
+                android:padding="@dimen/app_text_size_min" >
+                <ImageView android:layout_width="@dimen/pc_img_size"
+                           android:layout_height="@dimen/pc_img_size"
+                           android:layout_centerVertical="true"
+                           android:id="@+id/queryCarImg"
+                           android:background="@drawable/wallet"
+                           android:layout_marginRight="@dimen/_10dp"
+                        />
+                <TextView
+                    android:id="@+id/queryCar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="车驾码查询"
+                    android:textColor="@color/color_gray"
+                    android:layout_toRightOf="@+id/queryCarImg"
+                    android:textSize="@dimen/pc_txt_size" />
+
+                <TextView
+                    android:id="@+id/queryCarTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/queryCar"
+                    android:drawablePadding="@dimen/app_text_size_min"
+                    android:drawableRight="@drawable/arrow_right"
+                    android:gravity="center_vertical|right"
+                    android:singleLine="true"
+                    android:textColor="@color/color_small_gray"
+                    android:textSize="@dimen/app_text_size_second" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/wallet_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_click"
+                android:layout_marginTop="1dp"
                 android:padding="@dimen/app_text_size_min" >
                 <ImageView android:layout_width="@dimen/pc_img_size"
                            android:layout_height="@dimen/pc_img_size"
@@ -150,84 +226,6 @@
                     android:textSize="@dimen/app_text_size_second" />
             </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/cation_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
-                android:background="@drawable/item_click"
-                android:visibility="gone"
-                android:padding="@dimen/app_text_size_min" >
-                <ImageView android:layout_width="@dimen/pc_img_size"
-                           android:layout_height="@dimen/pc_img_size"
-                           android:layout_centerVertical="true"
-                           android:id="@+id/cationImg"
-                           android:background="@drawable/cursion"
-                           android:layout_marginRight="@dimen/_10dp"
-                        />
-                <TextView
-                    android:id="@+id/cationname"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="@string/cationg"
-                    android:textColor="@color/color_small_gray"
-                    android:layout_toRightOf="@+id/cationImg"
-                    android:textSize="@dimen/pc_txt_size" />
-
-                <TextView
-                    android:id="@+id/account_cationname"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/cationname"
-                    android:drawablePadding="@dimen/app_text_size_min"
-                    android:drawableRight="@drawable/arrow_right"
-                    android:gravity="center_vertical|right"
-                    android:singleLine="true"
-                    android:textColor="@color/color_small_gray"
-                    android:textSize="@dimen/app_text_size_second" />
-            </RelativeLayout>
-            <RelativeLayout
-                android:id="@+id/feedBace_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10dp"
-                android:background="@drawable/item_click"
-                android:visibility="gone"
-                android:padding="@dimen/app_text_size_min" >
-                <ImageView android:layout_width="@dimen/pc_img_size"
-                           android:layout_height="@dimen/pc_img_size"
-                           android:layout_centerVertical="true"
-                           android:id="@+id/feedBaceImg"
-                           android:background="@drawable/feed_back"
-                           android:layout_marginRight="@dimen/_10dp"
-                        />
-                <TextView
-                    android:id="@+id/feedBacename"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="@string/feebacek"
-                    android:textColor="@color/color_small_gray"
-                    android:layout_toRightOf="@+id/feedBaceImg"
-                    android:textSize="@dimen/pc_txt_size" />
-
-                <TextView
-                    android:id="@+id/account_feedBacename"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/feedBacename"
-                    android:drawablePadding="@dimen/app_text_size_min"
-                    android:drawableRight="@drawable/arrow_right"
-                    android:gravity="center_vertical|right"
-                    android:singleLine="true"
-                    android:textColor="@color/color_small_gray"
-                    android:textSize="@dimen/app_text_size_second" />
-            </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/custom_layout"
                 android:layout_width="match_parent"

@@ -62,5 +62,6 @@
 
     <!--teacher-->
     <dimen name="home_tea_img_size">105dp</dimen>
+    <dimen name="line_bound">1dp</dimen>
 
 </resources>

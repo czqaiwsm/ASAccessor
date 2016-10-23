@@ -53,6 +53,34 @@
                         android:button="@null"
                         android:gravity="center"
                         android:text="单项件"
+                        android:textColor="@color/tab_text_color"
+                        android:background="@drawable/head_center_selector"
+                        android:textSize="18sp"
+                        android:layout_weight="1"
+                        />
+                <View
+                    android:layout_width="@dimen/line_bound"
+                    android:layout_height="match_parent"
+                    android:background="@color/login_normal"/>
+                <RadioButton
+                    android:id="@+id/单项件"
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="汽车用品"
+                    android:textColor="@color/tab_text_color"
+                    android:background="@drawable/head_center_selector"
+                    android:textSize="18sp"
+                    android:layout_weight="1"
+                    />
+                <RadioButton
+                        android:id="@+id/rightBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="fill_parent"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="商用车"
                         android:checked="false"
                         android:textColor="@color/tab_text_color"
                         android:background="@drawable/head_right_selector"

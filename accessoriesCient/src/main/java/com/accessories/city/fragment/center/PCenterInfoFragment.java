@@ -16,8 +16,10 @@ import com.accessories.city.R;
 import com.accessories.city.activity.TeacherMainActivity;
 import com.accessories.city.activity.center.FeedBackActivity;
 import com.accessories.city.activity.center.PCenterInfoUserActivity;
+import com.accessories.city.activity.center.QueryCarActivity;
 import com.accessories.city.activity.center.ServiceProtocolActivity;
 import com.accessories.city.activity.center.SettingActivity;
+import com.accessories.city.activity.center.WidthdrawInfoActivity;
 import com.accessories.city.activity.login.SellerLoginActivity;
 import com.accessories.city.activity.teacher.MyAssetActivity;
 import com.accessories.city.bean.UserInfo;
@@ -47,10 +49,10 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
 
     private RelativeLayout wallet_layout;
     private RelativeLayout order_layout;
-    private RelativeLayout caution_layout;
-    private RelativeLayout feedback_layout;
     private RelativeLayout custom_layout;
     private RelativeLayout setting_layout;
+    private RelativeLayout wdrawRl;
+    private RelativeLayout queryCarRl;
 
     private UserInfo mUserInfo;
     private TextView account_customname;
@@ -128,20 +130,21 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
         pcenter_avatar_layout = (RelativeLayout) v.findViewById(R.id.pcenter_avatar_layout);
         wallet_layout = (RelativeLayout) v.findViewById(R.id.wallet_layout);
         order_layout = (RelativeLayout) v.findViewById(R.id.order_layout);
-        caution_layout = (RelativeLayout) v.findViewById(R.id.cation_layout);
-        feedback_layout = (RelativeLayout) v.findViewById(R.id.feedBace_layout);
         custom_layout = (RelativeLayout) v.findViewById(R.id.custom_layout);
         setting_layout = (RelativeLayout) v.findViewById(R.id.set_layout);
+        queryCarRl = (RelativeLayout) v.findViewById(R.id.queryCarRl);
+        wdrawRl = (RelativeLayout) v.findViewById(R.id.wdrawRl);
         account_customname = (TextView)v.findViewById(R.id.account_customname);
         account_ordername = (TextView)v.findViewById(R.id.account_ordername);
 
 //        pcenter_avatar_layout.setOnClickListener(this);
         wallet_layout.setOnClickListener(this);
         order_layout.setOnClickListener(this);
-        caution_layout.setOnClickListener(this);
-        feedback_layout.setOnClickListener(this);
         custom_layout.setOnClickListener(this);
         setting_layout.setOnClickListener(this);
+        wdrawRl.setOnClickListener(this);
+        queryCarRl.setOnClickListener(this);
+
 
         setData(mUserInfo);
 
@@ -184,12 +187,11 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
                 Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+account_customname.getText().toString()));
                 startActivity(intent);
                 break;
-            case R.id.cation_layout:// 我的评价
-                toClassActivity(PCenterInfoFragment.this, MyAssetActivity.class.getName());
+            case R.id.wdrawRl:// 提现
+                toClassActivity(PCenterInfoFragment.this, WidthdrawInfoActivity.class.getName());
                 break;
-
-            case R.id.feedBace_layout:// 反馈
-                toClassActivity(PCenterInfoFragment.this, FeedBackActivity.class.getName());
+            case R.id.queryCarRl:// 车驾码查询
+                toClassActivity(PCenterInfoFragment.this, QueryCarActivity.class.getName());
                 break;
 
             case R.id.set_layout:// 设置

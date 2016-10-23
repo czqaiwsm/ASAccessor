@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/bg_main">
+
+    <EditText
+        android:id="@+id/accountEt"
+        android:hint="请输入支付宝账号"
+        style="@style/widthdraw_txt_sty"/>
+    <EditText
+        android:id="@+id/accountNameEt"
+        android:layout_marginTop="@dimen/line_bound"
+        android:hint="请输入支付宝账号对应的姓名"
+        style="@style/widthdraw_txt_sty"/>
+    <EditText
+        android:id="@+id/scoreEt"
+        android:layout_marginTop="@dimen/line_bound"
+        android:hint="请输入提现积分数"
+        style="@style/widthdraw_txt_sty"/>
+
+    <TextView
+        android:id="@+id/login_text"
+        android:text="提交"
+        android:layout_marginTop="70dp"
+        style="@style/big_btn_txt"/>
+</LinearLayout>
