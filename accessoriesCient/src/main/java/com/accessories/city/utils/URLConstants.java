@@ -35,10 +35,10 @@ public class URLConstants {
 //    public static final String BASE_URL = "http://120.25.171.4/learn-interface/interface/api.action";//基础URL
 //    public static final String BASE_URL = "http://www.leishangnet.com/learn-teach/teach/api.action";//基础 teacher URL
     public static final String BASE_URL = "http://120.76.47.196:8080/learn-teach/teach/api.action";//基础 teacher URL
-
     public static final String TEACHER_UPLOAD = "http://120.76.47.196:8080/learn-teach/teach/upload.action";
 
-    public static final String ACBASE_URL = "http://121.41.75.147:8081/carfashion/json";//车时尚 基础URL
+//    public static final String ACBASE_URL = "http://121.41.75.147:8081/carfashion/json";//车时尚 基础URL
+    public static final String ACBASE_URL = "http://121.41.75.147:8081/carfashion_test/json";//车时尚 基础URL
     public static final String CATEGORYLIST =ACBASE_URL+"/categoryList.do";//类型
     public static final String Home =ACBASE_URL+"/index.do";//首页
     public static final String SHOPLIST =ACBASE_URL+"/shopList.do";//商家列表
