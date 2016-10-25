@@ -13,6 +13,7 @@
     <dimen name="maint_bottom_margintop">3dp</dimen>
     <dimen name="maint_bottom_marginbot">2dp</dimen>
     <dimen name="dp_15">15dp</dimen>
+    <dimen name="widthdraw_pading">15dp</dimen>
 
     <dimen name="line">0.5dp</dimen>
     <dimen name="text_size_second">16sp</dimen>

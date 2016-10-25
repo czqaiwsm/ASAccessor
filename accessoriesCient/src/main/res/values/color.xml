@@ -17,7 +17,8 @@
     <!--<color name="bg_header">#004D93</color>
     <color name="bg_header_focus">#003B93</color>
     <color name="orange_bg_home_header">#004D93</color>-->
-    <color name="login_normal">#0099FF</color>
+    <!--<color name="login_normal">#0099FF</color>-->
+    <color name="login_normal">#2e82ff</color>
     <color name="login_focus">#0587dd</color>
     <color name="white">#FFFFFF</color>
     <color name="item_click_color">#33000000</color>
@@ -61,6 +62,15 @@
 
     <color name="teach_txt_color">#7B7B7B</color>
     <color name="teach_txt_color2">#474747</color>
+    <color name="color_666">#666666</color>
+    <color name="color_999">#999999</color>
+    <color name="color_333">#333333</color>
+    <color name="color_ccc">#cccccc</color>
+    <color name="color_f4f4f4">#f4f4f4</color>
+    <color name="color_e5e5e5">#e5e5e5</color>
+    <color name="color_ff5a00">#ff5a00</color>
+    <color name="color_fe0000">#fe0000</color>
+    <color name="color_00ba00">#00ba00</color>
 
     <color name="course_txt">#FF646464</color>
     <color name="course_solid">#FF127AE9 </color>

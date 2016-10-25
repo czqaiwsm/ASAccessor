@@ -11,30 +11,23 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:orientation="horizontal"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
+        android:background="@drawable/vin_serach_bg"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp">
 
         <RelativeLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_gravity="center_vertical"
             android:layout_weight="4">
 
 
             <LinearLayout android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          android:background="@drawable/ic_search_bg"
+                          android:layout_height="match_parent"
                           android:id="@+id/homeSearch"
+
                 >
 
-                <TextView android:layout_width="25dp"
-                          android:layout_height="25dp"
-                          android:layout_marginRight="5dp"
-                          android:layout_marginLeft="5dp"
-                          android:layout_gravity="center_vertical"
-                          android:gravity="center_vertical"
-                          android:background="@drawable/ic_search_edit"
-                    />
                 <EditText
                     android:id="@+id/search_edit"
                     android:layout_width="wrap_content"
@@ -45,7 +38,10 @@
                     android:paddingTop="6dip"
                     android:background="@null"
                     android:layout_gravity="center"
-                    android:textSize="@dimen/text_size_second"
+                    android:textColorHint="@color/color_999"
+                    android:textSize="@dimen/app_text_size_min"
+                    android:singleLine="true"
+                    android:layout_marginLeft="4dp"
                     />
             </LinearLayout>
             <!-- <EditText
@@ -66,7 +62,7 @@
             <ImageView
                 android:id="@+id/close_btn"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:clickable="true"
@@ -74,22 +70,33 @@
                 android:scaleType="center"
                 android:src="@drawable/ic_close_btn"/>
         </RelativeLayout>
-
-        <Button
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="@color/color_ccc"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingRight="@dimen/_10dp"
+            android:paddingLeft="@dimen/_10dp"
             android:id="@+id/search_btn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="-2dp"
-            android:layout_weight="1"
-            android:background="@drawable/bg_serach_btn"
-            android:gravity="center"
-            android:paddingBottom="7dp"
-            android:paddingLeft="6dp"
-            android:paddingRight="6dp"
-            android:paddingTop="5dp"
-            android:text="@string/search"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/text_size_second"/>
+            >
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:gravity="center"
+                android:layout_gravity="center_vertical"
+                android:textColor="@android:color/white"
+                android:background="@drawable/vin_search"
+                android:textSize="@dimen/text_size_second"/>
+        </LinearLayout>
+
 
     </LinearLayout>
     <com.accessories.city.view.ReboundScrollView
@@ -110,7 +117,8 @@
                     android:text="品牌"
                     />
                 <TextView
-                    android:text="品牌"
+                    android:id="@+id/brandNameTv"
+                    android:textColor = "@color/color_666"
                     style="@style/query_car_txt_sty"/>
 
             </LinearLayout>
@@ -121,10 +129,11 @@
                 <TextView
                     style="@style/query_car_txt_sty"
                     android:layout_weight="1"
-                    android:text="品牌"
+                    android:text="厂家名称"
                     />
                 <TextView
-                    android:text="品牌"
+                    android:id="@+id/manufacturerTv"
+                    android:textColor = "@color/color_666"
                     style="@style/query_car_txt_sty"/>
 
             </LinearLayout>
@@ -135,10 +144,11 @@
                 <TextView
                     style="@style/query_car_txt_sty"
                     android:layout_weight="1"
-                    android:text="品牌"
+                    android:text="车型"
                     />
                 <TextView
-                    android:text="品牌"
+                    android:id="@+id/carTypeTv"
+                    android:textColor = "@color/color_666"
                     style="@style/query_car_txt_sty"/>
 
             </LinearLayout>
@@ -149,10 +159,101 @@
                 <TextView
                     style="@style/query_car_txt_sty"
                     android:layout_weight="1"
-                    android:text="品牌"
+                    android:text="年份"
                     />
                 <TextView
-                    android:text="品牌"
+                    android:id="@+id/madeYearTv"
+                    android:textColor = "@color/color_666"
+                    style="@style/query_car_txt_sty"/>
+
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="15dp"
+                >
+                <TextView
+                    style="@style/query_car_txt_sty"
+                    android:layout_weight="1"
+                    android:text="发动机型号"
+                    />
+                <TextView
+                    android:id="@+id/engineTypeTv"
+                    android:textColor = "@color/color_666"
+                    style="@style/query_car_txt_sty"/>
+
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="15dp"
+                >
+                <TextView
+                    style="@style/query_car_txt_sty"
+                    android:layout_weight="1"
+                    android:text="变速器型号"
+                    />
+                <TextView
+                    android:id="@+id/transmissionTypeTv"
+                    android:textColor = "@color/color_666"
+                    style="@style/query_car_txt_sty"/>
+
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="15dp"
+                >
+                <TextView
+                    style="@style/query_car_txt_sty"
+                    android:layout_weight="1"
+                    android:text="排量"
+                    />
+                <TextView
+                    android:id="@+id/outputVolumeTv"
+                    android:textColor = "@color/color_666"
+                    style="@style/query_car_txt_sty"/>
+
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="15dp"
+                >
+                <TextView
+                    style="@style/query_car_txt_sty"
+                    android:layout_weight="1"
+                    android:text="档位数"
+                    />
+                <TextView
+                    android:id="@+id/gearsNumTv"
+                    android:textColor = "@color/color_666"
+                    style="@style/query_car_txt_sty"/>
+
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="15dp"
+                >
+                <TextView
+                    style="@style/query_car_txt_sty"
+                    android:layout_weight="1"
+                    android:text="功率转速"
+                    />
+                <TextView
+                    android:id="@+id/powerTv"
+                    android:textColor = "@color/color_666"
+                    style="@style/query_car_txt_sty"/>
+
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="15dp"
+                >
+                <TextView
+                    style="@style/query_car_txt_sty"
+                    android:layout_weight="1"
+                    android:text="车身形式"
+                    />
+                <TextView
+                    android:id="@+id/carBodyTv"
+                    android:textColor = "@color/color_666"
                     style="@style/query_car_txt_sty"/>
 
             </LinearLayout>

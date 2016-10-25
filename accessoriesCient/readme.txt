@@ -5,3 +5,5 @@ pass cssapp2016
 
 
 提现的页面
+
+adapter_widthdraw_record
