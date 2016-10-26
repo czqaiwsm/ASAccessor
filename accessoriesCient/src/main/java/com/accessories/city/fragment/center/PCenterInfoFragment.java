@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,6 +17,7 @@ import com.accessories.city.R;
 import com.accessories.city.activity.TeacherMainActivity;
 import com.accessories.city.activity.center.FeedBackActivity;
 import com.accessories.city.activity.center.PCenterInfoUserActivity;
+import com.accessories.city.activity.center.PCenterModifyInfoActivity;
 import com.accessories.city.activity.center.QueryCarActivity;
 import com.accessories.city.activity.center.ServiceProtocolActivity;
 import com.accessories.city.activity.center.SettingActivity;
@@ -57,6 +59,8 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
     private UserInfo mUserInfo;
     private TextView account_customname;
     private TextView account_ordername;
+    private TextView editNameTv;
+    private TextView name;
 
     private boolean isPrepare = false;
     private boolean isVisible = false;
@@ -127,7 +131,6 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
 
     private void initView(View v) {
         mHeadImg = (RoundImageView) v.findViewById(R.id.account_head_img);
-        pcenter_avatar_layout = (RelativeLayout) v.findViewById(R.id.pcenter_avatar_layout);
         wallet_layout = (RelativeLayout) v.findViewById(R.id.wallet_layout);
         order_layout = (RelativeLayout) v.findViewById(R.id.order_layout);
         custom_layout = (RelativeLayout) v.findViewById(R.id.custom_layout);
@@ -136,6 +139,8 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
         wdrawRl = (RelativeLayout) v.findViewById(R.id.wdrawRl);
         account_customname = (TextView)v.findViewById(R.id.account_customname);
         account_ordername = (TextView)v.findViewById(R.id.account_ordername);
+        editNameTv = (TextView)v.findViewById(R.id.editNameTv);
+        name = (TextView)v.findViewById(R.id.name);
 
 //        pcenter_avatar_layout.setOnClickListener(this);
         wallet_layout.setOnClickListener(this);
@@ -144,9 +149,15 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
         setting_layout.setOnClickListener(this);
         wdrawRl.setOnClickListener(this);
         queryCarRl.setOnClickListener(this);
-
-
+        editNameTv.setOnClickListener(this);
         setData(mUserInfo);
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setData(BaseApplication.getUserInfo());
 
     }
 
@@ -157,7 +168,7 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
             String money = "<span>"+getString(R.string.integeral, userInfo.getIntegral())+"<font color='#0099FF'>(￥"+userInfo.getMoney()+")</font></span>";
             account_ordername.setText(Html.fromHtml(money));
 //            ImageLoader.getInstance().displayImage(userInfo.getHeadImg(), mHeadImg, ImageLoaderUtil.mHallIconLoaderOptions);
-//            name.setText(userInfo.getNickName());
+            name.setText(TextUtils.isEmpty(userInfo.getNickname())?"":userInfo.getNickname());
 //            phone.setText(userInfo.getMobile());
 //            phone.setText(DataMapConstants.getJoniorMap().get(userInfo.getGrade()));
         }
@@ -169,6 +180,9 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
     public void onClick(View v) {
         // TODO Auto-generated method stub
         switch (v.getId()) {
+            case R.id.editNameTv:
+                toClassActivity(PCenterInfoFragment.this, PCenterModifyInfoActivity.class.getName());
+                break;
             case R.id.pcenter_avatar_layout:// 头像
                 toClassActivity(PCenterInfoFragment.this, PCenterInfoUserActivity.class.getName());
                 break;

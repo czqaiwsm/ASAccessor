@@ -39,7 +39,6 @@ public class MsgInfosFragment extends BaseFragment implements RequsetListener {
     private CustomListView callListView;//
     private GridViewForScrollView viewForScrollView = null;
     private View converView;
-    private ImageView banner;
     private LinearLayout guideLL;
     private List<CateSubTypeEntity> list = null;
     private ClassTypeAdpter adapter;
@@ -121,7 +120,6 @@ public class MsgInfosFragment extends BaseFragment implements RequsetListener {
         viewpager = (ViewPager) view.findViewById(R.id.id_guide_viewpager);
         guideLL = (LinearLayout) view.findViewById(R.id.guideLL);
         viewForScrollView = (GridViewForScrollView) view.findViewById(R.id.callGridView);
-        banner = (ImageView)view.findViewById(R.id.banner);
         ArrayAdapter mArrayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, new Object[]{});
 //        callListView.setRefreshBackGround(getResources().getColor(R.color.bg));
         callListView.setAdapter(mArrayAdapter);

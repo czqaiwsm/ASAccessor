@@ -54,6 +54,7 @@ public class URLConstants {
     public static final String GETUSERINFO =ACBASE_URL+"/getUserInfo.do";//获取个人信息
     public static final String MSGCODE =ACBASE_URL+"/getMsgCode.do";//获取个人信息
     public static final String GETVERSION =ACBASE_URL+"/getVersion.do";//获取个人信息
+    public static final String UPDATE_USER =ACBASE_URL+"/updateUser.do";//修改用户信息
 
 
 
