@@ -2,6 +2,7 @@ package com.accessories.city.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.accessories.city.R;
+import com.accessories.city.adapter.MainAdapter;
 import com.accessories.city.adapter.OrderPayAdpter;
 import com.accessories.city.bean.OrderInfo;
 import com.accessories.city.bean.OrderListBean;
@@ -26,6 +28,7 @@ import com.volley.req.net.RequestManager;
 import com.volley.req.net.RequestParam;
 import com.volley.req.parser.JsonParserBase;
 
+import java.lang.ref.SoftReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -39,8 +42,7 @@ import java.util.Map;
 public class PullRefreshFragment extends BaseFragment implements RequsetListener,CustomListView.OnLoadMoreListener {
 
     private CustomListView customListView = null;
-    private List<OrderInfo> list = new ArrayList<OrderInfo>();
-    private OrderPayAdpter adapter;
+    private MainAdapter adapter;
     private TextView noData ;
 
     private int pageCount = 0;//总页数
@@ -55,11 +57,6 @@ public class PullRefreshFragment extends BaseFragment implements RequsetListener
         super.onCreate(savedInstanceState);
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_msg,null);
-        return view;
-    }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -75,7 +72,7 @@ public class PullRefreshFragment extends BaseFragment implements RequsetListener
         customListView = (CustomListView)view.findViewById(R.id.callListView);
         noData = (TextView)view.findViewById(R.id.noData);
         customListView.setCanRefresh(true);
-//        adapter = new OrderPayAdpter(mActivity, list,flag,this);
+        adapter = new MainAdapter(new SoftReference<Context>(mActivity));
         customListView.setAdapter(adapter);
 
         customListView.setOnRefreshListener(new CustomListView.OnRefreshListener() {
@@ -96,20 +93,6 @@ public class PullRefreshFragment extends BaseFragment implements RequsetListener
         requestData(1);
     }
 
-    @Override
-    protected void requestData(int requestType) {
-
-        HttpURL url = new HttpURL();
-        url.setmBaseUrl(URLConstants.BASE_URL);
-        Map postParams = null;
-
-        RequestParam param = new RequestParam();
-//        param.setmParserClassName(OrderListBeanParse.class.getName());
-        param.setmPostarams(postParams);
-        param.setmHttpURL(url);
-        param.setPostRequestMethod();
-        RequestManager.getRequestData(getActivity(), createReqSuccessListener(requestType), createMyReqErrorListener(), param);
-    }
 
     @Override
     public void handleRspSuccess(int requestType,Object obj) {
@@ -131,7 +114,7 @@ public class PullRefreshFragment extends BaseFragment implements RequsetListener
                             break;
                         case LOAD_MORE:
                             if(teacherInfos != null && teacherInfos.size()>0){//有数据
-                                list.addAll(teacherInfos);
+                                adapter.getList().addAll(teacherInfos);
                                 customListView.onLoadMoreComplete(CustomListView.ENDINT_MANUAL_LOAD_DONE);
                                 adapter.notifyDataSetInvalidated();
                             }else {
@@ -176,7 +159,7 @@ public class PullRefreshFragment extends BaseFragment implements RequsetListener
      * @param teacherInfos
      */
     private void refresh(ArrayList<OrderInfo> teacherInfos){
-
+        List list = adapter.getList();
         list.clear();
         if(teacherInfos != null){
             list.addAll(teacherInfos);
@@ -199,5 +182,4 @@ public class PullRefreshFragment extends BaseFragment implements RequsetListener
         adapter.notifyDataSetChanged();
 
     }
-    OrderInfo orderInfo = null;
 }
