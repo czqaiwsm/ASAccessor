@@ -15,33 +15,29 @@ import com.accessories.city.view.tab.TabsAdapter;
 
 public class WidthDrawFragment extends BaseFragment {
 
-    private String key;
     private ViewPager mViewPager;
     private ScrollingTabContainerView mTabContainerView;
     private TabsAdapter mTabsAdapter;
 
+    private int flag = 1;// 1 提现   2发布
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
-        // startReqTask(this);
-        // mLoadHandler.sendEmptyMessageDelayed(Constant.NET_SUCCESS, 100);// 停止加载框
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         View view = inflater.inflate(R.layout.fragment_widthdraw, container, false);
         return view;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onViewCreated(view, savedInstanceState);
-        initView(view);
+        flag = mActivity.getIntent().getFlags();
 
+        initView(view);
         setTitleText(R.string.schedule);
     }
 
@@ -61,15 +57,31 @@ public class WidthDrawFragment extends BaseFragment {
 
     private void onInitTabConfig() {
         TabsActionBar tabsActionBar = new TabsActionBar(getActivity(), mTabContainerView);
-        Bundle aliBundle = new Bundle();
-        aliBundle.putString("cashType",0+"");// 0支付宝 1微信
-        mTabsAdapter = new TabsAdapter(getActivity(), mViewPager, tabsActionBar);
-        mTabsAdapter.addTab(tabsActionBar.newTab().setCustomView(LayoutInflater.from(getActivity()).inflate(R.layout.msg, null))
-                .setmTabbgDrawableId(R.drawable.login_tab), WidthdrawInfoFragment.class, aliBundle);
-        Bundle wxBundle = new Bundle();
-        wxBundle.putString("cashType",1+"");// 0支付宝 1微信
-        mTabsAdapter.addTab(tabsActionBar.newTab().setCustomView(LayoutInflater.from(getActivity()).inflate(R.layout.contact, null))
-                .setmTabbgDrawableId(R.drawable.login_tab), WidthdrawInfoFragment.class, wxBundle);
+        switch (flag){
+            case 1:
+                Bundle aliBundle = new Bundle();
+                aliBundle.putString("cashType",0+"");// 0支付宝 1微信
+                mTabsAdapter = new TabsAdapter(getActivity(), mViewPager, tabsActionBar);
+                mTabsAdapter.addTab(tabsActionBar.newTab().setCustomView(LayoutInflater.from(getActivity()).inflate(R.layout.msg, null))
+                        .setmTabbgDrawableId(R.drawable.login_tab), WidthdrawInfoFragment.class, aliBundle);
+                Bundle wxBundle = new Bundle();
+                wxBundle.putString("cashType",1+"");// 0支付宝 1微信
+                mTabsAdapter.addTab(tabsActionBar.newTab().setCustomView(LayoutInflater.from(getActivity()).inflate(R.layout.contact, null))
+                        .setmTabbgDrawableId(R.drawable.login_tab), WidthdrawInfoFragment.class, wxBundle);
+                break;
+            case 2:
+                Bundle applyBundle = new Bundle();
+                applyBundle.putString("cashType",0+"");// 供应
+                mTabsAdapter = new TabsAdapter(getActivity(), mViewPager, tabsActionBar);
+                mTabsAdapter.addTab(tabsActionBar.newTab().setCustomView(LayoutInflater.from(getActivity()).inflate(R.layout.apply_publish, null))
+                        .setmTabbgDrawableId(R.drawable.login_tab), PublisFragment.class, applyBundle);
+                Bundle buyBundle = new Bundle();
+                buyBundle.putString("cashType",1+"");// 求购
+                mTabsAdapter.addTab(tabsActionBar.newTab().setCustomView(LayoutInflater.from(getActivity()).inflate(R.layout.buy_publish, null))
+                        .setmTabbgDrawableId(R.drawable.login_tab), PublisFragment.class, buyBundle);
+                break;
+        }
+
     }
 
     @Override

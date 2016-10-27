@@ -5,6 +5,7 @@
               android:layout_height="match_parent"
               android:background="@color/bg_main">
     <EditText
+        android:id="@+id/contentEt"
         android:layout_width="match_parent"
         android:layout_height="140dp"
         android:background="@color/white"
@@ -15,7 +16,6 @@
         android:gravity="top"
         android:hint="有什么想说的..."
         android:textSize="14sp"
-        android:id="@+id/content"
         android:maxLength="300"
         android:textColorHint="#999999"
         android:textColor="#333333"
@@ -44,7 +44,6 @@
                 android:background="@drawable/abaose"/>
 
             <ImageView
-                android:id="@+id/deleteImg1IV"
                 style="@style/style_log_img_delete"
                 />
         </RelativeLayout>
@@ -62,7 +61,6 @@
                 android:background="@drawable/abaose"/>
 
             <ImageView
-                android:id="@+id/deleteImg2IV"
                 style="@style/style_log_img_delete"
                 />
         </RelativeLayout>
@@ -73,7 +71,6 @@
             android:layout_marginRight="@dimen/_10dp"
             android:gravity="center">
             <ImageView
-                android:id="@+id/add"
                 style="@style/style_log_img"
                 android:background="@drawable/add"/>
         </RelativeLayout>
@@ -81,7 +78,7 @@
 
 
     <EditText
-        android:id="@+id/login_username"
+        android:id="@+id/phoneEt"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginTop="@dimen/_10dp"
@@ -108,7 +105,7 @@
         android:paddingLeft="16dp"
         android:paddingRight="16dp">
         <TextView
-            android:id="@+id/nickname"
+            android:id="@+id/addressTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"

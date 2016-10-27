@@ -1,9 +1,16 @@
 package com.accessories.city.fragment.center;
 
+import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -30,6 +37,7 @@ import com.accessories.city.help.RequsetListener;
 import com.accessories.city.parse.LoginInfoParse;
 import com.accessories.city.utils.AppManager;
 import com.accessories.city.utils.BaseApplication;
+import com.accessories.city.utils.SmartToast;
 import com.accessories.city.utils.URLConstants;
 import com.accessories.city.view.RoundImageView;
 import com.volley.req.net.HttpURL;
@@ -130,7 +138,6 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
     }
 
     private void initView(View v) {
-        mHeadImg = (RoundImageView) v.findViewById(R.id.account_head_img);
         wallet_layout = (RelativeLayout) v.findViewById(R.id.wallet_layout);
         order_layout = (RelativeLayout) v.findViewById(R.id.order_layout);
         custom_layout = (RelativeLayout) v.findViewById(R.id.custom_layout);
@@ -150,6 +157,7 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
         wdrawRl.setOnClickListener(this);
         queryCarRl.setOnClickListener(this);
         editNameTv.setOnClickListener(this);
+        name.setOnClickListener(this);
         setData(mUserInfo);
 
     }
@@ -178,7 +186,7 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
 
     @Override
     public void onClick(View v) {
-        // TODO Auto-generated method stub
+        Intent intent = null;
         switch (v.getId()) {
             case R.id.editNameTv:
                 toClassActivity(PCenterInfoFragment.this, PCenterModifyInfoActivity.class.getName());
@@ -187,10 +195,10 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
                 toClassActivity(PCenterInfoFragment.this, PCenterInfoUserActivity.class.getName());
                 break;
             case R.id.wallet_layout:// 关于我们
-                Intent intent1 = new Intent(mActivity, ServiceProtocolActivity.class);
-                intent1.setFlags(12);
-                intent1.putExtra("url","www.baidu.com");
-                mActivity.startActivity(intent1);
+                intent = new Intent(mActivity, ServiceProtocolActivity.class);
+                intent.setFlags(12);
+                intent.putExtra("url","www.baidu.com");
+                mActivity.startActivity(intent);
 //                toClassActivity(PCenterInfoFragment.this, WalletActivity.class.getName());
                 break;
             case R.id.order_layout:// 积分
@@ -198,16 +206,25 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
                 break;
             case R.id.custom_layout:// 联系我们
                 //用intent启动拨打电话
-                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+account_customname.getText().toString()));
-                startActivity(intent);
+                if(TextUtils.isEmpty(account_customname.getText().toString())){
+                    toasetUtil.showInfo("暂无客服电话!");
+                    return;
+                }
+                callPhone();
                 break;
             case R.id.wdrawRl:// 提现
-                toClassActivity(PCenterInfoFragment.this, WidthdrawInfoActivity.class.getName());
+                intent = new Intent(mActivity,WidthdrawInfoActivity.class);
+                intent.setFlags(1);
+                startActivity(intent);
+                break;
+            case R.id.name://
+                intent = new Intent(mActivity,WidthdrawInfoActivity.class);
+                intent.setFlags(2);
+                startActivity(intent);
                 break;
             case R.id.queryCarRl:// 车驾码查询
                 toClassActivity(PCenterInfoFragment.this, QueryCarActivity.class.getName());
                 break;
-
             case R.id.set_layout:// 设置
                 toClassActivity(PCenterInfoFragment.this, SellerLoginActivity.class.getName());
                 break;
@@ -242,15 +259,67 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
         }
     }
 
-    /******************************************** 修改头像start *****************************************************/
-    private RoundImageView mHeadImg;
-    private RelativeLayout pcenter_avatar_layout;
-    // popupwidos
-
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         setData(mUserInfo);
     }
+
+    private void call(){
+        //用intent启动拨打电话
+        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+account_customname.getText().toString()));
+        startActivity(intent);
+    }
+
+    private void callPhone() {
+        //检查权限
+        if (ContextCompat.checkSelfPermission(BaseApplication.getInstance(),
+                Manifest.permission.CALL_PHONE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            if (shouldShowRequestPermissionRationale(
+                    Manifest.permission.CALL_PHONE)) {
+
+                new AlertDialog.Builder(mActivity)
+                        .setMessage("需要开启权限才能拨打电话")
+                        .setPositiveButton("设置", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                intent.setData(Uri.parse("package:" + BaseApplication.getInstance().getPackageName()));
+                                startActivity(intent);
+                            }
+                        })
+                        .setNegativeButton("取消", null)
+                        .create()
+                        .show();
+            } else {
+
+                //申请权限
+                requestPermissions(new String[]{Manifest.permission.CALL_PHONE},
+                        100);
+            }
+//
+        } else {
+            //已经拥有权限进行拨打
+            call();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == 100)
+        {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
+            {
+                call();
+            } else
+            {
+                // Permission Denied
+                SmartToast.showText("您拒绝了拨打电话权限!");
+            }
+            return;
+        }
+    }
+
 }

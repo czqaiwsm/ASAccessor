@@ -23,7 +23,6 @@ import com.accessories.city.utils.ScreenUtils;
  * This widget implements the dynamic action bar tab behavior that can change
  * across different configurations or circumstances.
  */
-@SuppressLint({"ResourceAsColor", "NewApi"})
 public class ScrollingTabContainerView extends HorizontalScrollView
         implements AdapterView.OnItemClickListener {
     private static final String TAG = "ScrollingTabContainerView";
