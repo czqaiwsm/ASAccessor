@@ -28,7 +28,7 @@
                 android:gravity="center">
 
                 <com.accessories.city.view.RoundImageView
-                    android:id="@+id/account_head_img"
+                    android:id="@+id/headRImg"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_centerVertical="true"

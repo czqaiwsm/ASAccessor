@@ -38,7 +38,12 @@ public class URLConstants {
     public static final String TEACHER_UPLOAD = "http://120.76.47.196:8080/learn-teach/teach/upload.action";
 
 //    public static final String ACBASE_URL = "http://121.41.75.147:8081/carfashion/json";//车时尚 基础URL
-    public static final String ACBASE_URL = "http://121.41.75.147:8081/carfashion_test/json";//车时尚 基础URL
+
+    public static final String ACBASE_HOST = "http://121.41.75.147:8081/carfashion_test";//车时尚 基础URL
+    public static final String ACBASE_URL = ACBASE_HOST+"/json";//车时尚 基础URL
+
+
+    public static final String FILE_UPLOAD =ACBASE_HOST+"/file/uploadFile.do";//文件上传
     public static final String CATEGORYLIST =ACBASE_URL+"/categoryList.do";//类型
     public static final String Home =ACBASE_URL+"/index.do";//首页
     public static final String SHOPLIST =ACBASE_URL+"/shopList.do";//商家列表

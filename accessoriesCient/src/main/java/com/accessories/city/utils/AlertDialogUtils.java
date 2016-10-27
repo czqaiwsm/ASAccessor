@@ -237,11 +237,10 @@ public class AlertDialogUtils {
      * @param context
      * @param title           标题
      * @param message         提示文本
-     * @param positiveBtnText 确定按钮文本
      * @param positionOnclick 确定按钮事件
      * @return
      */
-    public static void displayMyAlertChoice(final Context context, String title, String message, String positiveBtnText, final View.OnClickListener positionOnclick) {
+    public static void displayMyAlertChoice(final Context context, String title, String message, final View.OnClickListener positionOnclick) {
 
         final Dialog builder = new Dialog(context, R.style.MyDialog);
         builder.setCancelable(true);

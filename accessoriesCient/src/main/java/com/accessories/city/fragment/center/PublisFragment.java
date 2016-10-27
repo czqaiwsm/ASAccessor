@@ -26,6 +26,7 @@ import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.pm.ActivityInfoCompat;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -39,8 +40,13 @@ import android.widget.Toast;
 
 import com.accessories.city.R;
 import com.accessories.city.activity.ChooseCityActivity;
+import com.accessories.city.activity.TeacherMainActivity;
 import com.accessories.city.activity.teacher.ChooseJoinorActivity;
+import com.accessories.city.bean.UploadBean;
+import com.accessories.city.bean.UserInfo;
 import com.accessories.city.fragment.BaseFragment;
+import com.accessories.city.help.RequsetListener;
+import com.accessories.city.parse.LoginInfoParse;
 import com.accessories.city.utils.AlertDialogUtils;
 import com.accessories.city.utils.AppLog;
 import com.accessories.city.utils.BaseApplication;
@@ -57,8 +63,14 @@ import com.google.gson.reflect.TypeToken;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+import com.volley.req.net.HttpURL;
+import com.volley.req.net.RequestManager;
+import com.volley.req.net.RequestParam;
 import com.volley.req.parser.JsonParserBase;
 import com.volley.req.parser.ParserUtil;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -69,17 +81,20 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.ParseException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import cn.jpush.android.api.JPushInterface;
 
 /**
  * @desc 教师首页
  * @creator caozhiqing
  * @data 2016/3/10
  */
-public class PublisFragment extends BaseFragment implements View.OnClickListener {
+public class PublisFragment extends BaseFragment implements View.OnClickListener,RequsetListener {
 
 
     @Bind(R.id.contentEt)
@@ -99,7 +114,8 @@ public class PublisFragment extends BaseFragment implements View.OnClickListener
     @Bind(R.id.addressTv)
     TextView addressTv;
 
-    private String cashType = "-1";
+    private String cashType = "-1";//0供应 1求购
+    private Bitmap m_obj_IconBp = null;
 
 
 
@@ -133,6 +149,7 @@ public class PublisFragment extends BaseFragment implements View.OnClickListener
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
         Bundle bundle = null;
         if((bundle = getArguments()) != null){
             cashType = bundle.getString("cashType");
@@ -166,20 +183,74 @@ public class PublisFragment extends BaseFragment implements View.OnClickListener
             case R.id.addRl:
                 photoSet();
                 break;
-            case R.id.choose_jonior:
-                intent = new Intent(mActivity, ChooseJoinorActivity.class);
-                startActivityForResult(intent, URLConstants.CHOOSE_JOINOR_REQUEST_CODE);
+            case R.id.workLog1Rl:
+                AlertDialogUtils.displayMyAlertChoice(mActivity, "提示", "是否确定删除此图片?", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        workLog1Rl.setVisibility(View.GONE);
+                        workLog1Rl.setTag("");
+                        addRl.setVisibility(View.VISIBLE);
+                    }
+                },null);
+                break;
+            case R.id.workLog2Rl:
+                AlertDialogUtils.displayMyAlertChoice(mActivity, "提示", "是否确定删除此图片?", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        workLog2Rl.setVisibility(View.GONE);
+                        workLog2Rl.setTag("");
+                        addRl.setVisibility(View.VISIBLE);
+                    }
+                },null);
+
                 break;
             default:
                 break;
         }
     }
 
+    @Subscribe
+    public void eventReq(int req){
+        requestTask(1);
+    }
+
+    @Override
+    protected void requestData(int requestType) {
+        HttpURL url = new HttpURL();
+        url.setmBaseUrl(URLConstants.LOGIN);
+        Map postParams = new HashMap();
+
+        postParams.put("userId", BaseApplication.getUserInfo().getId());
+        postParams.put("msgType",cashType);
+        postParams.put("msgContent",contentEt.getText().toString());
+        postParams.put("phone",phoneEt.getText().toString());
+        postParams.put("address",addressTv.getText().toString());
+        postParams.put("cityId",BaseApplication.getInstance().location[1]);
+
+        String tempPath = workLog1Rl.getVisibility() == View.VISIBLE?workLog1Rl.getTag().toString()+",":"";
+        tempPath += workLog1Rl.getVisibility() == View.VISIBLE?workLog1Rl.getTag().toString():"";
+
+        postParams.put("msgPic",tempPath);
+        RequestParam param = new RequestParam();
+        param.setmPostMap(postParams);
+        param.setmHttpURL(url);
+        param.setPostRequestMethod();
+        RequestManager.getRequestData(getActivity(), createReqSuccessListener(),createMyReqErrorListener(), param);
+
+    }
+
+    @Override
+    public void handleRspSuccess(int requestType,Object obj) {
+        SmartToast.showText("发布成功");
+        mActivity.setResult(Activity.RESULT_OK);
+        mActivity.finish();
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
-    }
+        EventBus.getDefault().unregister(this);
+      }
 
 
 
@@ -212,6 +283,37 @@ public class PublisFragment extends BaseFragment implements View.OnClickListener
         intent.putExtra("outputY", 320);
         intent.putExtra("return-data", true);
         startActivityForResult(intent, RESULT_REQUEST);
+    }
+
+    /**
+    * 保存裁剪之后的图片数据
+    *
+    * @param data
+    */
+    private void getImageToView(Intent data) {
+        Bundle extras = data.getExtras();
+        if (extras == null) {
+            return;
+        }
+        Bitmap bitmap = extras.getParcelable("data");
+        Drawable drawable = new BitmapDrawable(bitmap);
+//         mHeadImg.setImageDrawable(drawable);
+        /********** 上传图片 ***************/
+        m_obj_IconBp = bitmap;// 用于上传服务器
+        setLoadingDilog(WaitLayer.DialogType.MODALESS);
+        showLoadingDilog("正在上传...");
+        if (NetUtils.isConnected(getActivity())) {
+            new Thread(new Runnable() {
+
+                @Override
+                public void run() {
+                    uploadFileM();
+                }
+            }, "upPic1").start();
+        } else {
+            toasetUtil.showInfo("网络连接出错,无法上传头像");
+        }
+
     }
 
     /**
@@ -413,12 +515,144 @@ public class PublisFragment extends BaseFragment implements View.OnClickListener
                     break;
                 case RESULT_REQUEST:// 保存修改的头像并上传服务器
                     if (data != null) {
+                        getImageToView(data);
                     }
                     break;
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+
+    // 解析服务器响应的数据
+    private void parseDataFromServer(String data) {
+        try {
+            System.out.println("data:"+data);
+
+            if (data != null) {
+                UploadBean result = ParserUtil.fromJson(data, new TypeToken<UploadBean>() {
+                }.getType());
+                if (result != null && URLConstants.SUCCESS_CODE.equals(result.getResult())) {
+                    if(workLog1Rl.getVisibility() == View.GONE){
+                        workLog1Img.setImageBitmap(m_obj_IconBp);
+                        workLog1Rl.setVisibility(View.VISIBLE);
+                        workLog1Rl.setTag(result.getFilePath());
+                    }else {
+                        workLog2Img.setImageBitmap(m_obj_IconBp);
+                        workLog2Rl.setVisibility(View.VISIBLE);
+                        workLog2Rl.setTag(result.getFilePath());
+                    }
+
+                    if(workLog1Rl.getVisibility() == View.VISIBLE
+                            && workLog2Rl.getVisibility() == View.VISIBLE){
+                        addRl.setVisibility(View.GONE);
+
+                    }
+
+                } else {
+                    toasetUtil.showInfo("上传失败,请重新上传!");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            dismissLoadingDilog();
+        }
+    }
+
+
+    private void uploadFileM() {
+
+        AppLog.Loge("开始上传头像------------");
+        String fore_name = UUID.randomUUID().toString();
+        String fileName = fore_name + ".jpg"; // 报文中的文件名参数
+        String end = "\r\n";
+        String twoHyphens = "--";
+        String boundary = "*****";
+        m_obj_IconBp = Utils.compressImage(m_obj_IconBp);// 压缩到100kb
+        byte[] picByte = BitMap2Byte(m_obj_IconBp);
+        try {
+            URL url = new URL(URLConstants.FILE_UPLOAD);
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            /*
+             * Output to the connection. Default is false, set to true because
+			 * post method must write something to the connection
+			 */
+            con.setDoOutput(true);
+			/* Read from the connection. Default is true. */
+            con.setDoInput(true);
+			/* Post cannot use caches */
+            con.setUseCaches(false);
+			/* Set the post method. Default is GET */
+            con.setRequestMethod("POST");
+			/* 设置请求属性 */
+            con.setRequestProperty("Connection", "Keep-Alive");
+            con.setRequestProperty("Charset", "UTF-8");
+            con.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
+
+			/* 设置StrictMode 否则HTTPURLConnection连接失败，因为这是在主进程中进行网络连接 */
+            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectDiskReads().detectDiskWrites().detectNetwork().penaltyLog().build());
+			/* 设置DataOutputStream，getOutputStream中默认调用connect() */
+            DataOutputStream ds = new DataOutputStream(con.getOutputStream());
+            ds.writeBytes(twoHyphens + boundary + end);
+            //avatar 需要与后台约定的字段.
+            ds.writeBytes("Content-Disposition: form-data; " + "name=\"avatar\";filename=\"" + fileName + "\"" + end);
+            ds.writeBytes(end);
+            AppLog.Logi(PCenterInfoFragmentUser.class + "", "图片字节:" + picByte.toString());
+            ds.write(picByte, 0, picByte.length);
+            ds.writeBytes(end);
+            ds.writeBytes(twoHyphens + boundary + twoHyphens + end);
+
+            ds.close();
+			/* 从返回的输入流读取响应信息 */
+            InputStream is = con.getInputStream(); // input from the connection
+            // 正式建立HTTP连接
+            int ch;
+            final StringBuffer b = new StringBuffer();
+            while ((ch = is.read()) != -1) {
+                b.append((char) ch);
+            }
+			/* 显示网页响应内容 */
+            // Toast.makeText(getActivity(), b.toString().trim(),
+            // Toast.LENGTH_SHORT).show();// Post成功
+            AppLog.Logi(PCenterInfoFragmentUser.class + "", "响应内容:" + b.toString().trim());
+            // 解析响应的数据
+            mActivity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    parseDataFromServer(b.toString().trim());
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+            dismissLoadingDilog();
+			/* 显示异常信息 */
+            Message msg = handler.obtainMessage();
+            msg.what = SHOW_ERROR;
+            msg.obj = getResources().getString(R.string.upload_fail);
+            handler.removeMessages(msg.what);
+            handler.sendMessage(msg);
+        }
+    }
+
+    // 将BitMap转换成字节流
+    private byte[] BitMap2Byte(Bitmap bitmap) {
+        if (null == bitmap) {
+            return null;
+        }
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+        AppLog.Logi(PCenterInfoFragmentUser.class + "", "byte = " + byteArray);
+        AppLog.Logi(PCenterInfoFragmentUser.class + "", "byteString = " + byteArray.toString());
+        try {
+            stream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return byteArray;
+    }
+
 
 
 }

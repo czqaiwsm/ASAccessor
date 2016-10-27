@@ -515,10 +515,10 @@ public class PCenterInfoFragmentUser extends BaseFragment implements OnClickList
 
                     if(jsonStr != null){
 
-                        if(!TextUtils.isEmpty(jsonStr.getImgPath())){
+//                        if(!TextUtils.isEmpty(jsonStr.getImgPath())){
 //                            BaseApplication.getUserInfo().setHeadImg(jsonStr.getImgPath());
-                            myHandler.sendEmptyMessage(UPLOAD_OK);
-                        }
+//                            myHandler.sendEmptyMessage(UPLOAD_OK);
+//                        }
                     }
                 }else{
                     toasetUtil.showInfo( result.getMessage());

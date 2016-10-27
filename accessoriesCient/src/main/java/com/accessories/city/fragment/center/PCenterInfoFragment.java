@@ -69,7 +69,7 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
     private TextView account_ordername;
     private TextView editNameTv;
     private TextView name;
-
+    private RoundImageView headRImg;
     private boolean isPrepare = false;
     private boolean isVisible = false;
 
@@ -148,6 +148,7 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
         account_ordername = (TextView)v.findViewById(R.id.account_ordername);
         editNameTv = (TextView)v.findViewById(R.id.editNameTv);
         name = (TextView)v.findViewById(R.id.name);
+        headRImg = (RoundImageView) v.findViewById(R.id.headRImg);
 
 //        pcenter_avatar_layout.setOnClickListener(this);
         wallet_layout.setOnClickListener(this);
@@ -158,6 +159,7 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
         queryCarRl.setOnClickListener(this);
         editNameTv.setOnClickListener(this);
         name.setOnClickListener(this);
+        headRImg.setOnClickListener(this);
         setData(mUserInfo);
 
     }
@@ -217,6 +219,7 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
                 intent.setFlags(1);
                 startActivity(intent);
                 break;
+            case R.id.headRImg://
             case R.id.name://
                 intent = new Intent(mActivity,WidthdrawInfoActivity.class);
                 intent.setFlags(2);

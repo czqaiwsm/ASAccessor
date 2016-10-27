@@ -6,6 +6,8 @@ import android.content.Context;
 import android.os.Vibrator;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+
+import com.accessories.city.BuildConfig;
 import com.accessories.city.bean.UserInfo;
 import com.accessories.city.service.LocationService;
 import com.accessories.city.service.LocationUitl;
@@ -14,6 +16,7 @@ import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+
 
 /**
  * @author czq

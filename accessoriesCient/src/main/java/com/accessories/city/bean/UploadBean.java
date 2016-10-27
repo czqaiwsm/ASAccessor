@@ -8,22 +8,40 @@ package com.accessories.city.bean;
 public class UploadBean {
 
 
-    private String id;
-    private String imgPath;
+    private String message;
+    private String result;
+    private String filePath;
+    private String absFilePath;
 
-    public String getId() {
-        return id;
+    public String getMessage() {
+        return message;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public String getImgPath() {
-        return imgPath;
+    public String getResult() {
+        return result;
     }
 
-    public void setImgPath(String imgPath) {
-        this.imgPath = imgPath;
+    public void setResult(String result) {
+        this.result = result;
+    }
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public String getAbsFilePath() {
+        return absFilePath;
+    }
+
+    public void setAbsFilePath(String absFilePath) {
+        this.absFilePath = absFilePath;
     }
 }

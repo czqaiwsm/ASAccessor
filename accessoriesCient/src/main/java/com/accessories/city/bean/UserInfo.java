@@ -11,10 +11,11 @@ public class UserInfo implements Serializable {
 
     private String id;
     private String phone;
-    private String nickname	    ;//用户头像
+    private String nickname	    ;//
     private String account	    ;//昵称
     private String money	;//兑换钱
     private String integral	;//积分
+    private String userHead	;//用户头像
 
     private String shopName;
     private String shopId;
@@ -81,5 +82,14 @@ public class UserInfo implements Serializable {
 
     public void setShopId(String shopId) {
         this.shopId = shopId;
+    }
+
+
+    public String getUserHead() {
+        return userHead;
+    }
+
+    public void setUserHead(String userHead) {
+        this.userHead = userHead;
     }
 }

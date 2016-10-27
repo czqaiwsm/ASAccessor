@@ -12,6 +12,8 @@ import com.accessories.city.view.tab.ScrollingTabContainerView;
 import com.accessories.city.view.tab.TabsActionBar;
 import com.accessories.city.view.tab.TabsAdapter;
 
+import org.greenrobot.eventbus.EventBus;
+
 
 public class WidthDrawFragment extends BaseFragment {
 
@@ -39,6 +41,15 @@ public class WidthDrawFragment extends BaseFragment {
 
         initView(view);
         setTitleText(R.string.schedule);
+
+        if(flag ==2){
+            setHeaderRightText("发布", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    EventBus.getDefault().post(1);
+                }
+            });
+        }
     }
 
     @Override
