@@ -93,5 +93,6 @@
     <color name="certify_txt">#FF414141</color>
     <color name="certify_txt2">#FF7A7A7A</color>
     <color name="alph_white_0.5">#ae888888</color>
-    
+    <color name="province_line_border">#C7C7C7</color>
+
 </resources>

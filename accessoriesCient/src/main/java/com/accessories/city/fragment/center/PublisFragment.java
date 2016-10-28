@@ -53,11 +53,13 @@ import com.accessories.city.utils.BaseApplication;
 import com.accessories.city.utils.IDCard;
 import com.accessories.city.utils.ImageLoaderUtil;
 import com.accessories.city.utils.NetUtils;
+import com.accessories.city.utils.PhoneUitl;
 import com.accessories.city.utils.SDCardUtils;
 import com.accessories.city.utils.SmartToast;
 import com.accessories.city.utils.URLConstants;
 import com.accessories.city.utils.Utils;
 import com.accessories.city.utils.WaitLayer;
+import com.accessories.city.view.AddPopwindow;
 import com.accessories.city.view.UpdateAvatarPopupWindow;
 import com.google.gson.reflect.TypeToken;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -117,7 +119,7 @@ public class PublisFragment extends BaseFragment implements View.OnClickListener
     private String cashType = "-1";//0供应 1求购
     private Bitmap m_obj_IconBp = null;
 
-
+    private AddPopwindow popwindow = null;
 
     UpdateAvatarPopupWindow m_obj_menuWindow ;
     private static final int REQUEST_PHOTO = 4;// 相册选择头像
@@ -204,13 +206,31 @@ public class PublisFragment extends BaseFragment implements View.OnClickListener
                 },null);
 
                 break;
+            case R.id.addressLL:
+                popwindow = new AddPopwindow(mActivity,this);
+                break;
+            case R.id.sureBtn:
+                addressTv.setText(v.getTag().toString());
+                break;
             default:
                 break;
         }
     }
 
     @Subscribe
-    public void eventReq(int req){
+    public void eventReq(Integer req){
+        if (!PhoneUitl.isPhone(phoneEt.getText().toString())){
+            toasetUtil.showInfo(R.string.phone_error);
+            return;
+        }
+        if(TextUtils.isEmpty(contentEt.getText().toString())){
+            toasetUtil.showInfo("请输入内容");
+            return;
+        }
+        if(workLog1Rl.getVisibility() == View.GONE && workLog2Rl.getVisibility() == View.GONE ){
+            toasetUtil.showInfo("请选择图片");
+            return;
+        }
         requestTask(1);
     }
 

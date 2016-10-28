@@ -59,7 +59,6 @@ public class WidthDrawFragment extends BaseFragment {
 
     private void initView(View view) {
         setLeftHeadIcon(0);
-
         mViewPager = (ViewPager) view.findViewById(R.id.order_viewpager);
         mViewPager.setOffscreenPageLimit(0);
         mTabContainerView = (ScrollingTabContainerView) view.findViewById(R.id.tab_container);

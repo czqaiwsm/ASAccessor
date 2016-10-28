@@ -361,6 +361,7 @@ public abstract class BaseFragment extends Fragment{
                         if(jsonParserBase != null && URLConstants.SUCCESS_CODE.equals(jsonParserBase.getResult())){
                             if(requsetListener != null){
                                     if(!isDetached() && getView() != null )
+                                        System.out.println("respJson=="+object.toString());
                                         requsetListener.handleRspSuccess(requestType,object.toString());
                             }
 
