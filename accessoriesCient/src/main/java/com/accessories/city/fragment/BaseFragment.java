@@ -356,12 +356,12 @@ public abstract class BaseFragment extends Fragment{
 
                         }
                     }else {
+                        System.out.println("respJson=="+object.toString());
                         JsonParserBase jsonParserBase =  ParserUtil.fromJsonBase(object.toString(), new TypeToken<JsonParserBase>() {
                         }.getType());
                         if(jsonParserBase != null && URLConstants.SUCCESS_CODE.equals(jsonParserBase.getResult())){
                             if(requsetListener != null){
                                     if(!isDetached() && getView() != null )
-                                        System.out.println("respJson=="+object.toString());
                                         requsetListener.handleRspSuccess(requestType,object.toString());
                             }
 

@@ -64,8 +64,9 @@ public class TeacherHomePageFragment extends BaseFragment implements View.OnClic
     private String cityName;
     private int type = 1;//1汽车配件全车件  4.汽车配件单项件
 
-    private boolean isPrepare = false;
-    private boolean isVisible = false;
+    private boolean prepare = false;
+    private boolean isShow = false;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,33 +104,29 @@ public class TeacherHomePageFragment extends BaseFragment implements View.OnClic
                 return true;
             }
         });
-        isPrepare = true;
+        prepare = true;
 
-        onLazyLoad();
+        onLoade();
+    }
+
+    private void onLoade(){
+        if(prepare && isShow){
+            requestTask(1);
+            prepare = false;
+        }
     }
 
     @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser) {
-            isVisible = true;
-        } else {
-            isVisible = false;
-            if (isPrepare) {
-                dismissLoadingDilog();
-            }
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        isShow = !hidden;
+        if(hidden){
+            dismissLoadingDilog();
         }
-
-        onLazyLoad();
+        onLoade();
     }
-    private void onLazyLoad() {
 
-        if (!isPrepare || !isVisible) {
-            return;
-        }
-        requestTask(1);
 
-    }
 
     private void initView(View view) {
 //        homeSearch = (LinearLayout) view.findViewById(R.id.homeSearch);

@@ -306,7 +306,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="商家入口"
+                    android:text="清除缓存"
                     android:textColor="@color/color_gray"
                     android:layout_toRightOf="@+id/clearImg"
                     android:textSize="@dimen/pc_txt_size" />

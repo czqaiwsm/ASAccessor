@@ -97,8 +97,7 @@ public class PcenterModifyInfoIAFragment extends BaseFragment implements Requset
 		Map postParams = new HashMap<String,String>();
 		url.setmBaseUrl(URLConstants.UPDATE_USER);
 		UserInfo mUserInfo = BaseApplication.getUserInfo();
-		if(mUserInfo!= null)
-			postParams.put("id", ""+mUserInfo.getId());
+		postParams.put("id", ""+mUserInfo.getId());
 		postParams.put("nickname",id_pcenterinfo_line1_et1.getText().toString());
 		RequestParam param = new RequestParam();
 		param.setmPostMap(postParams);
@@ -108,13 +107,10 @@ public class PcenterModifyInfoIAFragment extends BaseFragment implements Requset
 	}
 	@Override
 	public void handleRspSuccess(int requestType,Object obj) {
-		JsonParserBase<UserInfo> jsonParserBase = (JsonParserBase<UserInfo>)obj;
-		if ((jsonParserBase != null)){
-			UserInfo mUserInfo = jsonParserBase.getObj();
-			BaseApplication.saveUserInfo(jsonParserBase.getObj());
-			BaseApplication.setMt_token(jsonParserBase.getObj().getId());
-			JPushInterface.setAlias(BaseApplication.getInstance(), "t_" + BaseApplication.getUserInfo().getId(), null);
-		}
+		SmartToast.showText("昵称修改成功!");
+		BaseApplication.getUserInfo().setNickname(id_pcenterinfo_line1_et1.getText().toString());
+		BaseApplication.saveUserInfo(BaseApplication.getUserInfo());
+		mActivity.finish();
 	}
 
 }
