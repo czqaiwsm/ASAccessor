@@ -10,10 +10,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.accessories.city.R;
+import com.accessories.city.activity.home.ChooseActivity;
 import com.accessories.city.bean.CertifyStatus;
 import com.accessories.city.fragment.BaseFragment;
 import com.accessories.city.help.RequestHelp;
 import com.accessories.city.help.RequsetListener;
+import com.accessories.city.utils.BaseApplication;
+import com.accessories.city.utils.SmartToast;
 import com.accessories.city.utils.URLConstants;
 import com.google.gson.reflect.TypeToken;
 import com.volley.req.net.HttpURL;
@@ -23,8 +26,10 @@ import com.volley.req.net.inferface.IParser;
 import com.volley.req.parser.JsonParserBase;
 import com.volley.req.parser.ParserUtil;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.Bind;
@@ -48,7 +53,7 @@ public class WidthdrawInfoFragment extends BaseFragment implements View.OnClickL
     TextView loginText;
     private CertifyStatus certifyStatus;
 
-    private String cashType = "-1";
+    private String cashType = "-1";//0支付宝 1微信
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,47 +74,62 @@ public class WidthdrawInfoFragment extends BaseFragment implements View.OnClickL
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        initView();
+        loginText.setOnClickListener(this);
+        initView();
     }
 
     private void initView() {
+        if("1".equals(cashType)){
+            accountEt.setHint("请输入微信账号");
+            accountNameEt.setHint("请输入微信对应的姓名");
+
+        }
+
+
     }
 
 
     @Override
     public void onClick(View v) {
-        Intent intent = null;
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK) {
+        switch (v.getId()){
+            case R.id.login_text:
+                requestTask(1);
+                break;
         }
-
     }
+
 
     @Override
     protected void requestData(int requestType) {
+
         HttpURL url = new HttpURL();
-        url.setmBaseUrl(URLConstants.BASE_URL);
-        Map postParams = RequestHelp.getBaseParaMap("QueryCertifi");
+        url.setmBaseUrl(URLConstants.ADD_CASH);
+        Map postParams = new HashMap();
         RequestParam param = new RequestParam();
-//        param.setmParserClassName(this);
-        param.setmPostarams(postParams);
+//        1. userId 用户ID
+//        2. cashType 提现类型 0支付宝 1微信 3. cashAccount 提现账号
+//        4. cashName 提现名称
+//        5. cashIntegral 提现积分
+//        6. cashMone 提现金额
+
+        postParams.put("userId", BaseApplication.getUserInfo().getId());
+        postParams.put("cashType",cashType);
+        postParams.put("cashAccount",accountEt.getText().toString());
+        postParams.put("cashName",accountNameEt.getText().toString());
+        postParams.put("cashIntegral",scoreEt.getText().toString());
+        postParams.put("cashMone","1000");
+        param.setmPostMap(postParams);
         param.setmHttpURL(url);
         param.setPostRequestMethod();
-        RequestManager.getRequestData(getActivity(), createReqSuccessListener(), createMyReqErrorListener(), param);
+        RequestManager.getRequestData(getActivity(), createReqSuccessListener(requestType), createMyReqErrorListener(), param);
 
     }
 
     @Override
     public void handleRspSuccess(int requestType, Object obj) {
-        JsonParserBase<CertifyStatus> jsonParserBase = (JsonParserBase<CertifyStatus>) obj;
-        certifyStatus = jsonParserBase.getObj();
-        String satus = certifyStatus.getIdcardStatus();
-        initView();
-
+        SmartToast.showText("提现成功!");
+        EventBus.getDefault().post(BaseApplication.getUserInfo());
+        mActivity.finish();
     }
 
 

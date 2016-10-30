@@ -61,7 +61,7 @@
                     android:drawableTop="@drawable/tab_contact_list_bg"
                     android:paddingBottom="@dimen/maint_bottom_marginbot"
                     android:scaleType="matrix"
-                    android:text="@string/address_book"
+                    android:text="产品中心"
                     android:textColor="@color/main_botton_text_color"
                     android:background="@null"
                     android:textSize="@dimen/maint_bottom_txt_size" />
@@ -93,7 +93,7 @@
                     android:drawableTop="@drawable/tab_setting_bg"
                     android:paddingBottom="@dimen/maint_bottom_marginbot"
                     android:scaleType="matrix"
-                    android:text="@string/schedule_tab"
+                    android:text="会话列表"
                     android:textColor="@color/main_botton_text_color"
                     android:background="@null"
 

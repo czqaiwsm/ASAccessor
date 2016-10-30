@@ -61,7 +61,9 @@ public class URLConstants {
     public static final String GETVERSION =ACBASE_URL+"/getVersion.do";//获取个人信息
     public static final String UPDATE_USER =ACBASE_URL+"/updateUser.do";//修改用户信息
     public static final String ADD_MEMBER_MESSAGE =ACBASE_URL+"/addMemberMessage.do";//发布消息
-    public static final String MEMBER_MESSAGE_LIST =ACBASE_URL+"/memberMessageList.do";//发布消息
+    public static final String MEMBER_MESSAGE_LIST =ACBASE_URL+"/memberMessageList.do";//消息记录
+    public static final String CASH_LIST =ACBASE_URL+"/cashList.do";//提现记录
+    public static final String ADD_CASH =ACBASE_URL+"/addCash.do";//提现
 
 
 

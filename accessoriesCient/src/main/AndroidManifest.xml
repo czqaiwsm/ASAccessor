@@ -162,6 +162,8 @@
                   android:screenOrientation="portrait"/>
         <activity android:name=".activity.center.QueryCarActivity"
                   android:screenOrientation="portrait"/>
+        <activity android:name=".activity.center.WidthdrawRecordActivity"
+                  android:screenOrientation="portrait"/>
 
 
 

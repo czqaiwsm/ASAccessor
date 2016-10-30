@@ -29,6 +29,7 @@ import com.accessories.city.activity.center.QueryCarActivity;
 import com.accessories.city.activity.center.ServiceProtocolActivity;
 import com.accessories.city.activity.center.SettingActivity;
 import com.accessories.city.activity.center.WidthdrawInfoActivity;
+import com.accessories.city.activity.center.WidthdrawRecordActivity;
 import com.accessories.city.activity.login.SellerLoginActivity;
 import com.accessories.city.activity.teacher.MyAssetActivity;
 import com.accessories.city.bean.UserInfo;
@@ -44,6 +45,9 @@ import com.volley.req.net.HttpURL;
 import com.volley.req.net.RequestManager;
 import com.volley.req.net.RequestParam;
 import com.volley.req.parser.JsonParserBase;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -63,6 +67,7 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
     private RelativeLayout setting_layout;
     private RelativeLayout wdrawRl;
     private RelativeLayout queryCarRl;
+    private RelativeLayout widthdrawRecordRl;
 
     private UserInfo mUserInfo;
     private TextView account_customname;
@@ -83,6 +88,8 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mUserInfo = BaseApplication.getUserInfo();
+
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -144,6 +151,7 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
         setting_layout = (RelativeLayout) v.findViewById(R.id.set_layout);
         queryCarRl = (RelativeLayout) v.findViewById(R.id.queryCarRl);
         wdrawRl = (RelativeLayout) v.findViewById(R.id.wdrawRl);
+        widthdrawRecordRl = (RelativeLayout) v.findViewById(R.id.widthdrawRecordRl);
         account_customname = (TextView)v.findViewById(R.id.account_customname);
         account_ordername = (TextView)v.findViewById(R.id.account_ordername);
         editNameTv = (TextView)v.findViewById(R.id.editNameTv);
@@ -158,6 +166,7 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
         wdrawRl.setOnClickListener(this);
         queryCarRl.setOnClickListener(this);
         editNameTv.setOnClickListener(this);
+        widthdrawRecordRl.setOnClickListener(this);
         name.setOnClickListener(this);
         headRImg.setOnClickListener(this);
         setData(mUserInfo);
@@ -184,6 +193,11 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
         }
 
 
+    }
+
+    @Subscribe
+    public void  useInfoChange(UserInfo userInfo){
+        requestTask(1);
     }
 
     @Override
@@ -217,6 +231,10 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
             case R.id.wdrawRl:// 提现
                 intent = new Intent(mActivity,WidthdrawInfoActivity.class);
                 intent.setFlags(1);
+                startActivity(intent);
+                break;
+            case R.id.widthdrawRecordRl:// 提现记录
+                intent = new Intent(mActivity,WidthdrawRecordActivity.class);
                 startActivity(intent);
                 break;
             case R.id.headRImg://
@@ -325,4 +343,9 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
         }
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        EventBus.getDefault().unregister(this);
+    }
 }

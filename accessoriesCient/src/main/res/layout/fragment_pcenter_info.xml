@@ -101,7 +101,7 @@
                     android:textSize="@dimen/app_text_size_second" />
             </RelativeLayout>
             <RelativeLayout
-                android:id="@+id/widthdrawRecord"
+                android:id="@+id/widthdrawRecordRl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
