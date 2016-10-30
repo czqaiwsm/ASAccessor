@@ -13,6 +13,7 @@ import com.accessories.city.R;
 import com.accessories.city.activity.login.LoginActivity;
 import com.accessories.city.fragment.TeacherHomePageFragment;
 import com.accessories.city.fragment.center.PCenterInfoFragment;
+import com.accessories.city.fragment.msg.MsgInfoFragment;
 import com.accessories.city.fragment.msg.MsgInfosFragment;
 import com.accessories.city.utils.BaseApplication;
 import com.accessories.city.utils.SmartToast;
@@ -35,9 +36,9 @@ public class TeacherMainActivity extends BaseActivity implements View.OnClickLis
     private Button[] mTabs;
     private Fragment[] fragments;
 
-    private TeacherHomePageFragment homePageFragment;
-    private MsgInfosFragment msgInfosFragment;
-    private MsgInfosFragment scheduleFragment;
+//    private TeacherHomePageFragment homePageFragment;
+//    private MsgInfosFragment msgInfosFragment;
+//    private MsgInfosFragment scheduleFragment;
     private PCenterInfoFragment pCenterFragment;
 
     private final int VIEW_COUNT = 4;
@@ -54,9 +55,9 @@ public class TeacherMainActivity extends BaseActivity implements View.OnClickLis
         UpdateMgr.getInstance(this).checkUpdateInfo(null, false);
         setContentView(R.layout.main_activity);
         fragments = new Fragment[VIEW_COUNT];
-        fragments[0] = homePageFragment =new TeacherHomePageFragment();
-        fragments[1] = msgInfosFragment = new MsgInfosFragment(2);
-        fragments[2] = scheduleFragment = new MsgInfosFragment(3);
+        fragments[0] =new MsgInfoFragment();
+        fragments[1] = new TeacherHomePageFragment();
+        fragments[2] = new MsgInfosFragment(3);
         fragments[3] = pCenterFragment = new PCenterInfoFragment();
 
         initView();

@@ -29,7 +29,7 @@
                     android:drawableTop="@drawable/tab_chat_bg"
                     android:paddingBottom="@dimen/maint_bottom_marginbot"
                     android:scaleType="matrix"
-                    android:text="@string/session"
+                    android:text="信息发布"
                     android:textColor="@color/main_botton_text_color"
                     android:background="@null"
                     android:textSize="@dimen/maint_bottom_txt_size" />

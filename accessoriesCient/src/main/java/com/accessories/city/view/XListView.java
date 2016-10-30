@@ -210,7 +210,7 @@ public class XListView extends ListView implements OnScrollListener {
         if (mPullRefreshing && height <= mHeaderViewHeight) {
             return;
         }
-        int finalHeight = 0; // default: scroll back to dismiss header.
+        int finalHeight = 0; // default_car: scroll back to dismiss header.
         // is refreshing, just scroll back to show all the header.
         if (mPullRefreshing && height > mHeaderViewHeight) {
             finalHeight = mHeaderViewHeight;

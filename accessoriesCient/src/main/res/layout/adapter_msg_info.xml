@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/bg_main"
+              android:orientation="vertical"
+
+    >
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="12dp"
+        android:paddingLeft="@dimen/dp_15"
+        android:paddingRight="@dimen/dp_15"
+        android:paddingTop="@dimen/_10dp"
+        android:background="@color/white"
+        android:layout_marginBottom="@dimen/_10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.accessories.city.view.RoundImageView
+            android:id="@+id/head_photo"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginRight="@dimen/_10dp"
+            android:background="@drawable/head_photo"
+            />
+
+        <TextView
+            android:id="@+id/nameTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_toRightOf="@+id/head_photo"
+            android:singleLine="true"
+            android:text="南阳汽车用一片"
+            android:textColor="#000000"
+            android:textSize="@dimen/app_text_size_normal"/>
+
+        <TextView
+            android:id="@+id/telTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/head_photo"
+            android:layout_toRightOf="@+id/head_photo"
+            android:singleLine="true"
+            android:text="Tel:18677779999"
+            android:textColor="#999999"
+            android:textSize="@dimen/app_text_size_min"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/contentTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="发发冷风机阿道夫建安路附近激发了房间里钢结构IT黼国黻家发给古拉的肉大概迦大哥让老公发给"
+        android:textColor="@color/teach_txt_color2"
+        android:textSize="@dimen/app_text_size_min"
+        />
+     <ImageView
+         android:visibility="visible"
+         android:id="@+id/oneImg"
+         android:layout_width="180dp"
+         android:layout_height="170dp"
+         android:src="@drawable/default_car"
+         android:layout_marginTop="5dp"/>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/twoImgLl"
+        android:layout_marginTop="5dp"
+        >
+        <ImageView
+            android:id="@+id/img1"
+            android:layout_width="140dp"
+            android:layout_height="135dp"
+            android:src="@drawable/default_car"
+            android:layout_marginRight="@dimen/_10dp"
+            />
+        <ImageView
+            android:id="@+id/img2"
+            android:layout_width="140dp"
+            android:layout_height="135dp"
+            android:src="@drawable/default_car"
+            android:layout_marginRight="@dimen/_10dp"
+            />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/timeTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textColor="#999999"
+        android:textSize="@dimen/app_text_size_small"
+        android:text="2016-10-10 21:05:08"
+        />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/addressTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#799cc2"
+            android:textSize="@dimen/app_text_size_small"
+            android:text="安徽省 合肥市 政务区"
+            android:layout_marginRight="4dp"
+            />
+
+        <TextView
+            android:id="@+id/typeTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_ff5a00"
+            android:textSize="@dimen/app_text_size_small"
+            android:layout_marginLeft="4dp"
+            android:background="@drawable/msg_info_bg"
+            android:paddingRight="3dp"
+            android:paddingLeft="3dp"
+            android:text="供应"/>
+    </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

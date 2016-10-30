@@ -49,6 +49,6 @@ public class ErrorCode {
      * case NETWORK_RESOURCE_NOT_FIND: return "服务器无资源"; case
      * NETWORK_READ_TIME_OUT: return "网络超时"; case NETWORK_INVALID_URL: return
      * "无效URL"; case FULL_STORAGE: return "SD卡剩余空间不足"; case STORAGE_INVALID:
-     * return "未发现SD卡，无法下载歌曲资源！"; default: break; } return null; }
+     * return "未发现SD卡，无法下载歌曲资源！"; default_car: break; } return null; }
      */
 }

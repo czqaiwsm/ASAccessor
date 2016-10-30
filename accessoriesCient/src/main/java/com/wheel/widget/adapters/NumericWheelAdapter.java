@@ -23,10 +23,10 @@ import android.content.Context;
  */
 public class NumericWheelAdapter extends AbstractWheelTextAdapter {
     
-    /** The default min value */
+    /** The default_car min value */
     public static final int DEFAULT_MAX_VALUE = 9;
 
-    /** The default max value */
+    /** The default_car max value */
     private static final int DEFAULT_MIN_VALUE = 0;
     
     // Values

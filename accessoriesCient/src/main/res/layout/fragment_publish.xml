@@ -97,7 +97,7 @@
         />
 
     <RelativeLayout
-        android:id="@+id/wallet_layout"
+        android:id="@+id/addessLl"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginTop="@dimen/dp_10"

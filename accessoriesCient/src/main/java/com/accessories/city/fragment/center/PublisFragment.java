@@ -51,6 +51,7 @@ import com.accessories.city.utils.AlertDialogUtils;
 import com.accessories.city.utils.AppLog;
 import com.accessories.city.utils.BaseApplication;
 import com.accessories.city.utils.IDCard;
+import com.accessories.city.utils.ImageFactory;
 import com.accessories.city.utils.ImageLoaderUtil;
 import com.accessories.city.utils.NetUtils;
 import com.accessories.city.utils.PhoneUitl;
@@ -111,6 +112,8 @@ public class PublisFragment extends BaseFragment implements View.OnClickListener
     RelativeLayout workLog2Rl;
     @Bind(R.id.addRl)
     RelativeLayout addRl;
+    @Bind(R.id.addessLl)
+    RelativeLayout addessLl;
     @Bind(R.id.phoneEt)
     EditText phoneEt;
     @Bind(R.id.addressTv)
@@ -170,12 +173,14 @@ public class PublisFragment extends BaseFragment implements View.OnClickListener
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initView();
+        popwindow = new AddPopwindow(mActivity,this);
     }
 
     private void initView() {
         addRl.setOnClickListener(this);
         workLog1Rl.setOnClickListener(this);
         workLog2Rl.setOnClickListener(this);
+        addessLl.setOnClickListener(this);
     }
 
     @Override
@@ -206,8 +211,9 @@ public class PublisFragment extends BaseFragment implements View.OnClickListener
                 },null);
 
                 break;
-            case R.id.addressLL:
-                popwindow = new AddPopwindow(mActivity,this);
+            case R.id.addessLl:
+                popwindow.payPopShow(v);
+
                 break;
             case R.id.sureBtn:
                 addressTv.setText(v.getTag().toString());
@@ -219,25 +225,28 @@ public class PublisFragment extends BaseFragment implements View.OnClickListener
 
     @Subscribe
     public void eventReq(Integer req){
-        if (!PhoneUitl.isPhone(phoneEt.getText().toString())){
-            toasetUtil.showInfo(R.string.phone_error);
-            return;
+        if(cashType.equals(req+"")){
+            if (!PhoneUitl.isPhone(phoneEt.getText().toString())){
+                toasetUtil.showInfo(R.string.phone_error);
+                return;
+            }
+            if(TextUtils.isEmpty(contentEt.getText().toString())){
+                toasetUtil.showInfo("请输入内容");
+                return;
+            }
+            if(workLog1Rl.getVisibility() == View.GONE && workLog2Rl.getVisibility() == View.GONE ){
+                toasetUtil.showInfo("请选择图片");
+                return;
+            }
+            requestTask(1);
         }
-        if(TextUtils.isEmpty(contentEt.getText().toString())){
-            toasetUtil.showInfo("请输入内容");
-            return;
-        }
-        if(workLog1Rl.getVisibility() == View.GONE && workLog2Rl.getVisibility() == View.GONE ){
-            toasetUtil.showInfo("请选择图片");
-            return;
-        }
-        requestTask(1);
+
     }
 
     @Override
     protected void requestData(int requestType) {
         HttpURL url = new HttpURL();
-        url.setmBaseUrl(URLConstants.LOGIN);
+        url.setmBaseUrl(URLConstants.ADD_MEMBER_MESSAGE);
         Map postParams = new HashMap();
 
         postParams.put("userId", BaseApplication.getUserInfo().getId());
@@ -248,7 +257,7 @@ public class PublisFragment extends BaseFragment implements View.OnClickListener
         postParams.put("cityId",BaseApplication.getInstance().location[1]);
 
         String tempPath = workLog1Rl.getVisibility() == View.VISIBLE?workLog1Rl.getTag().toString()+",":"";
-        tempPath += workLog1Rl.getVisibility() == View.VISIBLE?workLog1Rl.getTag().toString():"";
+        tempPath += workLog2Rl.getVisibility() == View.VISIBLE?workLog2Rl.getTag().toString():"";
 
         postParams.put("msgPic",tempPath);
         RequestParam param = new RequestParam();
@@ -660,6 +669,7 @@ public class PublisFragment extends BaseFragment implements View.OnClickListener
         if (null == bitmap) {
             return null;
         }
+        bitmap = ImageFactory.ratio(bitmap,800,800);
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
         byte[] byteArray = stream.toByteArray();

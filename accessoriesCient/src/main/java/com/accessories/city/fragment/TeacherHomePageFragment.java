@@ -38,7 +38,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @desc 首页
+ * @desc 产品中心
  * @creator caozhiqing
  * @data 2016/3/10
  * 13637055938    111111
@@ -62,8 +62,10 @@ public class TeacherHomePageFragment extends BaseFragment implements View.OnClic
 
     private String cityId;
     private String cityName;
-
     private int type = 1;//1汽车配件全车件  4.汽车配件单项件
+
+    private boolean isPrepare = false;
+    private boolean isVisible = false;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,7 +103,32 @@ public class TeacherHomePageFragment extends BaseFragment implements View.OnClic
                 return true;
             }
         });
+        isPrepare = true;
+
+        onLazyLoad();
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            isVisible = true;
+        } else {
+            isVisible = false;
+            if (isPrepare) {
+                dismissLoadingDilog();
+            }
+        }
+
+        onLazyLoad();
+    }
+    private void onLazyLoad() {
+
+        if (!isPrepare || !isVisible) {
+            return;
+        }
         requestTask(1);
+
     }
 
     private void initView(View view) {

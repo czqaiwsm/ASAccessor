@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public  class MainAdapter extends BaseAdapter {
-    private List mItemList;
-    private SoftReference<Context> mContext;
+    protected List mItemList = new ArrayList();
+    protected SoftReference<Context> mContext;
 
     @Override
     public int getCount() {

@@ -46,7 +46,7 @@ public class WidthDrawFragment extends BaseFragment {
             setHeaderRightText("发布", new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    EventBus.getDefault().post(1);
+                    EventBus.getDefault().post(new Integer(mViewPager.getCurrentItem()));
                 }
             });
         }

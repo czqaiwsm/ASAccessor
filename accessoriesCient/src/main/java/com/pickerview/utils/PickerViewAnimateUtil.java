@@ -10,7 +10,7 @@ import com.accessories.city.R;
 public class PickerViewAnimateUtil {
     private static final int INVALID = -1;
     /**
-     * Get default animation resource when not defined by the user
+     * Get default_car animation resource when not defined by the user
      *
      * @param gravity       the gravity of the dialog
      * @param isInAnimation determine if is in or out animation. true when is is

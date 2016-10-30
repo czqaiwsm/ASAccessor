@@ -112,7 +112,7 @@ public class BaseApplication extends Application {
     private void initImageLoader() {
         // This configuration tuning is custom. You can tune every option, you
         // may tune some of them,
-        // or you can create default configuration by
+        // or you can create default_car configuration by
         // ImageLoaderConfiguration.createDefault(this);
         // method.
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).threadPriority(Thread.NORM_PRIORITY - 2).denyCacheImageMultipleSizesInMemory()

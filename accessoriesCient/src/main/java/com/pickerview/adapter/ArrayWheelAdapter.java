@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class ArrayWheelAdapter<T> implements WheelAdapter {
 	
-	/** The default items length */
+	/** The default_car items length */
 	public static final int DEFAULT_LENGTH = 4;
 	
 	// items

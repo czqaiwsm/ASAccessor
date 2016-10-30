@@ -25,15 +25,15 @@ import java.util.List;
  * @data 2016/3/10
  */
 @SuppressLint("ValidFragment")
-public class PullRefreshFragment extends BaseFragment implements RequsetListener,CustomListView.OnLoadMoreListener {
+public abstract class PullRefreshFragment extends BaseFragment implements RequsetListener,CustomListView.OnLoadMoreListener {
 
     private CustomListView customListView = null;
     private MainAdapter adapter;
     private TextView noData ;
 
     private int pageCount = 0;//总页数
-    private int pageNo = 1;
-    private int pageSize = 10;//每页的数据量
+    protected int pageNo = 1;
+    protected int pageSize = 10;//每页的数据量
     private PullRefreshStatus status = PullRefreshStatus.NORMAL;
 
 
@@ -58,8 +58,6 @@ public class PullRefreshFragment extends BaseFragment implements RequsetListener
         customListView = (CustomListView)view.findViewById(R.id.callListView);
         noData = (TextView)view.findViewById(R.id.noData);
         customListView.setCanRefresh(true);
-        adapter = new MainAdapter(new SoftReference<Context>(mActivity));
-        customListView.setAdapter(adapter);
 
         customListView.setOnRefreshListener(new CustomListView.OnRefreshListener() {
             @Override
@@ -72,6 +70,13 @@ public class PullRefreshFragment extends BaseFragment implements RequsetListener
         });
     }
 
+
+    protected void initAdapater(MainAdapter mainAdapter){
+        this.adapter = mainAdapter;
+        customListView.setAdapter(this.adapter);
+
+    }
+
     @Override
     public void onLoadMore() {
         status = PullRefreshStatus.LOAD_MORE;
@@ -79,17 +84,19 @@ public class PullRefreshFragment extends BaseFragment implements RequsetListener
         requestData(1);
     }
 
+    protected  abstract List parseList(String json);
+
 
     @Override
     public void handleRspSuccess(int requestType,Object obj) {
         switch (requestType){
             case 1:
-                JsonParserBase<OrderListBean> jsonParserBase = (JsonParserBase<OrderListBean>)obj;
-                OrderListBean chooseTeachBean = jsonParserBase.getObj();
-                if(chooseTeachBean != null){
-                    pageCount = chooseTeachBean.getTotalPages();
-                    pageSize = chooseTeachBean.getPageSize();
-                    ArrayList<OrderInfo> teacherInfos = chooseTeachBean.getElements();
+                System.out.println("resJson=="+obj.toString());
+                ArrayList teacherInfos = (ArrayList) parseList(obj.toString());
+                if(teacherInfos != null){
+//                    pageCount = chooseTeachBean.getTotalPages();
+//                    pageSize = chooseTeachBean.getPageSize();
+//                    ArrayList<OrderInfo> teacherInfos = chooseTeachBean.getElements();
                     switch (status){
                         case NORMAL:
                             refresh(teacherInfos);
@@ -144,7 +151,7 @@ public class PullRefreshFragment extends BaseFragment implements RequsetListener
      * 页数为1时使用
      * @param teacherInfos
      */
-    private void refresh(ArrayList<OrderInfo> teacherInfos){
+    private void refresh(ArrayList teacherInfos){
         List list = adapter.getList();
         list.clear();
         if(teacherInfos != null){
