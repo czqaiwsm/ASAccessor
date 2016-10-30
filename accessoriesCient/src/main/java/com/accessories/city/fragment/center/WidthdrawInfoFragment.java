@@ -3,6 +3,7 @@ package com.accessories.city.fragment.center;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import com.accessories.city.help.RequsetListener;
 import com.accessories.city.utils.BaseApplication;
 import com.accessories.city.utils.SmartToast;
 import com.accessories.city.utils.URLConstants;
+import com.google.gson.internal.bind.TimeTypeAdapter;
 import com.google.gson.reflect.TypeToken;
 import com.volley.req.net.HttpURL;
 import com.volley.req.net.RequestManager;
@@ -93,6 +95,13 @@ public class WidthdrawInfoFragment extends BaseFragment implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.login_text:
+                if(TextUtils.isEmpty(accountEt.getText().toString())
+                        || TextUtils.isEmpty(accountNameEt.getText().toString())
+                        || TextUtils.isEmpty(scoreEt.getText().toString())){
+                    SmartToast.showText("请完善提现信息!");
+                    return;
+                }
+
                 requestTask(1);
                 break;
         }

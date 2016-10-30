@@ -48,7 +48,7 @@ public class WidthdrawRecordAdpter extends MainAdapter {
             if("0".equals(widthdrawRecord.getCashType())){
                 holder.descTv.setText("支付宝提现");
             }else {
-                holder.descTv.setText("微信宝提现");
+                holder.descTv.setText("微信提现");
             }
             if("0".equals(widthdrawRecord.getCashStatus())){//0处理中 1已完成 2拒绝
                 holder.statusTv.setTextColor(mContext.get().getResources().getColor(R.color.color_ff5a00));

@@ -63,7 +63,7 @@ public class WidthdrawRecordFragment extends PullRefreshFragment implements Requ
         setLoadingDilog(WaitLayer.DialogType.NOT_NOMAL);
         prepare = true;
         initAdapater(new WidthdrawRecordAdpter(new SoftReference<Context>(mActivity)));
-
+        setLeftHeadIcon(0);
         setTitleText("提现记录");
         requestTask(1);
 //        onLazyLoad();

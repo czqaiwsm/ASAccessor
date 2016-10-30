@@ -6,6 +6,8 @@
               android:background="@color/bg_main">
 
     <EditText
+        android:singleLine="true"
+        android:inputType="numberSigned"
         android:id="@+id/accountEt"
         android:hint="请输入支付宝账号"
         style="@style/widthdraw_txt_sty"/>
@@ -24,5 +26,7 @@
         android:id="@+id/login_text"
         android:text="提交"
         android:layout_marginTop="70dp"
+        android:singleLine="true"
+        android:inputType="numberSigned"
         style="@style/big_btn_txt"/>
 </LinearLayout>
