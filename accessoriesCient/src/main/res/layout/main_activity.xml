@@ -90,13 +90,12 @@
                     android:id="@+id/btn_setting"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:drawableTop="@drawable/tab_setting_bg"
+                    android:drawableTop="@drawable/tab_session_bg"
                     android:paddingBottom="@dimen/maint_bottom_marginbot"
                     android:scaleType="matrix"
                     android:text="会话列表"
                     android:textColor="@color/main_botton_text_color"
                     android:background="@null"
-
                     android:textSize="@dimen/maint_bottom_txt_size" />
         </RelativeLayout>
         <RelativeLayout

@@ -13,7 +13,15 @@ public class NewsEntity {
 	private String time;
 
 	private String phone;
+	private String vip;//0非vip  1vip
 
+	public String getVip() {
+		return vip;
+	}
+
+	public void setVip(String vip) {
+		this.vip = vip;
+	}
 
 	public String getId() {
 		return id;

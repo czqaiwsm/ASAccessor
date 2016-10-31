@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.accessories.city.R;
 import com.accessories.city.bean.NewsEntity;
@@ -48,6 +49,7 @@ public class NewsAdpter extends BaseAdapter {
             holder = new ViewHolder();
             convertView = LayoutInflater.from(mContext).inflate(R.layout.news_adapter_ui, null);
             holder.headPhoto = (ImageView)convertView.findViewById(R.id.head_photo);
+            holder.isVipLl = (LinearLayout)convertView.findViewById(R.id.isVipLl);
             holder.name = (TextView)convertView.findViewById(R.id.Name);
             holder.time = (TextView) convertView.findViewById(R.id.time);
             holder.msgContent = (TextView)convertView.findViewById(R.id.msg_content);
@@ -55,13 +57,16 @@ public class NewsAdpter extends BaseAdapter {
         }else {
             holder = (ViewHolder) convertView.getTag();
         }
-
         NewsEntity obj = mItemList.get(position);
         if(obj != null){
             ImageLoader.getInstance().displayImage(obj.getShopPic(),holder.headPhoto, ImageLoaderUtil.mHallIconLoaderOptions);
-//            holder.time.setText(obj.getCreateTime());
             holder.name.setText(obj.getShopName());
             holder.msgContent.setText(obj.getShopDesc());
+            if("1".equals(obj.getVip())){
+                holder.isVipLl.setVisibility(View.VISIBLE);
+            }else {
+                holder.isVipLl.setVisibility(View.GONE);
+            }
         }
         return convertView;
     }
@@ -71,5 +76,6 @@ public class NewsAdpter extends BaseAdapter {
         private TextView name;
         private TextView time;
         private TextView msgContent;
+        private LinearLayout isVipLl;
     }
 }

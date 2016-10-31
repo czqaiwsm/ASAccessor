@@ -26,6 +26,23 @@
                   android:singleLine="true"
                   android:text="大众轮胎"
                 />
+
+        <LinearLayout
+            android:id="@+id/isVipLl"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/Name"
+            android:layout_alignTop="@+id/Name"
+            android:layout_alignBottom="@+id/Name">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/vip"
+                android:layout_marginLeft="4dp"
+                />
+        </LinearLayout>
+
         <TextView android:id="@+id/msg_content"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
