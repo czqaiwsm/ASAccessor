@@ -146,7 +146,7 @@
                            android:layout_height="@dimen/pc_img_size"
                            android:layout_centerVertical="true"
                            android:id="@+id/queryCarImg"
-                           android:background="@drawable/vin_search"
+                           android:background="@drawable/car_search"
                            android:layout_marginRight="@dimen/_10dp"
                         />
                 <TextView
