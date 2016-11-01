@@ -45,7 +45,7 @@ public class URLConstants {
 
     public static final String FILE_UPLOAD =ACBASE_HOST+"/file/uploadFile.do";//文件上传
     public static final String CATEGORYLIST =ACBASE_URL+"/categoryList.do";//类型
-    public static final String Home =ACBASE_URL+"/index.do";//首页
+    public static final String Home =ACBASE_URL+"/index_1.do";//首页
     public static final String SHOPLIST =ACBASE_URL+"/shopList.do";//商家列表
     public static final String CITYLIST =ACBASE_URL+"/cityList.do";//城市列表
     public static final String GETMSGCODE =ACBASE_URL+"/getMsgCode.do";//获取验证码

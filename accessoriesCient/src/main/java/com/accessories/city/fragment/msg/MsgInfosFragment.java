@@ -1,5 +1,6 @@
 package com.accessories.city.fragment.msg;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -29,6 +30,7 @@ import com.volley.req.net.RequestManager;
 import com.volley.req.net.RequestParam;
 import com.volley.req.parser.JsonParserBase;
 
+import java.lang.ref.SoftReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -147,7 +149,7 @@ public class MsgInfosFragment extends BaseFragment implements RequsetListener {
 
     private void setSingle(){
         list = new ArrayList<CateSubTypeEntity>();
-        adapter = new ClassTypeAdpter(getActivity(),list);
+        adapter = new ClassTypeAdpter(new SoftReference<Context>(getActivity()));
         viewForScrollView.setAdapter(adapter);
 
     }
@@ -221,9 +223,9 @@ public class MsgInfosFragment extends BaseFragment implements RequsetListener {
      * @param teacherInfos
      */
     private void refresh(ArrayList<CateSubTypeEntity> teacherInfos) {
-        list.clear();
+        adapter.getList().clear();
         if(teacherInfos != null){
-            list.addAll(teacherInfos);
+            adapter.getList().addAll(teacherInfos);
         }
         adapter.notifyDataSetChanged();
     }

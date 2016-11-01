@@ -10,7 +10,6 @@ public class HomePagerBanner {
     private String title;//广告标题
     private String picUrl;//广告显示的图片地址
     private String redirect;//客户端页面跳转url
-
     public String getId() {
         return id;
     }

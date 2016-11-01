@@ -56,10 +56,11 @@ public  class MainAdapter extends BaseAdapter {
         if(mItemList == null) mItemList = new ArrayList();
         mItemList.clear();
         mItemList.addAll(list);
-
+        notifyDataSetChanged();
     }
 
     public List getList(){
+        if(mItemList == null) mItemList = new ArrayList();
         return mItemList;
     }
 

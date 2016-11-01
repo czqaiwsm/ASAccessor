@@ -63,7 +63,7 @@
                     android:layout_height="match_parent"
                     android:background="@color/login_normal"/>
                 <RadioButton
-                    android:id="@+id/单项件"
+                    android:id="@+id/carList"
                     android:layout_width="match_parent"
                     android:layout_height="fill_parent"
                     android:button="@null"
@@ -75,7 +75,7 @@
                     android:layout_weight="1"
                     />
                 <RadioButton
-                        android:id="@+id/rightBtn"
+                        android:id="@+id/commerciaList"
                         android:layout_width="match_parent"
                         android:layout_height="fill_parent"
                         android:button="@null"

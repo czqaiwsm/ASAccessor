@@ -54,7 +54,7 @@ public class ClasseTypeFragment extends BaseFragment implements OnClickListener{
             list.add(cateSubTypeEntity);
         }
 
-        adapter = new ClassTypeAdpter(getActivity(),list);
+//        adapter = new ClassTypeAdpter(getActivity(),list);
         viewForScrollView.setAdapter(adapter);
         viewForScrollView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 

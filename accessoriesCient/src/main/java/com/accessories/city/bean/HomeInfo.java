@@ -11,6 +11,15 @@ public class HomeInfo {
     private ArrayList<HomePagerBanner> bannerAry;
     private ArrayList<CateSubTypeEntity> catSingleAry;//单项件分类
     private ArrayList<CateSubTypeEntity> catAllAry;//全车件分类
+    private ArrayList<CateSubTypeEntity> catAry;//新接口
+
+    public ArrayList<CateSubTypeEntity> getCatAry() {
+        return catAry;
+    }
+
+    public void setCatAry(ArrayList<CateSubTypeEntity> catAry) {
+        this.catAry = catAry;
+    }
 
     public ArrayList<HomePagerBanner> getBannerAry() {
         return bannerAry;

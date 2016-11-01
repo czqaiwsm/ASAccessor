@@ -21,6 +21,7 @@ import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import com.accessories.city.R;
+import com.accessories.city.activity.center.SellerInfoActivity;
 import com.accessories.city.activity.center.ServiceProtocolActivity;
 import com.accessories.city.bean.BannerImgInfo;
 import com.accessories.city.utils.ImageLoaderUtil;
@@ -197,6 +198,7 @@ public class GuideViewPagerAdapter extends PagerAdapter {
 		m_obj_start.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
+
 			}
 		});
 
@@ -233,9 +235,12 @@ public class GuideViewPagerAdapter extends PagerAdapter {
 				iv.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						Intent intent = new Intent(context, ServiceProtocolActivity.class);
-						intent.setFlags(11);
-						intent.putExtra("url",v.getTag().toString());
+						if(TextUtils.isEmpty(v.getTag().toString())) return;
+						Intent intent = new Intent(context, SellerInfoActivity.class);
+						intent.putExtra("shopId", v.getTag().toString());
+//						Intent intent = new Intent(context, ServiceProtocolActivity.class);
+//						intent.setFlags(11);
+//						intent.putExtra("url",v.getTag().toString());
 						context.startActivity(intent);
 					}
 				});
