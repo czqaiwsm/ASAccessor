@@ -49,6 +49,7 @@ import com.accessories.city.activity.login.SellerLoginActivity;
 import com.accessories.city.activity.teacher.MyAssetActivity;
 import com.accessories.city.bean.UploadBean;
 import com.accessories.city.bean.UserInfo;
+import com.accessories.city.bean.Value;
 import com.accessories.city.fragment.BaseFragment;
 import com.accessories.city.help.RequsetListener;
 import com.accessories.city.parse.LoginInfoParse;
@@ -241,6 +242,8 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
         clearRl.setOnClickListener(this);
         name.setOnClickListener(this);
         headRImg.setOnClickListener(this);
+
+        wdrawRl.setClickable(true);
         setData(mUserInfo);
 
     }
@@ -299,9 +302,16 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
                 callPhone();
                 break;
             case R.id.wdrawRl:// 提现
-                intent = new Intent(mActivity,WidthdrawInfoActivity.class);
-                intent.setFlags(1);
-                startActivity(intent);
+
+                if(Integer.valueOf(BaseApplication.getUserInfo().getIntegral())==0){
+                    SmartToast.showText("您的积分不足,不能提现");
+                    return;
+                }
+                wdrawRl.setClickable(false);
+                requestTask(3);
+//                intent = new Intent(mActivity,WidthdrawInfoActivity.class);
+//                intent.setFlags(1);
+//                startActivity(intent);
                 break;
             case R.id.widthdrawRecordRl:// 提现记录
                 intent = new Intent(mActivity,WidthdrawRecordActivity.class);
@@ -346,6 +356,12 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
                 postParams.put("nickname",mUserInfo.getNickname());
                 postParams.put("userHead",headRImg.getTag().toString());
                 break;
+            case 3:
+                url.setmBaseUrl(URLConstants.CONSTANT);
+                param = new RequestParam();
+                postParams.put("type", "integral_type");
+                postParams.put("key","cash");
+                break;
 
         }
         param.setmPostMap(postParams);
@@ -369,11 +385,35 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
             case 2:
                 SmartToast.showText("头像修改过成功!");
                 break;
+            case 3:
+                wdrawRl.setClickable(true);
+                JsonParserBase<Value> jsonBase =  ParserUtil.fromJsonBase(obj.toString(), new TypeToken<JsonParserBase<Value>>() {
+                }.getType());
+                if(jsonBase.getObj().getValue()< Integer.valueOf(mUserInfo.getIntegral())){
+                    URLConstants.WIDTHDRAW_INTEGRAL = jsonBase.getObj().getValue();
+                    Intent intent = new Intent(mActivity,WidthdrawInfoActivity.class);
+                    intent.setFlags(1);
+                    startActivity(intent);
+                }else {
+                    SmartToast.showText("您的积分不足,不能提现");
+                }
+                break;
 
         }
 
     }
 
+    @Override
+    protected void failRespone() {
+        super.failRespone();
+        wdrawRl.setClickable(true);
+    }
+
+    @Override
+    protected void errorRespone() {
+        super.errorRespone();
+        wdrawRl.setClickable(true);
+    }
 
     String cache_size = "";
 

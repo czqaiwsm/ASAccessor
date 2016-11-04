@@ -14,7 +14,7 @@ public class UserInfo implements Serializable {
     private String nickname	    ;//
     private String account	    ;//昵称
     private String money	;//兑换钱
-    private String integral	;//积分
+    private String integral	= "0";//积分
     private String userHead	;//用户头像
 
     private String shopName;

@@ -101,7 +101,15 @@ public class WidthdrawInfoFragment extends BaseFragment implements View.OnClickL
                     SmartToast.showText("请完善提现信息!");
                     return;
                 }
-
+                 int integral = Integer.valueOf(scoreEt.getText().toString());
+                if(integral<URLConstants.WIDTHDRAW_INTEGRAL){
+                    SmartToast.showText("体现积分较小,请输入较多积分!");
+                    return;
+                }
+                if(integral>Integer.valueOf(BaseApplication.getUserInfo().getIntegral())){
+                    SmartToast.showText("您的积分不足,请输入较小积分!");
+                    return;
+                }
                 requestTask(1);
                 break;
         }
@@ -115,12 +123,6 @@ public class WidthdrawInfoFragment extends BaseFragment implements View.OnClickL
         url.setmBaseUrl(URLConstants.ADD_CASH);
         Map postParams = new HashMap();
         RequestParam param = new RequestParam();
-//        1. userId 用户ID
-//        2. cashType 提现类型 0支付宝 1微信 3. cashAccount 提现账号
-//        4. cashName 提现名称
-//        5. cashIntegral 提现积分
-//        6. cashMone 提现金额
-
         postParams.put("userId", BaseApplication.getUserInfo().getId());
         postParams.put("cashType",cashType);
         postParams.put("cashAccount",accountEt.getText().toString());

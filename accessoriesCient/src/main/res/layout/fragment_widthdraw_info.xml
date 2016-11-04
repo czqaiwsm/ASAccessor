@@ -19,6 +19,8 @@
     <EditText
         android:id="@+id/scoreEt"
         android:layout_marginTop="@dimen/line_bound"
+        android:inputType="numberSigned"
+        android:lines="1"
         android:hint="请输入提现积分数"
         style="@style/widthdraw_txt_sty"/>
 

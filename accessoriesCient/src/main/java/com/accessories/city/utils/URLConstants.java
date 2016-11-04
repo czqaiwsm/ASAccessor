@@ -12,6 +12,7 @@ public class URLConstants {
 //    https://svn.duapp.com/appid7ofdiffbr0/learn
 //    No1RightAnswer
 //    ls/2016
+    public static int WIDTHDRAW_INTEGRAL = 0;
 
     public static int SCREENH = 0;
     public static int SCREENW = 0;
@@ -64,6 +65,7 @@ public class URLConstants {
     public static final String MEMBER_MESSAGE_LIST =ACBASE_URL+"/memberMessageList.do";//消息记录
     public static final String CASH_LIST =ACBASE_URL+"/cashList.do";//提现记录
     public static final String ADD_CASH =ACBASE_URL+"/addCash.do";//提现
+    public static final String CONSTANT =ACBASE_URL+"/getConstant.do";//常量接口
 
 
 

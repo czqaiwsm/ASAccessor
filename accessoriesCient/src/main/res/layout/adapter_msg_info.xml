@@ -34,7 +34,6 @@
             android:id="@+id/nameTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
             android:layout_toRightOf="@+id/head_photo"
             android:singleLine="true"
             android:text="南阳汽车用一片"
