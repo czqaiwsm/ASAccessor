@@ -14,7 +14,7 @@
         <RelativeLayout android:layout_width="match_parent"
                         android:layout_height="match_parent"
                        >
-            <com.accessories.city.view.RoundImageView
+            <com.accessories.seller.view.RoundImageView
                     android:id="@+id/head_photo"
                     android:layout_width="@dimen/round_img_size"
                     android:layout_height="@dimen/round_img_size"
@@ -58,7 +58,7 @@
 
         </RelativeLayout>
 
-        <com.accessories.city.view.tab.ScrollingTabContainerView
+        <com.accessories.seller.view.tab.ScrollingTabContainerView
                 android:id="@+id/tab_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -66,7 +66,7 @@
                 android:layout_marginTop="@dimen/_10dp"
                 android:layout_marginBottom="@dimen/_10dp"
         >
-        </com.accessories.city.view.tab.ScrollingTabContainerView>
+        </com.accessories.seller.view.tab.ScrollingTabContainerView>
     </LinearLayout>
 
     <android.support.v4.view.ViewPager

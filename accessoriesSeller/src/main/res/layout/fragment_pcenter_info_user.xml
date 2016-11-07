@@ -7,7 +7,7 @@
 
     <include layout="@layout/fragment_header" />
 
-    <com.accessories.city.view.FlowScrollView
+    <com.accessories.seller.view.FlowScrollView
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -79,7 +79,7 @@
                     android:textColor="@color/color_small_gray"
                     android:textSize="@dimen/pc_txt_size" />
 
-                <com.accessories.city.view.RoundImageView
+                <com.accessories.seller.view.RoundImageView
                         android:id="@+id/account_head_img"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
@@ -386,6 +386,6 @@
                   android:layout_marginLeft="@dimen/app_text_size_min"
             />
         </LinearLayout>
-    </com.accessories.city.view.FlowScrollView>
+    </com.accessories.seller.view.FlowScrollView>
 
 </LinearLayout>

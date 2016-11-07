@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
-import com.accessories.city.R;
+import com.accessories.seller.R;
 import com.pickerview.view.BasePickerView;
 import com.pickerview.view.WheelOptions;
 

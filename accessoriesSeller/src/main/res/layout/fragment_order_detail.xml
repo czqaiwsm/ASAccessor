@@ -7,7 +7,7 @@
 
     <include layout="@layout/fragment_header" />
 
-    <com.accessories.city.view.FlowScrollView
+    <com.accessories.seller.view.FlowScrollView
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -372,6 +372,6 @@
                 />
             </RelativeLayout>
         </LinearLayout>
-    </com.accessories.city.view.FlowScrollView>
+    </com.accessories.seller.view.FlowScrollView>
 
 </LinearLayout>

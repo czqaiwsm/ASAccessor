@@ -2,8 +2,8 @@ package com.pickerview.view;
 
 import android.content.Context;
 import android.view.View;
-import com.accessories.city.R;
-import com.accessories.city.bean.DateBean;
+import com.accessories.seller.R;
+import com.accessories.seller.bean.DateBean;
 import com.pickerview.TimePickerView.Type;
 import com.pickerview.adapter.NumericWheelAdapter;
 import com.pickerview.lib.WheelView;

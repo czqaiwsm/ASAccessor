@@ -55,7 +55,7 @@
                   android:layout_below="@+id/centerCity"
                   android:layout_above="@+id/rl"
     >
-        <com.accessories.city.view.CustomListView
+        <com.accessories.seller.view.CustomListView
                 android:id="@+id/callListView"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"

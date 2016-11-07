@@ -111,7 +111,7 @@
                 android:scrollbarStyle="outsideOverlay"/>
     </LinearLayout>-->
 
-    <com.accessories.city.view.XListView
+    <com.accessories.seller.view.XListView
             android:id="@+id/search_data_list"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
@@ -121,7 +121,7 @@
             android:listSelector="@drawable/listview_item_click_select"
             android:layout_marginTop="5dp"
             >
-    </com.accessories.city.view.XListView>
+    </com.accessories.seller.view.XListView>
 
     <TextView
             android:id="@+id/hall_hint_text"

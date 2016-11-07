@@ -7,7 +7,7 @@ import android.content.DialogInterface.OnDismissListener;
 import android.os.IBinder;
 import android.text.TextUtils;
 import android.widget.Toast;
-import com.accessories.city.R;
+import com.accessories.seller.R;
 import com.download.base.utils.AppLog;
 import com.download.base.utils.SDCardUtils;
 import com.download.dialog.AskDialog;

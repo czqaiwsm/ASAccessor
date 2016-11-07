@@ -12,7 +12,7 @@ import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
-import com.accessories.city.R;
+import com.accessories.seller.R;
 import com.pickerview.adapter.WheelAdapter;
 import com.pickerview.listener.OnItemSelectedListener;
 

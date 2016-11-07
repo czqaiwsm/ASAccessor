@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
-import com.accessories.city.R;
+import com.accessories.seller.R;
 
 
 public class AskDialogActivity extends Activity {

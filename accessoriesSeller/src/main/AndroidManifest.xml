@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.accessories.city"
+          package="com.accessories.seller"
           android:versionCode="6"
           android:versionName="V1.0.6">
     <uses-sdk android:minSdkVersion="10"/>
@@ -22,11 +22,11 @@
     <!--添加可以向外拨打电话的权限  -->
     <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
     <permission
-            android:name="com.accessories.city.permission.JPUSH_MESSAGE"
+            android:name="com.accessories.seller.permission.JPUSH_MESSAGE"
             android:protectionLevel="signature" />
 
     <!-- Required  一些系统要求的权限，如访问网络等-->
-    <uses-permission android:name="com.accessories.city.permission.JPUSH_MESSAGE" />
+    <uses-permission android:name="com.accessories.seller.permission.JPUSH_MESSAGE" />
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -183,7 +183,7 @@
             <intent-filter>
                 <action android:name="cn.jpush.android.ui.PushActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="com.accessories.city" />
+                <category android:name="com.accessories.seller" />
             </intent-filter>
         </activity>
         <!-- Required  SDK核心功能-->
@@ -216,7 +216,7 @@
                 android:exported="true">
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.DaemonService" />
-                <category android:name="com.accessories.city" />
+                <category android:name="com.accessories.seller" />
             </intent-filter>
 
         </service>
@@ -228,7 +228,7 @@
                 android:exported="false">
             <intent-filter android:priority="1000">
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />   <!--Required  显示通知栏 -->
-                <category android:name="com.accessories.city" />
+                <category android:name="com.accessories.seller" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.USER_PRESENT" />
@@ -259,7 +259,7 @@
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" /> <!--Required  用户打开自定义通知栏的intent-->
                 <action android:name="cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK" /> <!--Optional 用户接受Rich Push Javascript 回调函数的intent-->
                 <action android:name="cn.jpush.android.intent.CONNECTION" /><!-- 接收网络变化 连接/断开 since 1.6.3 -->
-                <category android:name="com.accessories.city" />
+                <category android:name="com.accessories.seller" />
             </intent-filter>
         </receiver>
 

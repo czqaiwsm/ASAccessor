@@ -6,7 +6,7 @@ import android.view.*;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
-import com.accessories.city.R;
+import com.accessories.seller.R;
 import com.pickerview.listener.OnDismissListener;
 import com.pickerview.utils.PickerViewAnimateUtil;
 

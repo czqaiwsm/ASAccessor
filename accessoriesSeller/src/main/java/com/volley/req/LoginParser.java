@@ -1,6 +1,6 @@
 package com.volley.req;
 
-import com.accessories.city.utils.AppLog;
+import com.accessories.seller.utils.AppLog;
 import com.google.gson.reflect.TypeToken;
 import com.volley.req.net.inferface.IParser;
 import com.volley.req.parser.JsonParserBase;

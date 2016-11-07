@@ -47,7 +47,7 @@
               android:textColor="@color/black"
               android:textSize="15sp"
               android:text="开通城市"/>
-    <com.accessories.city.view.CustomListView
+    <com.accessories.seller.view.CustomListView
             android:id="@+id/callListView"
             android:layout_below="@+id/city"
             android:layout_width="fill_parent"

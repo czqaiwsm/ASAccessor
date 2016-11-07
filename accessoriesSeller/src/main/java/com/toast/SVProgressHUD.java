@@ -8,7 +8,7 @@ import android.view.*;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
-import com.accessories.city.R;
+import com.accessories.seller.R;
 
 /**
  * Created by Sai on 15/8/15.

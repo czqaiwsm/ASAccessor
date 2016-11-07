@@ -7,7 +7,7 @@
 
     <include layout="@layout/fragment_header" />
 
-    <com.accessories.city.view.ReboundScrollView
+    <com.accessories.seller.view.ReboundScrollView
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -305,6 +305,6 @@
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-    </com.accessories.city.view.ReboundScrollView>
+    </com.accessories.seller.view.ReboundScrollView>
 
 </LinearLayout>

@@ -93,7 +93,7 @@
                           android:layout_height="match_parent"
                           android:layout_marginTop="5dp"
                           android:background="@color/bg_color">
-                <com.accessories.city.view.GridViewForScrollView
+                <com.accessories.seller.view.GridViewForScrollView
                         android:id="@+id/callGridView"
                         android:layout_below="@+id/head"
                         android:layout_width="fill_parent"

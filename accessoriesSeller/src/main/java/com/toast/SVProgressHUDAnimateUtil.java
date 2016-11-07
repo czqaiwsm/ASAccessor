@@ -1,7 +1,7 @@
 package com.toast;
 
 import android.view.Gravity;
-import com.accessories.city.R;
+import com.accessories.seller.R;
 
 /**
  * Created by Sai on 15/8/16.

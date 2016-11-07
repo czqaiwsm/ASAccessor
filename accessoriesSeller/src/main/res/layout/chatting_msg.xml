@@ -31,7 +31,7 @@
               android:layout_marginLeft="5dp"
               android:layout_marginTop="5dp" >
 
-          <com.accessories.city.view.RoundImageView
+          <com.accessories.seller.view.RoundImageView
                   android:id="@+id/comhead"
                   android:layout_width="52dp"
                   android:layout_height="52dp"
@@ -94,7 +94,7 @@
                 android:layout_marginRight="5dp" >
 
 
-            <com.accessories.city.view.RoundImageView
+            <com.accessories.seller.view.RoundImageView
                     android:id="@+id/sendUserHead"
                     android:layout_width="52dp"
                     android:layout_height="52dp"

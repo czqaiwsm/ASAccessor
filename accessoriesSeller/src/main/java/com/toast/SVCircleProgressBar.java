@@ -8,7 +8,7 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
-import com.accessories.city.R;
+import com.accessories.seller.R;
 
 /**
  * Created by Sai on 15/9/1.
