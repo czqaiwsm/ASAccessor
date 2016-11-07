@@ -35,6 +35,45 @@
             android:visibility="gone"/>
 
             <EditText
+                android:id="@+id/storyNameEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:background="@android:color/transparent"
+                android:gravity="center_vertical"
+                android:hint="请输入店铺名称"
+                android:inputType="phone"
+                android:maxLines="1"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:singleLine="true"
+                android:textColor="@color/color_small_gray"
+                android:maxLength="11"
+                android:textSize="@dimen/app_text_size_first" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="6dp"
+            android:background="@color/color_small_gray" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_login_user"
+            android:visibility="gone"/>
+
+            <EditText
                 android:id="@+id/register_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

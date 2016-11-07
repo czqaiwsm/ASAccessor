@@ -42,6 +42,7 @@ import java.util.Map;
 
 public class RegisterFragment extends BaseFragment implements OnClickListener,RequsetListener {
 
+	private EditText storyNameEt;
 	private EditText register_phone;
 	private EditText inputCode;
 	private TextView getCode;
@@ -93,7 +94,9 @@ public class RegisterFragment extends BaseFragment implements OnClickListener,Re
 	 * 注册信息的判断 请求注册
 	 */
 	private void onJudge() {
-		if (TextUtils.isEmpty(register_phone.getText().toString()) || TextUtils.isEmpty(register_pass.getText().toString()) || TextUtils.isEmpty(inputCode.getText().toString())) {
+		if (TextUtils.isEmpty(register_phone.getText().toString()) ||
+				TextUtils.isEmpty(register_pass.getText().toString()) ||
+				TextUtils.isEmpty(inputCode.getText().toString()) ){
 			showSmartToast(R.string.input_error, Toast.LENGTH_LONG);
 			return;
 		}
@@ -228,9 +231,9 @@ public class RegisterFragment extends BaseFragment implements OnClickListener,Re
 
 				url.setmBaseUrl(URLConstants.REGIST);
 //				postParams.put("code",inputCode.getText().toString());
-				
 				postParams.put("phone",register_phone.getText().toString());
 				postParams.put("pwd",register_pass.getText().toString());
+				postParams.put("nickname",storyNameEt.getText().toString());
 				postParams.put("city", BaseApplication.getInstance().mapLocation != null?
 						(TextUtils.isEmpty(BaseApplication.getInstance().mapLocation.getCity())?BaseApplication.getInstance().location[0]:BaseApplication.getInstance().mapLocation.getCity())
 						:BaseApplication.getInstance().location[0]);
