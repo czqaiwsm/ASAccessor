@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+    <TextView
+            style="@style/title_tab_styel"
+            android:text="&#032;&#032;&#032;&#032;求购&#032;&#032;&#032;&#032;"
+            android:background="@drawable/title_right_selector"
+            android:onClick="@null"
+            android:clickable="false"
+            />
+
+</LinearLayout>

@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.accessories.city"
+          android:versionCode="6"
+          android:versionName="V1.0.6">
+    <uses-sdk android:minSdkVersion="10"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+
+    <!--添加可以向外拨打电话的权限  -->
+    <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
+    <permission
+            android:name="com.accessories.city.permission.JPUSH_MESSAGE"
+            android:protectionLevel="signature" />
+
+    <!-- Required  一些系统要求的权限，如访问网络等-->
+    <uses-permission android:name="com.accessories.city.permission.JPUSH_MESSAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+
+    <!-- Optional for location -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <application android:label="@string/app_name"
+                 android:icon="@drawable/ic_launcher"
+                 android:theme="@android:style/Theme.NoTitleBar"
+                 android:name=".utils.BaseApplication"
+                 android:allowBackup="true"
+            >
+
+        <receiver android:name=".activity.CallPhoneReceiver">
+            <intent-filter android:priority="1000">
+                <action android:name="android.permission.READ_PHONE_STATE"/>
+                <action android:name="android.intent.action.NEW_OUTGOING_CALL"/>
+            </intent-filter>
+        </receiver>
+
+        <service
+                android:name="com.baidu.location.f"
+                android:enabled="true"
+                android:process=":remote" >
+            <intent-filter>
+                <action android:name="com.baidu.location.service_v2.2" >
+                </action>
+            </intent-filter>
+        </service>
+        <meta-data
+                android:name="com.baidu.lbsapi.API_KEY"
+                android:value="QWz7CRdMQ10fivRMUCXhd2uX" />  <!--http://lbsyun.baidu.com/apiconsole/key-->
+        <!--SplashActivity-->
+        <activity android:name=".activity.SplashActivity"
+                  android:label="@string/app_name"
+                >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".activity.GuideActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.MainActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.ChooseCityActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.home.SearchActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.teacher.TeacherDetailActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.home.ChooseActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.teacher.ChooseJoinorActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.teacher.ChooseTeacherActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.center.PCenterInfoUserActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.center.PCenterModifyInfoActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.center.OrderActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.center.WalletActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.center.RechargeActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.center.DetailActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.center.OrderDetailActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.center.FeedBackActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.center.SettingActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.center.ServiceProtocolActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.center.SystemMsgActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.center.ResetPassActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.center.PurchaseCourseActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.teacher.ChatMsgActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.teacher.Cour"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.login.RegisterActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.login.LoginActivity"
+                  android:launchMode="singleTask"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.login.ForgetPassActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.teacher.EvaluateActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.center.WidthDrawActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.home.MultiChooseActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.home.TeaCourseSettingActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.center.EditActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.teacher.MyAssetActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.home.MsgChooseActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.teacher.CourseListActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.home.NewsActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.center.SellerInfoActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.center.WidthdrawInfoActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.center.QueryCarActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.center.WidthdrawRecordActivity"
+                  android:screenOrientation="portrait"/>
+
+
+
+        <!-- Rich push 核心功能 since 2.0.6-->
+        <activity
+                android:name="cn.jpush.android.ui.PopWinActivity"
+                android:theme="@style/MyDialogStyle"
+                android:exported="false">
+        </activity>
+
+        <!-- Required SDK核心功能-->
+        <activity
+                android:name="cn.jpush.android.ui.PushActivity"
+                android:configChanges="orientation|keyboardHidden"
+                android:theme="@android:style/Theme.NoTitleBar"
+                android:exported="false">
+            <intent-filter>
+                <action android:name="cn.jpush.android.ui.PushActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.accessories.city" />
+            </intent-filter>
+        </activity>
+        <!-- Required  SDK核心功能-->
+        <service
+                android:name="cn.jpush.android.service.DownloadService"
+                android:enabled="true"
+                android:exported="false" >
+        </service>
+
+
+        <!-- Required SDK 核心功能-->
+        <!-- 可配置android:process参数将PushService放在其他进程中 -->
+        <service
+                android:name="cn.jpush.android.service.PushService"
+                android:enabled="true"
+                android:exported="false">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTER" />
+                <action android:name="cn.jpush.android.intent.REPORT" />
+                <action android:name="cn.jpush.android.intent.PushService" />
+                <action android:name="cn.jpush.android.intent.PUSH_TIME" />
+            </intent-filter>
+        </service>
+
+        <!-- since 1.8.0 option 可选项。用于同一设备中不同应用的JPush服务相互拉起的功能。 -->
+        <!-- 若不启用该功能可删除该组件，将不拉起其他应用也不能被其他应用拉起 -->
+        <service
+                android:name="cn.jpush.android.service.DaemonService"
+                android:enabled="true"
+                android:exported="true">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.DaemonService" />
+                <category android:name="com.accessories.city" />
+            </intent-filter>
+
+        </service>
+
+        <!-- Required SDK核心功能-->
+        <receiver
+                android:name="cn.jpush.android.service.PushReceiver"
+                android:enabled="true"
+                android:exported="false">
+            <intent-filter android:priority="1000">
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />   <!--Required  显示通知栏 -->
+                <category android:name="com.accessories.city" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <!-- Optional -->
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+                <data android:scheme="package" />
+            </intent-filter>
+
+        </receiver>
+
+        <!-- Required SDK核心功能-->
+        <receiver android:name="cn.jpush.android.service.AlarmReceiver" android:exported="false"/>
+
+        <!-- User defined.  For test only  用户自定义的广播接收器-->
+        <receiver
+                android:name=".service.MyReceiver"
+                android:exported="false"
+                android:enabled="true">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTRATION" /> <!--Required  用户注册SDK的intent-->
+                <action android:name="cn.jpush.android.intent.UNREGISTRATION" />
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" /> <!--Required  用户接收SDK消息的intent-->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" /> <!--Required  用户接收SDK通知栏信息的intent-->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" /> <!--Required  用户打开自定义通知栏的intent-->
+                <action android:name="cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK" /> <!--Optional 用户接受Rich Push Javascript 回调函数的intent-->
+                <action android:name="cn.jpush.android.intent.CONNECTION" /><!-- 接收网络变化 连接/断开 since 1.6.3 -->
+                <category android:name="com.accessories.city" />
+            </intent-filter>
+        </receiver>
+
+
+        <!-- Required  . Enable it you can get statistics data with channel -->
+        <meta-data android:name="JPUSH_CHANNEL" android:value="developer-default"/>
+        <meta-data android:name="JPUSH_APPKEY" android:value="efaa82804527665f873290fc" /> <!--  </>值来自开发者平台取得的AppKey-->
+
+
+        <!--老师端-->
+        <activity android:name=".activity.TeacherMainActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.home.TeacherCertifyActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.home.IDCardCertifyActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.teacher.SchoolCertifyActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.home.CourseSettingActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.home.PhoneRecordActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.login.SellerLoginActivity"
+                  android:screenOrientation="portrait"/>
+
+        <!-- 安装包版本更新 -->
+        <service
+                android:name="com.download.update.DownloadService"
+                android:exported="false">
+        </service>
+    </application>
+</manifest>

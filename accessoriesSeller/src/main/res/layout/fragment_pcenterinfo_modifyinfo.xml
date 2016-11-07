@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/container"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white_bg_home"
+              android:orientation="vertical">
+
+    <include layout="@layout/fragment_header" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_main"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/modify_info_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dip"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:visibility="visible" >
+
+            <EditText
+                android:id="@+id/id_pcenterinfo_line1_et1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:background="@android:color/transparent"
+                android:gravity="center_vertical"
+                android:paddingBottom="@dimen/dp_10"
+                android:paddingTop="@dimen/dp_10"
+                android:singleLine="true"
+                android:textColorHint="@color/color_gray"
+                android:textSize="@dimen/app_text_size_second" />
+
+            <ImageView
+                    android:id="@+id/close_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:clickable="true"
+                    android:paddingRight="10dp"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_close_btn"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

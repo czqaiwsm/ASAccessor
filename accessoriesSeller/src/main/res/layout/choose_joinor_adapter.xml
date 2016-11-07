@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@null"
+              android:descendantFocusability="blocksDescendants"
+              android:layout_gravity="center">
+
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+    >
+        <TextView android:id="@+id/jonior"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="一年级"
+                  android:layout_centerVertical="true"
+                  android:textColor="@color/course_txt"
+                  android:layout_marginLeft="@dimen/msg_margin"
+                  android:textSize="@dimen/teache_curose"/>
+        <CheckBox android:id="@+id/select_joinor"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textSize="@dimen/teache_curose"
+                  android:layout_centerVertical="true"
+                  android:textColor="@color/course_solid"
+                  android:layout_alignParentRight="true"
+                  android:layout_marginRight="@dimen/msg_margin"
+                  android:button="@drawable/check_selector"
+                  android:enabled="false"
+                  android:focusable="false"
+                  android:clickable="false"
+                  />
+        <View android:layout_width="match_parent"
+              android:layout_height="0.5dp"
+              android:background="@color/color_small_gray"
+              android:layout_below="@+id/select_joinor"
+              android:layout_marginRight="@dimen/msg_margin"
+              android:layout_marginLeft="@dimen/msg_margin"
+              android:layout_marginTop="20dp"
+              android:layout_marginBottom="20dp"
+        />
+    </RelativeLayout>
+</LinearLayout>

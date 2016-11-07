@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+        android:background="@color/white">
+
+
+    <include
+            android:id="@+id/head"
+            layout="@layout/fragment_header"/>
+    <LinearLayout android:id="@+id/centerCity"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:layout_below="@id/head"
+                  android:layout_marginTop="4dp"
+            >
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:text="定位到的城市"
+                  android:layout_marginLeft="@dimen/_10dp"
+                  android:textColor="@color/black"
+                  android:textSize="@dimen/city_txt_size"
+                />
+        <TextView android:id="@+id/city_name"
+                  android:layout_width="match_parent"
+                  android:layout_height="@dimen/city_txt_h"
+                  android:text="定位城市"
+                  android:paddingLeft="@dimen/_10dp"
+                  android:drawableLeft="@drawable/map_location"
+                  android:drawablePadding="6dp"
+                  android:background="@color/white"
+                  android:textColor="@color/black"
+                  android:textSize="@dimen/city_txt_size"
+                  android:gravity="center_vertical"
+                />
+        <View android:layout_width="match_parent"
+              android:layout_height="@dimen/line"
+              android:background="@color/color_small_gray"/>
+    </LinearLayout>
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="@dimen/_10dp"
+              android:layout_marginLeft="@dimen/_10dp"
+              android:layout_below="@+id/centerCity"
+              android:id="@+id/city"
+              android:textColor="@color/black"
+              android:textSize="15sp"
+              android:text="开通城市"/>
+    <com.accessories.city.view.CustomListView
+            android:id="@+id/callListView"
+            android:layout_below="@+id/city"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:divider="@null"
+            android:dividerHeight="0dip"
+            android:scrollbars="none"
+            android:layout_marginTop="5dp"
+            android:background="@color/white"
+            android:listSelector="@drawable/item_click"
+            />
+
+</RelativeLayout>

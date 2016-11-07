@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+        <com.accessories.city.view.RoundImageView
+                android:id="@+id/head_photo"
+                android:layout_width="@dimen/round_img_size"
+                android:layout_height="@dimen/round_img_size"
+                android:layout_margin="@dimen/msg_margin"
+                android:src="@drawable/default_user_portrait"
+                />
+
+        <TextView android:id="@+id/Name"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textColor="@color/black"
+                  android:text="曹智青"
+                  android:layout_toRightOf="@+id/head_photo"
+                  android:textSize="@dimen/msg_name"
+                  android:layout_alignTop="@+id/head_photo"
+                />
+        <TextView android:id="@+id/time"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textColor="@color/color_gray"
+                  android:text="2016-03-16"
+                  android:layout_alignParentRight="true"
+                  android:layout_marginRight="@dimen/msg_margin"
+                  android:textSize="@dimen/msg_time"
+                  android:layout_alignTop="@+id/head_photo"
+                  android:visibility="gone"
+                />
+        <RelativeLayout android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/head_photo"
+                        android:layout_marginTop="4dp"
+                        android:id="@+id/rl"
+                        android:layout_below="@+id/Name">
+            <TextView android:id="@+id/idCertify"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      style="@style/choose_teach_txt"
+                      android:layout_marginRight="10dp"
+                      android:text="身份认证"/>
+            <TextView android:id="@+id/eduCertify"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      style="@style/choose_teach_txt"
+                      android:layout_toRightOf="@+id/idCertify"
+                      android:text="学历认证"/>
+
+        </RelativeLayout>
+        <TextView android:id="@+id/price"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textColor="@color/color_gray"
+                  android:text="@string/price"
+                  android:layout_toRightOf="@+id/head_photo"
+                  android:textSize="16sp"
+                  android:layout_marginTop="4dp"
+                  android:layout_below="@+id/rl"
+                />
+        <View android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@drawable/dap_line"
+              android:layout_below="@+id/head_photo"
+              android:layout_alignLeft="@+id/head_photo"
+              android:layout_marginRight="@dimen/msg_margin"
+                />
+
+    </RelativeLayout>
+</LinearLayout>

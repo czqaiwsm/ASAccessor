@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white">
+
+    <include layout="@layout/fragment_header"></include>
+    <com.accessories.city.view.FlowScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+            <RelativeLayout
+                    android:id="@+id/idCertifyRl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/page_bt"
+                    android:paddingBottom="@dimen/page_bt"
+                    android:layout_marginLeft="@dimen/_10dp"
+                    android:layout_marginRight="@dimen/_10dp"
+                    android:background="@drawable/item_click">
+                <TextView android:id="@+id/idCertify"
+                          android:layout_width="wrap_content"
+                          android:layout_height="match_parent"
+                          android:textSize="@dimen/teach_font_size"
+                          android:layout_gravity="center"
+                          android:layout_centerVertical="true"
+                          android:gravity="center_vertical"
+                          android:textColor="@color/teach_txt_color"
+                          android:text="@string/id_certify"/>
+                <TextView android:layout_toRightOf="@+id/idCertify"
+                          android:layout_width="wrap_content"
+                          android:layout_height="match_parent"
+                          android:layout_centerVertical="true"
+                          android:layout_gravity="center"
+                          android:gravity="center_vertical"
+                          android:textColor="@color/login_normal"
+                          android:layout_marginLeft="@dimen/_10dp"
+                          android:textSize="12sp"
+                          android:paddingLeft="4dp"
+                          android:paddingRight="4dp"
+                          android:paddingTop="2dp"
+                          android:paddingBottom="2dp"
+                          android:background="@drawable/normal_shape"
+                          android:text="@string/id_certify"/>
+                <TextView android:id="@+id/idCertify_status"
+                          android:layout_width="wrap_content"
+                          android:layout_height="match_parent"
+                          android:textSize="16sp"
+                          android:textColor="@color/teach_txt_color"
+                          android:text="未认证"
+                          android:layout_gravity="center"
+                          android:gravity="center"
+                          android:drawableRight="@drawable/arrow_right"
+                          android:layout_alignParentRight="true"
+                          android:drawablePadding="@dimen/choose_padd"
+                          />
+
+            </RelativeLayout>
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/color_small_gray"
+                    android:layout_marginLeft="@dimen/_10dp"
+                    android:layout_marginRight="@dimen/_10dp"/>
+
+            <RelativeLayout
+                    android:id="@+id/chooseCertifyRl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/page_bt"
+                    android:paddingBottom="@dimen/page_bt"
+                    android:layout_marginLeft="@dimen/_10dp"
+                    android:layout_marginRight="@dimen/_10dp"
+                    android:background="@drawable/item_click">
+                <TextView android:id="@+id/schoolCertify"
+                          android:layout_width="wrap_content"
+                          android:layout_height="match_parent"
+                          android:textSize="@dimen/teach_font_size"
+                          android:layout_gravity="center"
+                          android:gravity="center_vertical"
+                          android:textColor="@color/teach_txt_color"
+                          android:text="@string/school_certify"/>
+
+                <TextView android:layout_toRightOf="@+id/schoolCertify"
+                          android:layout_width="wrap_content"
+                          android:layout_height="match_parent"
+                          android:layout_centerVertical="true"
+                          android:layout_gravity="center"
+                          android:gravity="center_vertical"
+                          android:layout_marginLeft="@dimen/_10dp"
+                          android:textSize="12sp"
+                          android:paddingLeft="4dp"
+                          android:paddingRight="4dp"
+                          android:paddingTop="2dp"
+                          android:paddingBottom="2dp"
+                          android:textColor="@color/login_normal"
+                          android:background="@drawable/normal_shape"
+                          android:text="@string/school_certify"/>
+                <TextView android:id="@+id/schoolCertify_status"
+                          android:layout_width="wrap_content"
+                          android:layout_height="match_parent"
+                          android:layout_gravity="center"
+                          android:gravity="center"
+                          android:textSize="16sp"
+                          android:textColor="@color/teach_txt_color"
+                          android:text="未认证"
+                          android:drawableRight="@drawable/arrow_right"
+                          android:layout_alignParentRight="true"
+                          android:drawablePadding="@dimen/choose_padd"
+                />
+
+            </RelativeLayout>
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/color_small_gray"
+                    android:layout_marginLeft="@dimen/_10dp"
+                    android:layout_marginRight="@dimen/_10dp"/>
+        </LinearLayout>
+    </com.accessories.city.view.FlowScrollView>
+</LinearLayout>

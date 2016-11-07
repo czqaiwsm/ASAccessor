@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <View android:layout_width="match_parent"
+          android:layout_height="@dimen/line"
+          android:id="@+id/first_lien"
+          android:visibility="gone"
+          android:background="@color/color_small_gray"/>
+    <TextView android:id="@+id/city_name"
+              android:layout_width="match_parent"
+              android:layout_height="@dimen/city_txt_h"
+              android:text="定位城市"
+              android:paddingLeft="15dp"
+              android:textColor="@color/main_txt_black"
+              android:textSize="14sp"
+              android:gravity="center_vertical"
+            />
+    <View android:layout_width="match_parent"
+          android:layout_height="@dimen/line"
+          android:background="@color/color_small_gray"
+          android:id="@+id/half_lien"
+          android:layout_marginLeft="15dp"/>
+    <View android:layout_width="match_parent"
+          android:layout_height="@dimen/line"
+          android:id="@+id/second_lien"
+          android:visibility="gone"
+          android:background="@color/color_small_gray"/>
+</LinearLayout>

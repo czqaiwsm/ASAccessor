@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_gravity="center"
+              android:gravity="center"
+              android:orientation="vertical">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/white_round_ee_bg"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical" >
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="16dp"
+                      android:layout_marginRight="20dp"
+                      android:layout_marginLeft="20dp"
+                      android:orientation="vertical">
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content">
+                <TextView  android:layout_width="match_parent"
+                           android:layout_height="match_parent"
+                           android:gravity="center"
+                           android:layout_gravity="center"
+                           android:textColor="@color/main_txt_black"
+                           android:textSize="@dimen/app_text_size_most"
+                           android:text="提   示"
+                           android:layout_marginRight="@dimen/_10dp"
+                        />
+            </LinearLayout>
+
+            <TextView android:id="@+id/contentTip"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:textSize="@dimen/app_text_size_first"
+                      android:layout_marginTop="@dimen/_10dp"
+                      android:textColor="@color/main_txt_black"
+                    />
+            <RelativeLayout android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="20dp"
+
+                    >
+                <TextView
+                        android:id="@+id/commit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/login_selector2"
+                        android:gravity="center"
+                        android:paddingBottom="12dp"
+                        android:paddingTop="12dp"
+                        android:text="确定"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/app_text_size_most" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
