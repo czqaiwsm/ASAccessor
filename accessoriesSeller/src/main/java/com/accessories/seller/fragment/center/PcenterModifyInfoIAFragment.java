@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import com.accessories.seller.R;
+import com.accessories.seller.bean.SellerUserInfo;
 import com.accessories.seller.bean.UserInfo;
 import com.accessories.seller.fragment.BaseFragment;
 import com.accessories.seller.help.RequsetListener;
@@ -95,10 +96,10 @@ public class PcenterModifyInfoIAFragment extends BaseFragment implements Requset
 	protected void requestData(int requestCode) {
 		HttpURL url = new HttpURL();
 		Map postParams = new HashMap<String,String>();
-		url.setmBaseUrl(URLConstants.UPDATE_USER);
-		UserInfo mUserInfo = BaseApplication.getUserInfo();
-		postParams.put("id", ""+mUserInfo.getId());
-		postParams.put("nickname",id_pcenterinfo_line1_et1.getText().toString());
+		url.setmBaseUrl(URLConstants.UPDATE_SHOP);
+		SellerUserInfo mUserInfo = BaseApplication.getSellerUserInfo();
+		postParams.put("id", mUserInfo.getShopId());
+		postParams.put("shopName",id_pcenterinfo_line1_et1.getText().toString());
 		RequestParam param = new RequestParam();
 		param.setmPostMap(postParams);
 		param.setmHttpURL(url);
@@ -108,8 +109,8 @@ public class PcenterModifyInfoIAFragment extends BaseFragment implements Requset
 	@Override
 	public void handleRspSuccess(int requestType,Object obj) {
 		SmartToast.showText("昵称修改成功!");
-		BaseApplication.getUserInfo().setNickname(id_pcenterinfo_line1_et1.getText().toString());
-		BaseApplication.saveUserInfo(BaseApplication.getUserInfo());
+		BaseApplication.getSellerUserInfo().setShopName(id_pcenterinfo_line1_et1.getText().toString());
+		BaseApplication.saveSellerUserInfo(BaseApplication.getSellerUserInfo());
 		mActivity.finish();
 	}
 

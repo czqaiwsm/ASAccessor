@@ -63,6 +63,7 @@
             </LinearLayout>
 
             <RelativeLayout
+                android:visibility="gone"
                 android:id="@+id/wdrawRl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -101,6 +102,7 @@
                     android:textSize="@dimen/app_text_size_second" />
             </RelativeLayout>
             <RelativeLayout
+                android:visibility="gone"
                 android:id="@+id/widthdrawRecordRl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -174,6 +176,45 @@
                     android:textSize="@dimen/app_text_size_second" />
             </RelativeLayout>
             <RelativeLayout
+
+                android:id="@+id/set_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/item_click"
+                android:padding="@dimen/app_text_size_min" >
+                <ImageView android:layout_width="@dimen/pc_img_size"
+                           android:layout_height="@dimen/pc_img_size"
+                           android:layout_centerVertical="true"
+                           android:id="@+id/setImg"
+                           android:background="@drawable/phone_record"
+                           android:layout_marginRight="@dimen/_10dp"
+                    />
+                <TextView
+                    android:id="@+id/setname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="商家入口"
+                    android:textColor="@color/color_gray"
+                    android:layout_toRightOf="@+id/setImg"
+                    android:textSize="@dimen/pc_txt_size" />
+
+                <TextView
+                    android:id="@+id/account_setname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/setname"
+                    android:drawablePadding="@dimen/app_text_size_min"
+                    android:drawableRight="@drawable/arrow_right"
+                    android:gravity="center_vertical|right"
+                    android:singleLine="true"
+                    android:textColor="@color/color_small_gray"
+                    android:textSize="@dimen/app_text_size_second" />
+            </RelativeLayout>
+            <RelativeLayout
                 android:id="@+id/wallet_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -212,6 +253,7 @@
                     android:textSize="@dimen/app_text_size_second" />
             </RelativeLayout>
             <RelativeLayout
+                android:visibility="gone"
                 android:id="@+id/order_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -324,45 +366,7 @@
                     android:textColor="@color/color_small_gray"
                     android:textSize="@dimen/app_text_size_second" />
             </RelativeLayout>
-            <RelativeLayout
 
-                android:id="@+id/set_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
-                android:background="@drawable/item_click"
-                android:padding="@dimen/app_text_size_min" >
-                <ImageView android:layout_width="@dimen/pc_img_size"
-                           android:layout_height="@dimen/pc_img_size"
-                           android:layout_centerVertical="true"
-                           android:id="@+id/setImg"
-                           android:background="@drawable/setting"
-                           android:layout_marginRight="@dimen/_10dp"
-                        />
-                <TextView
-                    android:id="@+id/setname"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="商家入口"
-                    android:textColor="@color/color_gray"
-                    android:layout_toRightOf="@+id/setImg"
-                    android:textSize="@dimen/pc_txt_size" />
-
-                <TextView
-                    android:id="@+id/account_setname"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/setname"
-                    android:drawablePadding="@dimen/app_text_size_min"
-                    android:drawableRight="@drawable/arrow_right"
-                    android:gravity="center_vertical|right"
-                    android:singleLine="true"
-                    android:textColor="@color/color_small_gray"
-                    android:textSize="@dimen/app_text_size_second" />
-            </RelativeLayout>
         </LinearLayout>
     </com.accessories.seller.view.ReboundScrollView>
 

@@ -66,6 +66,7 @@ public class URLConstants {
     public static final String CASH_LIST =ACBASE_URL+"/cashList.do";//提现记录
     public static final String ADD_CASH =ACBASE_URL+"/addCash.do";//提现
     public static final String CONSTANT =ACBASE_URL+"/getConstant.do";//常量接口
+    public static final String UPDATE_SHOP =ACBASE_URL+"/updateShop.do";//修改商家
 
 
 

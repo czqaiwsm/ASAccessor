@@ -68,15 +68,13 @@ public class MsgInfoFragment extends PullRefreshFragment implements RequsetListe
         setRightHeadIcon(R.drawable.publis_righter, new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                v.setClickable(false);
-                v.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                       v.setClickable(true);
-                    }
-                },10*1000);
-                requestTask(2);
-
+               if("1".equals(BaseApplication.getSellerUserInfo().getVip())){
+                   Intent intent = new Intent(mActivity,WidthdrawInfoActivity.class);
+                   intent.setFlags(2);
+                   startActivityForResult(intent,100);
+               }else {
+                   SmartToast.showText("您还不是VIP用户,不能发布!");
+               }
             }
         });
         onLoade();

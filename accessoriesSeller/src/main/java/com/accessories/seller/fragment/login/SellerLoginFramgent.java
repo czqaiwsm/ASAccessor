@@ -41,7 +41,6 @@ public class SellerLoginFramgent extends BaseFragment implements View.OnClickLis
     private EditText login_pass;
     private TextView forget_pass_text;
     private TextView login_text;
-    private TextView register_text;
 
 
     @Override
@@ -69,14 +68,11 @@ public class SellerLoginFramgent extends BaseFragment implements View.OnClickLis
         login_pass = (EditText)view.findViewById(R.id.login_pass);
         forget_pass_text = (TextView)view.findViewById(R.id.forget_pass_text);
         login_text = (TextView)view.findViewById(R.id.login_text);
-        register_text = (TextView)view.findViewById(R.id.register_text);
 
         login_text.setOnClickListener(this);
-        register_text.setOnClickListener(this);
         forget_pass_text.setOnClickListener(this);
 
         forget_pass_text.setVisibility(View.GONE);
-        register_text.setVisibility(View.GONE);
         login_username.setHint("请输入用户名");
     }
 
@@ -101,9 +97,6 @@ public class SellerLoginFramgent extends BaseFragment implements View.OnClickLis
               }else {
                 requestTask();
               }
-              break;
-          case R.id.register_text:
-              toClassActivity(this, RegisterActivity.class.getName());
               break;
           case R.id.forget_pass_text:
               toClassActivity(this, ForgetPassActivity.class.getName());

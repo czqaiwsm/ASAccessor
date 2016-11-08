@@ -23,7 +23,6 @@ import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
-import android.text.Html;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -34,22 +33,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import cn.jpush.android.api.JPushInterface;
 import com.accessories.seller.R;
 import com.accessories.seller.activity.TeacherMainActivity;
-import com.accessories.seller.activity.center.FeedBackActivity;
-import com.accessories.seller.activity.center.PCenterInfoUserActivity;
 import com.accessories.seller.activity.center.PCenterModifyInfoActivity;
 import com.accessories.seller.activity.center.QueryCarActivity;
 import com.accessories.seller.activity.center.ServiceProtocolActivity;
-import com.accessories.seller.activity.center.SettingActivity;
 import com.accessories.seller.activity.center.WidthdrawInfoActivity;
 import com.accessories.seller.activity.center.WidthdrawRecordActivity;
 import com.accessories.seller.activity.login.SellerLoginActivity;
-import com.accessories.seller.activity.teacher.MyAssetActivity;
+import com.accessories.seller.bean.SellerUserInfo;
 import com.accessories.seller.bean.UploadBean;
 import com.accessories.seller.bean.UserInfo;
-import com.accessories.seller.bean.Value;
 import com.accessories.seller.fragment.BaseFragment;
 import com.accessories.seller.help.RequsetListener;
 import com.accessories.seller.parse.LoginInfoParse;
@@ -71,7 +65,6 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.volley.req.net.HttpURL;
 import com.volley.req.net.RequestManager;
 import com.volley.req.net.RequestParam;
-import com.volley.req.parser.JsonParserBase;
 import com.volley.req.parser.ParserUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -108,7 +101,7 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
     private RelativeLayout widthdrawRecordRl;
     private RelativeLayout clearRl;
 
-    private UserInfo mUserInfo;
+    private SellerUserInfo mUserInfo;
     private TextView account_customname;
     private TextView account_ordername;
     private TextView editNameTv;
@@ -157,7 +150,7 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mUserInfo = BaseApplication.getUserInfo();
+        mUserInfo = BaseApplication.getSellerUserInfo();
 
         EventBus.getDefault().register(this);
     }
@@ -203,7 +196,8 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
 
     private void onLazyLoad(){
         if(isPrepare && isVisible){
-            requestData(1);
+//            requestData(1);
+            setData(BaseApplication.getSellerUserInfo());
         }
 
     }
@@ -251,18 +245,18 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
     @Override
     public void onResume() {
         super.onResume();
-        setData(BaseApplication.getUserInfo());
+        setData(BaseApplication.getSellerUserInfo());
         setCache();
     }
 
-    private void setData(UserInfo userInfo) {
+    private void setData(SellerUserInfo userInfo) {
         account_customname.setText("0791-85232660");
         if(userInfo != null){
 
-            String money = "<span>"+getString(R.string.integeral, userInfo.getIntegral())+"<font color='#0099FF'>(￥"+userInfo.getMoney()+")</font></span>";
-            account_ordername.setText(Html.fromHtml(money));
-            ImageLoader.getInstance().displayImage(userInfo.getUserHead(), headRImg);
-            name.setText(TextUtils.isEmpty(userInfo.getNickname())?"":userInfo.getNickname());
+//            String money = "<span>"+getString(R.string.integeral, userInfo.getIntegral())+"<font color='#0099FF'>(￥"+userInfo.getMoney()+")</font></span>";
+//            account_ordername.setText(Html.fromHtml(money));
+            ImageLoader.getInstance().displayImage(userInfo.getShopPic(), headRImg);
+            name.setText(TextUtils.isEmpty(userInfo.getShopName())?"":userInfo.getShopName());
         }
 
 
@@ -345,16 +339,16 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
         switch (requestCode){
             case 1:
                 url.setmBaseUrl(URLConstants.GETUSERINFO);
-                postParams.put("userId", ""+mUserInfo.getId());
+//                postParams.put("userId", ""+mUserInfo.getId());
                 param = new RequestParam();
                 param.setmParserClassName(LoginInfoParse.class.getName());
                 break;
             case 2:
-                url.setmBaseUrl(URLConstants.UPDATE_USER);
+                url.setmBaseUrl(URLConstants.UPDATE_SHOP);
                 param = new RequestParam();
-                postParams.put("id", mUserInfo.getId());
-                postParams.put("nickname",mUserInfo.getNickname());
-                postParams.put("userHead",headRImg.getTag().toString());
+                postParams.put("id", mUserInfo.getShopId());
+                postParams.put("shopName",mUserInfo.getShopName());
+                postParams.put("shopPic",((UploadBean)headRImg.getTag()).getFilePath().toString());
                 break;
             case 3:
                 url.setmBaseUrl(URLConstants.CONSTANT);
@@ -373,31 +367,33 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
     public void handleRspSuccess(int requestType,Object obj) {
         switch (requestType){
             case 1:
-                JsonParserBase<UserInfo> jsonParserBase = (JsonParserBase<UserInfo>)obj;
-                if ((jsonParserBase != null)){
-                    mUserInfo = jsonParserBase.getObj();
-                    BaseApplication.saveUserInfo(jsonParserBase.getObj());
-                    BaseApplication.setMt_token(jsonParserBase.getObj().getId());
-                    JPushInterface.setAlias(BaseApplication.getInstance(), "t_" + BaseApplication.getUserInfo().getId(), null);
-                    setData(mUserInfo);
-                }
+//                JsonParserBase<UserInfo> jsonParserBase = (JsonParserBase<UserInfo>)obj;
+//                if ((jsonParserBase != null)){
+//                    mUserInfo = jsonParserBase.getObj();
+//                    BaseApplication.saveUserInfo(jsonParserBase.getObj());
+//                    BaseApplication.setMt_token(jsonParserBase.getObj().getId());
+//                    JPushInterface.setAlias(BaseApplication.getInstance(), "t_" + BaseApplication.getUserInfo().getId(), null);
+//                    setData(mUserInfo);
+//                }
                 break;
             case 2:
+                BaseApplication.getSellerUserInfo().setShopPic(((UploadBean)headRImg.getTag()).getAbsFilePath());
+                BaseApplication.saveSellerUserInfo(BaseApplication.getSellerUserInfo());
                 SmartToast.showText("头像修改过成功!");
                 break;
-            case 3:
-                wdrawRl.setClickable(true);
-                JsonParserBase<Value> jsonBase =  ParserUtil.fromJsonBase(obj.toString(), new TypeToken<JsonParserBase<Value>>() {
-                }.getType());
-                if(jsonBase.getObj().getValue()< Integer.valueOf(mUserInfo.getIntegral())){
-                    URLConstants.WIDTHDRAW_INTEGRAL = jsonBase.getObj().getValue();
-                    Intent intent = new Intent(mActivity,WidthdrawInfoActivity.class);
-                    intent.setFlags(1);
-                    startActivity(intent);
-                }else {
-                    SmartToast.showText("您的积分不足,不能提现");
-                }
-                break;
+//            case 3:
+//                wdrawRl.setClickable(true);
+//                JsonParserBase<Value> jsonBase =  ParserUtil.fromJsonBase(obj.toString(), new TypeToken<JsonParserBase<Value>>() {
+//                }.getType());
+//                if(jsonBase.getObj().getValue()< Integer.valueOf(mUserInfo.getIntegral())){
+//                    URLConstants.WIDTHDRAW_INTEGRAL = jsonBase.getObj().getValue();
+//                    Intent intent = new Intent(mActivity,WidthdrawInfoActivity.class);
+//                    intent.setFlags(1);
+//                    startActivity(intent);
+//                }else {
+//                    SmartToast.showText("您的积分不足,不能提现");
+//                }
+//                break;
 
         }
 
@@ -766,7 +762,7 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
                 }.getType());
                 if (result != null && URLConstants.SUCCESS_CODE.equals(result.getResult())) {
                     headRImg.setImageBitmap(m_obj_IconBp);
-                    headRImg.setTag(result.getFilePath());
+                    headRImg.setTag(result);
                     requestTask(2);
                 } else {
                     toasetUtil.showInfo("上传失败,请重新上传!");

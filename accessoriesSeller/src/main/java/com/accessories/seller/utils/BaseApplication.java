@@ -8,6 +8,7 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
 import com.accessories.seller.BuildConfig;
+import com.accessories.seller.bean.SellerUserInfo;
 import com.accessories.seller.bean.UserInfo;
 import com.accessories.seller.service.LocationService;
 import com.accessories.seller.service.LocationUitl;
@@ -34,6 +35,7 @@ public class BaseApplication extends Application {
     public Vibrator mVibrator;
 
     private static UserInfo userInfo;
+    private static SellerUserInfo sellerUserInfo;
 
 //    public String userId = "0" ;//用户Id,默认为0；
     public String appVersion = "";//版本
@@ -87,6 +89,17 @@ public class BaseApplication extends Application {
         BaseApplication.userInfo = userInfo;
         ContextUtils.saveObj2SP(BaseApplication.getInstance(),userInfo,"userInfo");
     }
+    public static SellerUserInfo getSellerUserInfo(){
+        if(sellerUserInfo == null){
+            sellerUserInfo = ContextUtils.getObjFromSp(BaseApplication.getInstance(),"sellerUserInfo");
+        }
+        return  sellerUserInfo;
+    }
+
+    public static void saveSellerUserInfo(SellerUserInfo sellerUserInfo){
+        BaseApplication.sellerUserInfo = sellerUserInfo;
+        ContextUtils.saveObj2SP(BaseApplication.getInstance(),sellerUserInfo,"sellerUserInfo");
+    }
 
     public static String getMt_token() {
         if(TextUtils.isEmpty(accessToken)){
@@ -106,7 +119,7 @@ public class BaseApplication extends Application {
     }
 
     public static boolean isLogin(){
-        return getUserInfo() != null && !TextUtils.isEmpty(userInfo.getId());
+        return getSellerUserInfo() != null && !TextUtils.isEmpty(sellerUserInfo.getShopId());
     }
 
     private void initImageLoader() {

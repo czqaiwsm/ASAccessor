@@ -12,6 +12,7 @@ import com.accessories.seller.R;
 import com.accessories.seller.activity.TeacherMainActivity;
 import com.accessories.seller.activity.login.ForgetPassActivity;
 import com.accessories.seller.activity.login.RegisterActivity;
+import com.accessories.seller.bean.SellerUserInfo;
 import com.accessories.seller.bean.UserInfo;
 import com.accessories.seller.fragment.BaseFragment;
 import com.accessories.seller.help.RequsetListener;
@@ -20,10 +21,12 @@ import com.accessories.seller.utils.BaseApplication;
 import com.accessories.seller.utils.PhoneUitl;
 import com.accessories.seller.utils.URLConstants;
 import com.accessories.seller.utils.WaitLayer;
+import com.google.gson.reflect.TypeToken;
 import com.volley.req.net.HttpURL;
 import com.volley.req.net.RequestManager;
 import com.volley.req.net.RequestParam;
 import com.volley.req.parser.JsonParserBase;
+import com.volley.req.parser.ParserUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,7 +42,6 @@ public class LoginFramgent extends BaseFragment implements View.OnClickListener,
     private EditText login_pass;
     private TextView forget_pass_text;
     private TextView login_text;
-    private TextView register_text;
 
 
 
@@ -68,10 +70,8 @@ public class LoginFramgent extends BaseFragment implements View.OnClickListener,
         login_pass = (EditText)view.findViewById(R.id.login_pass);
         forget_pass_text = (TextView)view.findViewById(R.id.forget_pass_text);
         login_text = (TextView)view.findViewById(R.id.login_text);
-        register_text = (TextView)view.findViewById(R.id.register_text);
 
         login_text.setOnClickListener(this);
-        register_text.setOnClickListener(this);
         forget_pass_text.setOnClickListener(this);
     }
 
@@ -93,14 +93,9 @@ public class LoginFramgent extends BaseFragment implements View.OnClickListener,
 //              }
               if(TextUtils.isEmpty(login_username.getText()) || TextUtils.isEmpty(login_pass.getText())){
                   toasetUtil.showInfo( R.string.passname_empty);
-              }else if (!PhoneUitl.isPhone(login_username.getText().toString())){
-                  toasetUtil.showInfo(R.string.phone_error);
               }else {
-                requestTask();
+                  requestTask();
               }
-              break;
-          case R.id.register_text:
-              toClassActivity(this, RegisterActivity.class.getName());
               break;
           case R.id.forget_pass_text:
               toClassActivity(this, ForgetPassActivity.class.getName());
@@ -113,14 +108,12 @@ public class LoginFramgent extends BaseFragment implements View.OnClickListener,
     @Override
     protected void requestData(int requestType) {
         HttpURL url = new HttpURL();
-        url.setmBaseUrl(URLConstants.LOGIN);
+        url.setmBaseUrl(URLConstants.SHOPLOGIN);
         Map postParams = new HashMap();
 
-        postParams.put("phone", login_username.getText().toString());
+        postParams.put("account", login_username.getText().toString());
         postParams.put("pwd",login_pass.getText().toString());
         RequestParam param = new RequestParam();
-//        param.setmParserClassName(LoginInfoParse.class.getName());
-        param.setmParserClassName(LoginInfoParse.class.getName());
         param.setmPostMap(postParams);
         param.setmHttpURL(url);
         param.setPostRequestMethod();
@@ -130,12 +123,14 @@ public class LoginFramgent extends BaseFragment implements View.OnClickListener,
 
     @Override
     public void handleRspSuccess(int requestType,Object obj) {
-        JsonParserBase<UserInfo> jsonParserBase = (JsonParserBase<UserInfo>)obj;
-        if ((jsonParserBase != null)){
-            BaseApplication.saveUserInfo(jsonParserBase.getObj());
-            BaseApplication.setMt_token(jsonParserBase.getObj().getId());
+        JsonParserBase<SellerUserInfo> jsonParserBase =  ParserUtil.fromJsonBase(obj.toString(), new TypeToken<JsonParserBase<SellerUserInfo>>() {
+        }.getType());
+
+        SellerUserInfo sellerUserInfo = null;
+
+        if ((sellerUserInfo = jsonParserBase.getObj()) != null){
+            BaseApplication.saveSellerUserInfo(sellerUserInfo);
             toClassActivity(LoginFramgent.this, TeacherMainActivity.class.getName());//老师
-            JPushInterface.setAlias(BaseApplication.getInstance(),"t_"+BaseApplication.getUserInfo().getId(),null);
             mActivity.finish();
         }
     }

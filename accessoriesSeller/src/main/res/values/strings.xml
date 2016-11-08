@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">车易配</string>
+    <string name="app_name">车易配商家端</string>
     <string name="session">轿车配件</string>
     <string name="address_book">汽车用品</string>
     <string name="schedule_tab">商用车配件</string>
