@@ -40,6 +40,7 @@ import com.accessories.seller.activity.center.QueryCarActivity;
 import com.accessories.seller.activity.center.ServiceProtocolActivity;
 import com.accessories.seller.activity.center.WidthdrawInfoActivity;
 import com.accessories.seller.activity.center.WidthdrawRecordActivity;
+import com.accessories.seller.activity.home.PhoneRecordActivity;
 import com.accessories.seller.activity.login.SellerLoginActivity;
 import com.accessories.seller.bean.SellerUserInfo;
 import com.accessories.seller.bean.UploadBean;
@@ -320,7 +321,7 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
                 toClassActivity(PCenterInfoFragment.this, QueryCarActivity.class.getName());
                 break;
             case R.id.set_layout:// 设置
-                toClassActivity(PCenterInfoFragment.this, SellerLoginActivity.class.getName());
+                toClassActivity(PCenterInfoFragment.this, PhoneRecordActivity.class.getName());
                 break;
             case R.id.clearRl:// 清理缓存
                 clearCache();

@@ -89,8 +89,8 @@ public class QueryCarFragment extends BaseFragment implements View.OnClickListen
     protected void requestData(int req) {
         showLoadingDilog("");
         String strUrl = "https://route.showapi.com/1142-1?" +
-                "showapi_appid=25683&showapi_sign=" +
-                "091582443591405e8f0c1387b74ee566" +
+                "showapi_appid=26130&showapi_sign=" +
+                "2513c6efc0e24e0995ed43d2772fb074" +
                 "&vin="+searchEdit.getText().toString(); //
         HttpURL url = new HttpURL();
         url.setmBaseUrl(strUrl);

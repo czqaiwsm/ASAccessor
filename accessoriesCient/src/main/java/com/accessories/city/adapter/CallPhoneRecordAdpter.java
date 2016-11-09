@@ -65,6 +65,8 @@ public class CallPhoneRecordAdpter extends BaseAdapter implements View.OnClickLi
 
             holder.headPhoto.setTag(obj.getPhone());
             holder.phoneNum.setText(obj.getPhone());
+            holder.headPhoto.setTag(obj.getPhone());
+            holder.phoneNum.setTag(obj.getPhone());
             holder.headPhoto.setOnClickListener(this);
             holder.phoneNum.setOnClickListener(this);
         }

@@ -14,6 +14,8 @@ public class NewsEntity {
 
 	private String phone;
 	private String vip;//0非vip  1vip
+	private String userName;
+	private String userHead;
 
 	public String getVip() {
 		return vip;
@@ -69,5 +71,21 @@ public class NewsEntity {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getUserHead() {
+		return userHead;
+	}
+
+	public void setUserHead(String userHead) {
+		this.userHead = userHead;
 	}
 }

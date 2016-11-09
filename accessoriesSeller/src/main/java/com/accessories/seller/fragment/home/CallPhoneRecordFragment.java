@@ -56,9 +56,7 @@ public class CallPhoneRecordFragment extends BaseFragment implements RequsetList
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getActivity().getIntent();
-        if (intent != null) {
-            shopId = intent.hasExtra("shopId") ? intent.getStringExtra("shopId") : "";
-        }
+        shopId = BaseApplication.getSellerUserInfo().getShopId();
     }
 
     @Override

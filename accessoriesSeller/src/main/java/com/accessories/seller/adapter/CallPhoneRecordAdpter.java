@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.accessories.seller.R;
 import com.accessories.seller.bean.NewsEntity;
 import com.accessories.seller.utils.ImageLoaderUtil;
+import com.accessories.seller.view.RoundImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
@@ -49,8 +50,9 @@ public class CallPhoneRecordAdpter extends BaseAdapter implements View.OnClickLi
         if (convertView == null) {
             holder = new ViewHolder();
             convertView = LayoutInflater.from(mContext).inflate(R.layout.phone_recorder_adapter_ui, null);
-            holder.headPhoto = (ImageView)convertView.findViewById(R.id.phoneImg);
+            holder.headPhoto = (RoundImageView) convertView.findViewById(R.id.phoneImg);
             holder.phoneNum = (TextView)convertView.findViewById(R.id.phone);
+            holder.nameTv = (TextView)convertView.findViewById(R.id.nameTv);
             holder.dateTime = (TextView) convertView.findViewById(R.id.dateTime);
             convertView.setTag(holder);
         }else {
@@ -59,12 +61,13 @@ public class CallPhoneRecordAdpter extends BaseAdapter implements View.OnClickLi
 
         NewsEntity obj = mItemList.get(position);
         if(obj != null){
-//            ImageLoader.getInstance().displayImage(obj.getShopPic(),holder.headPhoto, ImageLoaderUtil.mHallIconLoaderOptions);
+            ImageLoader.getInstance().displayImage(obj.getUserHead(),holder.headPhoto, ImageLoaderUtil.mHallIconLoaderOptions);
             holder.phoneNum.setText(obj.getPhone());
             holder.dateTime.setText(obj.getTime());
+            holder.nameTv.setText(obj.getUserName());
 
             holder.headPhoto.setTag(obj.getPhone());
-            holder.phoneNum.setText(obj.getPhone());
+            holder.phoneNum.setTag(obj.getPhone());
             holder.headPhoto.setOnClickListener(this);
             holder.phoneNum.setOnClickListener(this);
         }
@@ -72,9 +75,10 @@ public class CallPhoneRecordAdpter extends BaseAdapter implements View.OnClickLi
     }
 
     class ViewHolder {
-        private ImageView headPhoto;
+        private RoundImageView headPhoto;
         private TextView phoneNum;
         private TextView dateTime;
+        private TextView nameTv;
 
     }
 
