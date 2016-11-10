@@ -18,6 +18,15 @@ public class SellerInfo {
     private String phone2;//"18019585306", //手机2
     private String qq;//651339644"//QQ
     private String shopPic;//----------"//图片
+    private String vip;//
+
+    public String getVip() {
+        return vip;
+    }
+
+    public void setVip(String vip) {
+        this.vip = vip;
+    }
 
     public String getId() {
         return id;

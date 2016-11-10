@@ -39,13 +39,14 @@
 
                 <TextView
                         android:id="@+id/selleName"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="啊大幅拉风"
                         android:textColor="@color/black"
                         android:textSize="@dimen/pc_txt_size"
                         android:layout_marginTop="5dp"
                         android:layout_below="@+id/img"
+                        android:gravity="center"
                 />
             </RelativeLayout>
 
@@ -104,7 +105,10 @@
                           android:layout_marginTop="8dp"
                           android:layout_marginBottom="8dp"
                     >
-
+              <com.accessories.seller.view.ListViewForScrollView
+                  android:background="@color/white"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"/>
 
                    <LinearLayout android:layout_width="wrap_content"
                                  android:layout_height="wrap_content"
@@ -294,6 +298,8 @@
                               android:layout_height="wrap_content"
                               android:textColor="@color/main_txt_black"
                               android:textSize="18sp"
+                              android:layout_gravity="top"
+                              android:gravity="top"
                               android:text="地址:"
                     />
                     <TextView android:id="@+id/address"

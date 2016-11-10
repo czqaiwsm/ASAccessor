@@ -42,6 +42,7 @@ import com.accessories.seller.activity.center.WidthdrawInfoActivity;
 import com.accessories.seller.activity.center.WidthdrawRecordActivity;
 import com.accessories.seller.activity.home.PhoneRecordActivity;
 import com.accessories.seller.activity.login.SellerLoginActivity;
+import com.accessories.seller.bean.SellerInfo;
 import com.accessories.seller.bean.SellerUserInfo;
 import com.accessories.seller.bean.UploadBean;
 import com.accessories.seller.bean.UserInfo;
@@ -66,6 +67,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.volley.req.net.HttpURL;
 import com.volley.req.net.RequestManager;
 import com.volley.req.net.RequestParam;
+import com.volley.req.parser.JsonParserBase;
 import com.volley.req.parser.ParserUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -197,7 +199,7 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
 
     private void onLazyLoad(){
         if(isPrepare && isVisible){
-//            requestData(1);
+            requestData(1);
             setData(BaseApplication.getSellerUserInfo());
         }
 
@@ -336,24 +338,20 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
 
         HttpURL url = new HttpURL();
         Map postParams = new HashMap<String,String>();
-        RequestParam param = null;
+        RequestParam param = new RequestParam();
         switch (requestCode){
             case 1:
-                url.setmBaseUrl(URLConstants.GETUSERINFO);
-//                postParams.put("userId", ""+mUserInfo.getId());
-                param = new RequestParam();
-                param.setmParserClassName(LoginInfoParse.class.getName());
+                url.setmBaseUrl(URLConstants.SHOPDETAIL);
+                postParams.put("shopId",BaseApplication.getSellerUserInfo().getShopId());
                 break;
             case 2:
                 url.setmBaseUrl(URLConstants.UPDATE_SHOP);
-                param = new RequestParam();
                 postParams.put("id", mUserInfo.getShopId());
                 postParams.put("shopName",mUserInfo.getShopName());
                 postParams.put("shopPic",((UploadBean)headRImg.getTag()).getFilePath().toString());
                 break;
             case 3:
                 url.setmBaseUrl(URLConstants.CONSTANT);
-                param = new RequestParam();
                 postParams.put("type", "integral_type");
                 postParams.put("key","cash");
                 break;
@@ -368,6 +366,13 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
     public void handleRspSuccess(int requestType,Object obj) {
         switch (requestType){
             case 1:
+                JsonParserBase<SellerInfo> jsonParserBase = ParserUtil.fromJsonBase(obj.toString(), new TypeToken<JsonParserBase<SellerInfo>>() {
+                }.getType());
+                SellerInfo balanceInfo = jsonParserBase.getObj();
+                if(balanceInfo != null){
+                    BaseApplication.getSellerUserInfo().setVip(balanceInfo.getVip());
+                    BaseApplication.saveSellerUserInfo(BaseApplication.getSellerUserInfo());
+                }
 //                JsonParserBase<UserInfo> jsonParserBase = (JsonParserBase<UserInfo>)obj;
 //                if ((jsonParserBase != null)){
 //                    mUserInfo = jsonParserBase.getObj();

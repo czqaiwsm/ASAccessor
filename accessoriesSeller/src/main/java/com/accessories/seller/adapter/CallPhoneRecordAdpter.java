@@ -61,7 +61,7 @@ public class CallPhoneRecordAdpter extends BaseAdapter implements View.OnClickLi
 
         NewsEntity obj = mItemList.get(position);
         if(obj != null){
-            ImageLoader.getInstance().displayImage(obj.getUserHead(),holder.headPhoto, ImageLoaderUtil.mHallIconLoaderOptions);
+            ImageLoader.getInstance().displayImage(obj.getUserHead(),holder.headPhoto);
             holder.phoneNum.setText(obj.getPhone());
             holder.dateTime.setText(obj.getTime());
             holder.nameTv.setText(obj.getUserName());

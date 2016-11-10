@@ -11,19 +11,35 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.accessories.seller.R;
 import com.accessories.seller.activity.login.LoginActivity;
+import com.accessories.seller.bean.SellerInfo;
+import com.accessories.seller.bean.UploadBean;
 import com.accessories.seller.fragment.TeacherHomePageFragment;
 import com.accessories.seller.fragment.center.PCenterInfoFragment;
 import com.accessories.seller.fragment.msg.MsgInfoFragment;
 import com.accessories.seller.fragment.msg.MsgInfosFragment;
+import com.accessories.seller.help.RequsetListener;
+import com.accessories.seller.utils.AppLog;
 import com.accessories.seller.utils.BaseApplication;
 import com.accessories.seller.utils.SmartToast;
+import com.accessories.seller.utils.URLConstants;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.download.base.utils.ScreenUtils;
 import com.download.update.UpdateMgr;
+import com.google.gson.reflect.TypeToken;
+import com.volley.req.net.HttpURL;
+import com.volley.req.net.RequestManager;
+import com.volley.req.net.RequestParam;
+import com.volley.req.parser.JsonParserBase;
+import com.volley.req.parser.ParserUtil;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 老师端主页面
  */
-public class TeacherMainActivity extends BaseActivity implements View.OnClickListener{
+public class TeacherMainActivity extends BaseActivity implements View.OnClickListener,RequsetListener{
     /**
      * Called when the activity is first created.
      */
@@ -50,6 +66,7 @@ public class TeacherMainActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestData(1);
         count++;
         ScreenUtils.getScreenSize(this);
         UpdateMgr.getInstance(this).checkUpdateInfo(null, false);
@@ -181,4 +198,82 @@ public class TeacherMainActivity extends BaseActivity implements View.OnClickLis
         exit = false;
         super.finish();
     }
+
+    protected void requestData(int requestCode) {
+
+        HttpURL url = new HttpURL();
+        Map postParams = new HashMap<String,String>();
+        RequestParam param = new RequestParam();
+        switch (requestCode){
+            case 1:
+                url.setmBaseUrl(URLConstants.SHOPDETAIL);
+                postParams.put("shopId",BaseApplication.getSellerUserInfo().getShopId());
+                break;
+
+        }
+        param.setmPostMap(postParams);
+        param.setmHttpURL(url);
+        param.setPostRequestMethod();
+        RequestManager.getRequestData(this, createReqSuccessListener(requestCode), createMyReqErrorListener(), param);
+    }
+    @Override
+    public void handleRspSuccess(int requestType,Object obj) {
+        switch (requestType){
+            case 1:
+                JsonParserBase<SellerInfo> jsonParserBase = ParserUtil.fromJsonBase(obj.toString(), new TypeToken<JsonParserBase<SellerInfo>>() {
+                }.getType());
+                SellerInfo balanceInfo = jsonParserBase.getObj();
+                if(balanceInfo != null){
+                    BaseApplication.getSellerUserInfo().setVip(balanceInfo.getVip());
+                    BaseApplication.saveSellerUserInfo(BaseApplication.getSellerUserInfo());
+                }
+//                JsonParserBase<UserInfo> jsonParserBase = (JsonParserBase<UserInfo>)obj;
+//                if ((jsonParserBase != null)){
+//                    mUserInfo = jsonParserBase.getObj();
+//                    BaseApplication.saveUserInfo(jsonParserBase.getObj());
+//                    BaseApplication.setMt_token(jsonParserBase.getObj().getId());
+//                    JPushInterface.setAlias(BaseApplication.getInstance(), "t_" + BaseApplication.getUserInfo().getId(), null);
+//                    setData(mUserInfo);
+//                }
+                break;
+
+        }
+
+    }
+
+
+    protected Response.Listener<Object> createReqSuccessListener(final int requestType) {
+        return new Response.Listener<Object>() {
+            @Override
+            public void onResponse(Object object) {
+                if (object != null) {
+                        System.out.println("respJson=="+object.toString());
+                        JsonParserBase jsonParserBase =  ParserUtil.fromJsonBase(object.toString(), new TypeToken<JsonParserBase>() {
+                        }.getType());
+                        if(jsonParserBase != null && URLConstants.SUCCESS_CODE.equals(jsonParserBase.getResult())){
+
+                            handleRspSuccess(requestType,object.toString());
+                        }else{
+                            toasetUtil.showInfo( jsonParserBase.getMessage().toString());
+                        }
+                    }
+            }
+        };
+    }
+
+    protected Response.Listener<Object> createReqSuccessListener() {
+        return createReqSuccessListener(0);
+    }
+
+    protected Response.ErrorListener createMyReqErrorListener() {
+        return new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                AppLog.Loge(" data failed to load " + error.getMessage());
+                    toasetUtil.showErro(R.string.loading_fail_server);
+            }
+        };
+    }
+
+
 }
