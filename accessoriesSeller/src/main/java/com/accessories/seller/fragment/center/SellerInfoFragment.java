@@ -12,20 +12,21 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import butterknife.Bind;
-import butterknife.ButterKnife;
+
 import com.accessories.seller.R;
 import com.accessories.seller.activity.CallPhoneReceiver;
+import com.accessories.seller.bean.Phone;
 import com.accessories.seller.bean.SellerInfo;
 import com.accessories.seller.fragment.BaseFragment;
 import com.accessories.seller.help.RequsetListener;
 import com.accessories.seller.utils.BaseApplication;
 import com.accessories.seller.utils.URLConstants;
-import com.accessories.seller.view.ReboundScrollView;
+import com.accessories.seller.view.ListViewForScrollView;
 import com.google.gson.reflect.TypeToken;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.volley.req.net.HttpURL;
@@ -34,8 +35,13 @@ import com.volley.req.net.RequestParam;
 import com.volley.req.parser.JsonParserBase;
 import com.volley.req.parser.ParserUtil;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * 关于我们
@@ -82,9 +88,13 @@ public class SellerInfoFragment extends BaseFragment implements OnClickListener,
     LinearLayout wxLL;
     @Bind(R.id.container)
     LinearLayout container;
-    private String shopId;
+    @Bind(R.id.listview)
+    ListViewForScrollView listview;
 
-    private Handler mHandler = new Handler(){
+    private String shopId;
+    private PhoneAdapter phoneAdapter ;
+
+    private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
@@ -114,10 +124,21 @@ public class SellerInfoFragment extends BaseFragment implements OnClickListener,
         initTitleView();
         initView();
         CallPhoneReceiver.mHandler = mHandler;
+
+        listview.setAdapter((phoneAdapter =new PhoneAdapter()));
+
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + ((Phone)phoneAdapter.getItem(position)).getPhone()));
+                startActivity(intent);
+            }
+        });
+
         img.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override
             public boolean onPreDraw() {
-                int height = (img.getWidth()*27/39);
+                int height = (img.getWidth() * 27 / 39);
                 ViewGroup.LayoutParams layoutParams = img.getLayoutParams();
                 layoutParams.height = height;
                 img.setLayoutParams(layoutParams);
@@ -212,26 +233,32 @@ public class SellerInfoFragment extends BaseFragment implements OnClickListener,
                 ImageLoader.getInstance().displayImage(balanceInfo.getShopPic(), img);
                 selleName.setText(balanceInfo.getShopName());
                 bussiness.setText(balanceInfo.getShopDesc());
-                if (!TextUtils.isEmpty(balanceInfo.getShopAddr())) {
-                    address.setText(balanceInfo.getShopAddr());
-                    addressLL.setVisibility(View.VISIBLE);
+
+                if(balanceInfo.getPhoneAry() == null || balanceInfo.getPhoneAry().size()==0){
+                    if (!TextUtils.isEmpty(balanceInfo.getShopAddr())) {
+                        address.setText(balanceInfo.getShopAddr());
+                        addressLL.setVisibility(View.VISIBLE);
+                    }
+                    if (!TextUtils.isEmpty(balanceInfo.getPhone())) {
+                        phone1.setText(balanceInfo.getPhone());
+                        phone1LL.setVisibility(View.VISIBLE);
+                    }
+                    if (!TextUtils.isEmpty(balanceInfo.getPhone2())) {
+                        phone2.setText(balanceInfo.getPhone2());
+                        phone2LL.setVisibility(View.VISIBLE);
+                    }
+                    if (!TextUtils.isEmpty(balanceInfo.getTel())) {
+                        tel1.setText(balanceInfo.getTel());
+                        tel1LL.setVisibility(View.VISIBLE);
+                    }
+                    if (!TextUtils.isEmpty(balanceInfo.getTel2())) {
+                        tel2.setText(balanceInfo.getTel2());
+                        tel2LL.setVisibility(View.VISIBLE);
+                    }
+                }else {
+                    phoneAdapter.addList(balanceInfo.getPhoneAry());
                 }
-                if (!TextUtils.isEmpty(balanceInfo.getPhone())) {
-                    phone1.setText(balanceInfo.getPhone());
-                    phone1LL.setVisibility(View.VISIBLE);
-                }
-                if (!TextUtils.isEmpty(balanceInfo.getPhone2())) {
-                    phone2.setText(balanceInfo.getPhone2());
-                    phone2LL.setVisibility(View.VISIBLE);
-                }
-                if (!TextUtils.isEmpty(balanceInfo.getTel())) {
-                    tel1.setText(balanceInfo.getTel());
-                    tel1LL.setVisibility(View.VISIBLE);
-                }
-                if (!TextUtils.isEmpty(balanceInfo.getTel2())) {
-                    tel2.setText(balanceInfo.getTel2());
-                    tel2LL.setVisibility(View.VISIBLE);
-                }
+
                 if (!TextUtils.isEmpty(balanceInfo.getQq())) {
                     QQ.setText(balanceInfo.getQq());
                     QQLL.setVisibility(View.VISIBLE);
@@ -266,4 +293,69 @@ public class SellerInfoFragment extends BaseFragment implements OnClickListener,
         super.onDestroyView();
         ButterKnife.unbind(this);
     }
+
+    public class PhoneAdapter extends BaseAdapter {
+        private List<Phone> mItemList;
+
+        private String joniorId = "";
+
+        @Override
+        public int getCount() {
+            if (mItemList == null) mItemList = new ArrayList<>();
+            return mItemList == null ? 0 : mItemList.size();
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup arg2) {
+            ViewHolder holder = null;
+            if (convertView == null) {
+                convertView = LayoutInflater.from(getActivity()).inflate(R.layout.adapter_phone, null);
+                holder = new ViewHolder(convertView);
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+
+            Phone idInfo = mItemList.get(position);
+            if(idInfo != null){
+                holder.nameTv.setText(idInfo.getName()+":");
+                holder.telTv.setText(idInfo.getPhone());
+            }
+            return convertView;
+        }
+
+
+        @Override
+        public Object getItem(int position) {
+
+            return mItemList.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        public void addList(ArrayList list) {
+            if (mItemList == null) mItemList = new ArrayList<>();
+            mItemList.clear();
+            mItemList.addAll(list);
+            notifyDataSetChanged();
+        }
+
+
+       class ViewHolder {
+            @Bind(R.id.nameTv)
+            TextView nameTv;
+            @Bind(R.id.telTv)
+            TextView telTv;
+            @Bind(R.id.tel2LL)
+            LinearLayout tel2LL;
+
+            ViewHolder(View view) {
+                ButterKnife.bind(this, view);
+            }
+        }
+    }
+
 }

@@ -107,19 +107,21 @@ public class QueryCarFragment extends BaseFragment implements View.OnClickListen
                 VinBean.VinInfo  vinInfo = null ;
 
                 if ("0".equals(jsonParserBase.showapi_res_code) && (vinInfo = jsonParserBase.showapi_res_body) != null) {
-
-                    brandNameTv.setText(vinInfo.brand_name);
-                    manufacturerTv.setText(vinInfo.manufacturer);
-                    carTypeTv.setText(vinInfo.car_type);
-                    madeYearTv.setText(vinInfo.made_year);
-                    engineTypeTv.setText(vinInfo.engine_type);
-                    transmissionTypeTv.setText(vinInfo.transmission_type);
-                    outputVolumeTv.setText(vinInfo.output_volume);
-                    gearsNumTv.setText(vinInfo.gears_num);
-                    powerTv.setText(vinInfo.power);
-                    gearsNumTv.setText(vinInfo.gears_num);
-                    carBodyTv.setText(vinInfo.car_body);
-
+                    if("0".equals(vinInfo.ret_code)){
+                        brandNameTv.setText(vinInfo.brand_name);
+                        manufacturerTv.setText(vinInfo.manufacturer);
+                        carTypeTv.setText(vinInfo.car_type);
+                        madeYearTv.setText(vinInfo.made_year);
+                        engineTypeTv.setText(vinInfo.engine_type);
+                        transmissionTypeTv.setText(vinInfo.transmission_type);
+                        outputVolumeTv.setText(vinInfo.output_volume);
+                        gearsNumTv.setText(vinInfo.gears_num);
+                        powerTv.setText(vinInfo.power);
+                        gearsNumTv.setText(vinInfo.gears_num);
+                        carBodyTv.setText(vinInfo.car_body);
+                    }else {
+                        SmartToast.showText(vinInfo.remark);
+                    }
                 } else {
                     brandNameTv.setText("");
                     manufacturerTv.setText("");

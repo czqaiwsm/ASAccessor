@@ -36,6 +36,7 @@ public class VinBean {
         public String transmission_type;
         public String vehicle_level;
         public String vin;
+        public String remark;
     }
 
     ;

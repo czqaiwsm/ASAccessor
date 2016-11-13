@@ -1,5 +1,7 @@
 package com.accessories.seller.bean;
 
+import java.util.ArrayList;
+
 /**
  * @desc 请用一句话描述此文件
  * @creator caozhiqing
@@ -19,6 +21,15 @@ public class SellerInfo {
     private String qq;//651339644"//QQ
     private String shopPic;//----------"//图片
     private String vip;//
+    private ArrayList<Phone> phoneAry;
+
+    public ArrayList<Phone> getPhoneAry() {
+        return phoneAry;
+    }
+
+    public void setPhoneAry(ArrayList<Phone> phoneAry) {
+        this.phoneAry = phoneAry;
+    }
 
     public String getVip() {
         return vip;
