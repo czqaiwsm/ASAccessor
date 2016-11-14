@@ -17,13 +17,15 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
+import io.jchat.android.application.JChatDemoApplication;
+
 
 /**
  * @author czq
  * @desc 请用一句话描述它
  * @date 16/3/15
  */
-public class BaseApplication extends Application {
+public class BaseApplication extends JChatDemoApplication {
 
 
     private static BaseApplication  instance;
