@@ -170,7 +170,7 @@
                 <action android:name="cn.jpush.im.android.action.IM_RESPONSE" />
                 <action android:name="cn.jpush.im.android.action.NOTIFICATION_CLICK_PROXY" />
 
-                <category android:name="${applicationId}" />
+                <category android:name="com.accessories.city" />
             </intent-filter>
         </receiver>
 
@@ -299,5 +299,77 @@
                 android:name="com.download.update.DownloadService"
                 android:exported="false">
         </service>
+
+
+        <activity
+            android:name="io.jchat.android.activity.BaseActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="io.jchat.android.activity.LoginActivity"
+            android:theme="@style/noTitle"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"/>
+        <activity
+            android:name="io.jchat.android.activity.MainActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="io.jchat.android.activity.RegisterActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="io.jchat.android.activity.MeInfoActivity" />
+        <activity
+            android:name="io.jchat.android.chatting.ChatActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="io.jchat.android.activity.ReloginActivity"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"/>
+        <activity
+            android:name="io.jchat.android.activity.ChatDetailActivity" />
+        <activity
+            android:name="io.jchat.android.activity.GroupSettingActivity"
+            android:theme="@style/group_setting_dialog" />
+        <activity
+            android:name="io.jchat.android.activity.FriendInfoActivity" />
+        <activity
+            android:name="io.jchat.android.activity.CreateGroupActivity" />
+        <activity
+            android:name="io.jchat.android.activity.PickPictureTotalActivity" />
+        <activity
+            android:name="io.jchat.android.activity.PickPictureActivity" />
+        <activity
+            android:name="io.jchat.android.activity.BrowserViewPagerActivity" />
+        <activity
+            android:name="io.jchat.android.activity.SettingActivity" />
+        <activity
+            android:name="io.jchat.android.activity.NotificationSettingActivity" />
+        <activity
+            android:name="io.jchat.android.activity.DisturbSettingActivity" />
+        <activity
+            android:name="io.jchat.android.activity.ResetPasswordActivity"
+            android:windowSoftInputMode="adjustResize|stateAlwaysVisible"/>
+        <activity
+            android:name="io.jchat.android.activity.FixProfileActivity"
+            android:windowSoftInputMode="adjustResize|stateAlwaysVisible" />
+        <activity
+            android:name="io.jchat.android.activity.ResetNickNameActivity"
+            android:windowSoftInputMode="adjustResize|stateAlwaysVisible"/>
+        <activity
+            android:name="io.jchat.android.activity.SelectAreaActivity"
+            android:windowSoftInputMode="adjustResize|stateAlwaysVisible"/>
+        <activity
+            android:name="io.jchat.android.activity.EditSignatureActivity"
+            android:windowSoftInputMode="adjustResize|stateAlwaysVisible"/>
+        <activity
+            android:name="io.jchat.android.activity.EditNoteNameActivity" />
+        <activity
+            android:name="io.jchat.android.activity.AboutActivity" />
+        <activity
+            android:name="io.jchat.android.activity.SelectFriendActivity"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name="io.jchat.android.activity.MembersInChatActivity" />
+        <activity
+            android:name="io.jchat.android.activity.CropImageActivity" />
     </application>
 </manifest>

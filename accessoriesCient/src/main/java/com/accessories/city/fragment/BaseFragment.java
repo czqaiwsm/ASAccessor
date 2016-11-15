@@ -100,7 +100,7 @@ public abstract class BaseFragment extends Fragment{
     protected void requestTask(int requestType){
         if (loadingDilog != null && !loadingDilog.isShow()){
             showLoadingDilog(null);
-            handler.sendEmptyMessageDelayed(CANCEL,15000);
+
         }
         requestData(requestType);
     }
@@ -137,6 +137,7 @@ public abstract class BaseFragment extends Fragment{
     protected void showLoadingDilog(String msg){
         if(loadingDilog != null && !loadingDilog.isShow()){
             loadingDilog.show(msg);
+            handler.sendEmptyMessageDelayed(CANCEL,15000);
         }
     }
 

@@ -34,19 +34,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import cn.jpush.android.api.JPushInterface;
 import com.accessories.city.R;
 import com.accessories.city.activity.TeacherMainActivity;
-import com.accessories.city.activity.center.FeedBackActivity;
-import com.accessories.city.activity.center.PCenterInfoUserActivity;
 import com.accessories.city.activity.center.PCenterModifyInfoActivity;
 import com.accessories.city.activity.center.QueryCarActivity;
 import com.accessories.city.activity.center.ServiceProtocolActivity;
-import com.accessories.city.activity.center.SettingActivity;
 import com.accessories.city.activity.center.WidthdrawInfoActivity;
 import com.accessories.city.activity.center.WidthdrawRecordActivity;
 import com.accessories.city.activity.login.SellerLoginActivity;
-import com.accessories.city.activity.teacher.MyAssetActivity;
 import com.accessories.city.bean.UploadBean;
 import com.accessories.city.bean.UserInfo;
 import com.accessories.city.bean.Value;
@@ -74,9 +69,6 @@ import com.volley.req.net.RequestParam;
 import com.volley.req.parser.JsonParserBase;
 import com.volley.req.parser.ParserUtil;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -89,6 +81,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.im.android.eventbus.EventBus;
 
 /**
  * 我
@@ -268,8 +263,7 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
 
     }
 
-    @Subscribe
-    public void  useInfoChange(UserInfo userInfo){
+    public void onEvent(UserInfo userInfo){
         requestTask(1);
     }
 

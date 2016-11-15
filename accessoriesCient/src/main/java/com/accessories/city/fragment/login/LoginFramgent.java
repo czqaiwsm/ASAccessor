@@ -2,12 +2,17 @@ package com.accessories.city.fragment.login;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 import cn.jpush.android.api.JPushInterface;
+import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.api.BasicCallback;
+import io.jchat.android.chatting.utils.HandleResponseCode;
+
 import com.accessories.city.R;
 import com.accessories.city.activity.TeacherMainActivity;
 import com.accessories.city.activity.login.ForgetPassActivity;
@@ -96,7 +101,21 @@ public class LoginFramgent extends BaseFragment implements View.OnClickListener,
               }else if (!PhoneUitl.isPhone(login_username.getText().toString())){
                   toasetUtil.showInfo(R.string.phone_error);
               }else {
-                requestTask();
+
+                  showLoadingDilog(null);
+                  JMessageClient.login(login_username.getText().toString(), login_username.getText().toString(), new BasicCallback() {
+                      @Override
+                      public void gotResult(final int status, final String desc) {
+                          if (status == 0) {
+                              requestData(0);
+                          } else {
+                              dismissLoadingDilog();
+                              Log.i("LoginController", "status = " + status);
+                              HandleResponseCode.onHandle(mActivity, status, false);
+                          }
+                      }
+                  });
+
               }
               break;
           case R.id.register_text:

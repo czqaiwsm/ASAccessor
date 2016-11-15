@@ -1,8 +1,6 @@
 package com.accessories.city.fragment.center;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ContentUris;
@@ -18,7 +16,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
 import android.os.Message;
 import android.os.StrictMode;
 import android.provider.DocumentsContract;
@@ -26,7 +23,6 @@ import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.pm.ActivityInfoCompat;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -39,20 +35,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.accessories.city.R;
-import com.accessories.city.activity.ChooseCityActivity;
-import com.accessories.city.activity.TeacherMainActivity;
-import com.accessories.city.activity.teacher.ChooseJoinorActivity;
 import com.accessories.city.bean.UploadBean;
-import com.accessories.city.bean.UserInfo;
 import com.accessories.city.fragment.BaseFragment;
 import com.accessories.city.help.RequsetListener;
-import com.accessories.city.parse.LoginInfoParse;
 import com.accessories.city.utils.AlertDialogUtils;
 import com.accessories.city.utils.AppLog;
 import com.accessories.city.utils.BaseApplication;
-import com.accessories.city.utils.IDCard;
 import com.accessories.city.utils.ImageFactory;
-import com.accessories.city.utils.ImageLoaderUtil;
 import com.accessories.city.utils.NetUtils;
 import com.accessories.city.utils.PhoneUitl;
 import com.accessories.city.utils.SDCardUtils;
@@ -63,17 +52,11 @@ import com.accessories.city.utils.WaitLayer;
 import com.accessories.city.view.AddPopwindow;
 import com.accessories.city.view.UpdateAvatarPopupWindow;
 import com.google.gson.reflect.TypeToken;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.volley.req.net.HttpURL;
 import com.volley.req.net.RequestManager;
 import com.volley.req.net.RequestParam;
-import com.volley.req.parser.JsonParserBase;
 import com.volley.req.parser.ParserUtil;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -82,15 +65,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
-import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import cn.jpush.android.api.JPushInterface;
+import cn.jpush.im.android.eventbus.EventBus;
 
 /**
  * @desc 教师首页
@@ -223,7 +204,6 @@ public class PublisFragment extends BaseFragment implements View.OnClickListener
         }
     }
 
-    @Subscribe
     public void eventReq(Integer req){
         if(cashType.equals(req+"")){
             if (!PhoneUitl.isPhone(phoneEt.getText().toString())){
@@ -248,7 +228,6 @@ public class PublisFragment extends BaseFragment implements View.OnClickListener
         HttpURL url = new HttpURL();
         url.setmBaseUrl(URLConstants.ADD_MEMBER_MESSAGE);
         Map postParams = new HashMap();
-
         postParams.put("userId", BaseApplication.getUserInfo().getId());
         postParams.put("msgType",cashType);
         postParams.put("msgContent",contentEt.getText().toString());

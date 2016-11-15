@@ -20,6 +20,8 @@ import com.accessories.city.utils.SmartToast;
 import com.download.base.utils.ScreenUtils;
 import com.download.update.UpdateMgr;
 
+import io.jchat.android.activity.ConversationListFragment;
+
 /**
  * 老师端主页面
  */
@@ -57,7 +59,7 @@ public class TeacherMainActivity extends BaseActivity implements View.OnClickLis
         fragments = new Fragment[VIEW_COUNT];
         fragments[0] =new MsgInfoFragment();
         fragments[1] = new TeacherHomePageFragment();
-        fragments[2] = new MsgInfosFragment(3);
+        fragments[2] = new ConversationListFragment();;
         fragments[3] = pCenterFragment = new PCenterInfoFragment();
 
         initView();

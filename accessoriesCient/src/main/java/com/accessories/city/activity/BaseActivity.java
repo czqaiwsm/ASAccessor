@@ -1,12 +1,11 @@
 package com.accessories.city.activity;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.widget.EditText;
 import com.accessories.city.utils.AppManager;
 import com.toast.ToasetUtil;
 
-public class BaseActivity extends FragmentActivity {
+public class BaseActivity extends io.jchat.android.activity.BaseActivity {
 
 	public ToasetUtil toasetUtil = null;
 	private EditText editText = null;

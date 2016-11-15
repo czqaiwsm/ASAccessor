@@ -12,7 +12,7 @@ import com.accessories.city.view.tab.ScrollingTabContainerView;
 import com.accessories.city.view.tab.TabsActionBar;
 import com.accessories.city.view.tab.TabsAdapter;
 
-import org.greenrobot.eventbus.EventBus;
+import cn.jpush.im.android.eventbus.EventBus;
 
 
 public class WidthDrawFragment extends BaseFragment {

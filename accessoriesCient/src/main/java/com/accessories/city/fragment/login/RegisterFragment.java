@@ -33,6 +33,11 @@ import com.volley.req.parser.JsonParserBase;
 import java.util.HashMap;
 import java.util.Map;
 
+import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.api.BasicCallback;
+import io.jchat.android.chatting.utils.HandleResponseCode;
+import io.jchat.android.view.LoginDialog;
+
 /**
  * 注册完成
  * 
@@ -121,8 +126,24 @@ public class RegisterFragment extends BaseFragment implements OnClickListener,Re
 			toasetUtil.showInfo("请输入正确的验证码!");
 			return;
 		}
-		requetType = 2;
-		requestTask(2);
+
+		showLoadingDilog("");
+		JMessageClient.register(register_phone.getText().toString(), register_phone.getText().toString(), new BasicCallback() {
+
+			@Override
+			public void gotResult(final int status, final String desc) {
+				if (status == 0 || status ==1002) {//极光注册成功
+					requetType = 2;
+					requestData(2);
+				} else {
+					dismissLoadingDilog();
+					HandleResponseCode.onHandle(mActivity, status, false);
+				}
+			}
+		});
+
+
+
 	}
 
 	private void initTitleView() {
@@ -228,7 +249,6 @@ public class RegisterFragment extends BaseFragment implements OnClickListener,Re
 				param.setmParserClassName(VerifyCodeParse.class.getName());
 				break;
 			case 2://注册
-
 				url.setmBaseUrl(URLConstants.REGIST);
 //				postParams.put("code",inputCode.getText().toString());
 				postParams.put("phone",register_phone.getText().toString());
