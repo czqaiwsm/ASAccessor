@@ -200,7 +200,7 @@ public class UpdateMgr {
 			url.setmBaseUrl(URLConstants.GETVERSION);
 			Map postParams = new HashMap();
 			RequestParam param = new RequestParam();
-			postParams.put("type", "0");
+			postParams.put("type", "2");
 //        param.setmParserClassName(LoginInfoParse.class.getName());
 			param.setmPostMap(postParams);
 			param.setmHttpURL(url);

@@ -86,6 +86,7 @@ public class RegisterFragment extends BaseFragment implements OnClickListener,Re
 		getCode = (TextView) view.findViewById(R.id.register_getCode);
 		register_pass = (EditText) view.findViewById(R.id.register_passAgain);
 		register_passAgain = (EditText) view.findViewById(R.id.register_passAgain2);
+		storyNameEt = (EditText) view.findViewById(R.id.storyNameEt);
 		register = (TextView) view.findViewById(R.id.register);
 		protocol = (TextView) view.findViewById(R.id.protocol);
         box = (CheckBox)view.findViewById(R.id.greed);
@@ -127,20 +128,24 @@ public class RegisterFragment extends BaseFragment implements OnClickListener,Re
 			return;
 		}
 
-		showLoadingDilog("");
-		JMessageClient.register(register_phone.getText().toString(), register_phone.getText().toString(), new BasicCallback() {
+		requetType = 2;
 
-			@Override
-			public void gotResult(final int status, final String desc) {
-				if (status == 0 || status ==1002) {//极光注册成功
-					requetType = 2;
-					requestData(2);
-				} else {
-					dismissLoadingDilog();
-					HandleResponseCode.onHandle(mActivity, status, false);
-				}
-			}
-		});
+		requestTask(2);
+
+//		showLoadingDilog("");
+//		JMessageClient.register(register_phone.getText().toString(), register_phone.getText().toString(), new BasicCallback() {
+//
+//			@Override
+//			public void gotResult(final int status, final String desc) {
+//				if (status == 0 || status ==1002) {//极光注册成功
+//					requetType = 2;
+//					requestData(2);
+//				} else {
+//					dismissLoadingDilog();
+//					HandleResponseCode.onHandle(mActivity, status, false);
+//				}
+//			}
+//		});
 
 
 

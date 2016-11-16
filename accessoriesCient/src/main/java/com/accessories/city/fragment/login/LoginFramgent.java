@@ -30,6 +30,8 @@ import com.volley.req.net.RequestManager;
 import com.volley.req.net.RequestParam;
 import com.volley.req.parser.JsonParserBase;
 
+import java.io.File;
+import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -103,19 +105,20 @@ public class LoginFramgent extends BaseFragment implements View.OnClickListener,
               }else {
 
                   showLoadingDilog(null);
-                  JMessageClient.login(login_username.getText().toString(), login_username.getText().toString(), new BasicCallback() {
+
+                  showLoadingDilog("");
+                  JMessageClient.register(login_username.getText().toString(), login_username.getText().toString(), new BasicCallback() {
+
                       @Override
                       public void gotResult(final int status, final String desc) {
-                          if (status == 0) {
-                              requestData(0);
+                          if (status == 0 || status ==1002 || status==898001) {//极光注册成功
+                              loginIm();
                           } else {
                               dismissLoadingDilog();
-                              Log.i("LoginController", "status = " + status);
                               HandleResponseCode.onHandle(mActivity, status, false);
                           }
                       }
                   });
-
               }
               break;
           case R.id.register_text:
@@ -128,6 +131,23 @@ public class LoginFramgent extends BaseFragment implements View.OnClickListener,
       }
 
     }
+
+
+    private void loginIm(){
+        JMessageClient.login(login_username.getText().toString(), login_username.getText().toString(), new BasicCallback() {
+            @Override
+            public void gotResult(final int status, final String desc) {
+                if (status == 0) {
+                    requestData(0);
+                } else {
+                    dismissLoadingDilog();
+                    Log.i("LoginController", "status = " + status);
+                    HandleResponseCode.onHandle(mActivity, status, false);
+                }
+            }
+        });
+    }
+
 
     @Override
     protected void requestData(int requestType) {
@@ -155,6 +175,35 @@ public class LoginFramgent extends BaseFragment implements View.OnClickListener,
             BaseApplication.setMt_token(jsonParserBase.getObj().getId());
             toClassActivity(LoginFramgent.this, TeacherMainActivity.class.getName());//老师
             JPushInterface.setAlias(BaseApplication.getInstance(),"t_"+BaseApplication.getUserInfo().getId(),null);
+
+            final cn.jpush.im.android.api.model.UserInfo myUserInfo = JMessageClient.getMyInfo();
+            myUserInfo.setNickname(BaseApplication.getUserInfo().getNickname());
+            JMessageClient.updateMyInfo(cn.jpush.im.android.api.model.UserInfo.Field.nickname, myUserInfo, new BasicCallback() {
+                @Override
+                public void gotResult(final int status, final String desc) {
+                    if (status == 0) {
+                        Log.i("IMInfo","nickName"+myUserInfo.getNickname()+" 更新成功");
+                    } else {
+                        Log.i("IMError","nickName"+myUserInfo.getNickname()+" 更新失败");
+//                        dismissLoadingDilog();
+//                        HandleResponseCode.onHandle(mActivity, status, false);
+                    }
+                }
+            });
+
+            JMessageClient.updateUserAvatar(new File(URI.create(BaseApplication.getUserInfo().getUserHead())), new BasicCallback() {
+                @Override
+                public void gotResult(final int status, final String desc) {
+                    if (status == 0) {
+                        Log.i("IMInfo","头像"+BaseApplication.getUserInfo().getUserHead()+" 更新成功");
+                    } else {
+                        Log.i("IMError","头像"+BaseApplication.getUserInfo().getUserHead()+" 更新失败");
+//                        dismissLoadingDilog();
+//                        HandleResponseCode.onHandle(mActivity, status, false);
+                    }
+                }
+            });
+
             mActivity.finish();
         }
     }

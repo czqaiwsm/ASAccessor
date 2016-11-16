@@ -42,13 +42,11 @@
                 android:background="@android:color/transparent"
                 android:gravity="center_vertical"
                 android:hint="请输入店铺名称"
-                android:inputType="phone"
                 android:maxLines="1"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
                 android:singleLine="true"
                 android:textColor="@color/color_small_gray"
-                android:maxLength="11"
                 android:textSize="@dimen/app_text_size_first" />
         </LinearLayout>
 

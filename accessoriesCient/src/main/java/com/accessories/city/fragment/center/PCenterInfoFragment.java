@@ -25,6 +25,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.text.Html;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,6 +76,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -83,7 +85,13 @@ import java.util.Map;
 import java.util.UUID;
 
 import cn.jpush.android.api.JPushInterface;
+import cn.jpush.im.android.api.JMessageClient;
 import cn.jpush.im.android.eventbus.EventBus;
+import cn.jpush.im.api.BasicCallback;
+import io.jchat.android.activity.ReloginActivity;
+import io.jchat.android.chatting.utils.FileHelper;
+import io.jchat.android.chatting.utils.HandleResponseCode;
+import io.jchat.android.chatting.utils.SharePreferenceManager;
 
 /**
  * 我
@@ -180,6 +188,7 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
             @Override
             public void onClick(View v) {
                 if(BaseApplication.isLogin()){
+                    logoutIM();
                     BaseApplication.saveUserInfo(null);
                     BaseApplication.setMt_token("");
                 }
@@ -195,6 +204,32 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
 //        });
     }
 
+    //退出登录
+    public void logoutIM() {
+        // TODO Auto-generated method stub
+//        final Intent intent = new Intent();
+        cn.jpush.im.android.api.model.UserInfo info = JMessageClient.getMyInfo();
+        if (null != info) {
+//            intent.putExtra("userName", info.getUserName());
+            File file = info.getAvatarFile();
+            if (file != null && file.isFile()) {
+//                intent.putExtra("avatarFilePath", file.getAbsolutePath());
+            } else {
+                String path = FileHelper.getUserAvatarPath(info.getUserName());
+                file = new File(path);
+                if (file.exists()) {
+//                    intent.putExtra("avatarFilePath", file.getAbsolutePath());
+                }
+            }
+            SharePreferenceManager.setCachedUsername(info.getUserName());
+            SharePreferenceManager.setCachedAvatarPath(file.getAbsolutePath());
+            JMessageClient.logout();
+//            intent.setClass(mContext, ReloginActivity.class);
+//            startActivity(intent);
+        } else {
+            Log.i("TAG", "user info is null!");
+        }
+    }
 
     private void onLazyLoad(){
         if(isPrepare && isVisible){
@@ -509,6 +544,7 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
      * @param uri
      */
     public void startPhotoZoom(Uri uri) {
+//        MediaStore.ACTION_IMAGE_CAPTURE;
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(uri, "image/*");
         // 设置裁剪
@@ -761,15 +797,28 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
                 if (result != null && URLConstants.SUCCESS_CODE.equals(result.getResult())) {
                     headRImg.setImageBitmap(m_obj_IconBp);
                     headRImg.setTag(result.getFilePath());
-                    requestTask(2);
+
+                    URL url = new URL(result.getAbsFilePath());
+                    JMessageClient.updateUserAvatar(new File(result.getAbsFilePath().trim().replace("http:","")), new BasicCallback() {
+                        @Override
+                        public void gotResult(final int status, final String desc) {
+                            if (status == 0) {
+                                requestData(2);
+                            }else {
+                                HandleResponseCode.onHandle(mActivity, status, false);
+                                dismissLoadingDilog();
+                            }
+                        }
+                    });
+//                    requestTask(2);
                 } else {
                     toasetUtil.showInfo("上传失败,请重新上传!");
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
             dismissLoadingDilog();
+        } finally {
         }
     }
 
