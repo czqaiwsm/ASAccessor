@@ -84,6 +84,8 @@ public class SellerInfoFragment extends BaseFragment implements OnClickListener,
     LinearLayout QQLL;
     @Bind(R.id.wx)
     TextView wx;
+    @Bind(R.id.callNumTv)
+    TextView callNumTv;
     @Bind(R.id.wxLL)
     LinearLayout wxLL;
     @Bind(R.id.container)
@@ -233,6 +235,7 @@ public class SellerInfoFragment extends BaseFragment implements OnClickListener,
                 ImageLoader.getInstance().displayImage(balanceInfo.getShopPic(), img);
                 selleName.setText(balanceInfo.getShopName());
                 bussiness.setText(balanceInfo.getShopDesc());
+                callNumTv.setText(TextUtils.isEmpty(balanceInfo.getPhoneCalledNum())?"0":balanceInfo.getPhoneCalledNum());
 
                 if(balanceInfo.getPhoneAry() == null || balanceInfo.getPhoneAry().size()==0){
                     if (!TextUtils.isEmpty(balanceInfo.getShopAddr())) {

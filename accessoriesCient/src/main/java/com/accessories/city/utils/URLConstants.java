@@ -32,6 +32,8 @@ public class URLConstants {
     public static final int ORDERRIGHT = 0X21;
     /********Intent value*************/
 
+    public static final String MSG_File = "/cityImg/";
+
 //    120.76.47.196:8080
 //    public static final String BASE_URL = "http://120.25.171.4/learn-interface/interface/api.action";//基础URL
 //    public static final String BASE_URL = "http://www.leishangnet.com/learn-teach/teach/api.action";//基础 teacher URL

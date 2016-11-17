@@ -20,8 +20,26 @@ public class SellerInfo {
     private String phone2;//"18019585306", //手机2
     private String qq;//651339644"//QQ
     private String shopPic;//----------"//图片
+    private String account;//
+    private String phoneCalledNum;//
     private String vip;//
     private ArrayList<Phone> phoneAry;
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public String getPhoneCalledNum() {
+        return phoneCalledNum;
+    }
+
+    public void setPhoneCalledNum(String phoneCalledNum) {
+        this.phoneCalledNum = phoneCalledNum;
+    }
 
     public ArrayList<Phone> getPhoneAry() {
         return phoneAry;

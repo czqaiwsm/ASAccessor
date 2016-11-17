@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Environment;
+import android.text.TextUtils;
+import android.text.format.DateFormat;
 
 import java.io.*;
 import java.text.DecimalFormat;
@@ -13,6 +16,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
+
+import io.jchat.android.application.JChatDemoApplication;
+import io.jchat.android.chatting.utils.FileHelper;
 
 public class Utils {
 
@@ -42,7 +49,7 @@ public class Utils {
 	public static String getMonthLastMonth(Calendar my_month) {
 		SimpleDateFormat sdf = new SimpleDateFormat(DATE);
 		// my_month.add(Calendar.DATE, 1);// ?????????1??
-		my_month.add(Calendar.MONTH, -1);// ?��??1
+		my_month.add(Calendar.MONTH, -1);// ?????1
 		// String ss1 = sdf.format(my_month.getTime());
 
 		// my_month.add(Calendar.MONTH, 1);// ????????????????1??
@@ -61,7 +68,7 @@ public class Utils {
 	public static String getMonthNextMonth(Calendar my_month) {
 		SimpleDateFormat sdf = new SimpleDateFormat(DATE);
 		// my_month.set(Calendar.DATE, 1);// ?????????1??
-		// my_month.add(Calendar.MONTH, 1);// ?��??1
+		// my_month.add(Calendar.MONTH, 1);// ?????1
 		// String ss1 = sdf.format(my_month.getTime());
 
 		my_month.add(Calendar.MONTH, 1);// ????????????????1??
@@ -77,13 +84,13 @@ public class Utils {
 	}
 
 	/**
-	 * ??????????�˧�??
+	 * ???????????????
 	 *
 	 * @param price
 	 * @return *.00
 	 */
 	public static String getPriceValue(double price) {
-		DecimalFormat decimalFormat = new DecimalFormat("#0.00");// ?????????????????????��??????2��,????0????.
+		DecimalFormat decimalFormat = new DecimalFormat("#0.00");// ?????????????????????????????2??,????0????.
 		return decimalFormat.format(price);// format ????????????
 	}
 
@@ -101,10 +108,10 @@ public class Utils {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		image.compress(Bitmap.CompressFormat.JPEG, 100, baos);// ?????????????????100?????????????????????????baos??
 		int options = 100;
-		while (baos.toByteArray().length / 1024 > 50) { // ????��?????????????????100kb,??????????
+		while (baos.toByteArray().length / 1024 > 50) { // ???????????????????????100kb,??????????
 			baos.reset();// ????baos?????baos
 			image.compress(Bitmap.CompressFormat.JPEG, options, baos);// ???????options%?????????????????baos??
-			options -= 10;// ??��?????10
+			options -= 10;// ?????????10
 		}
 		ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());// ????????????baos????ByteArrayInputStream??
 		Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, null);// ??ByteArrayInputStream??????????
@@ -129,7 +136,7 @@ public class Utils {
 					File path = otherAppContext.getCacheDir();
 					if (path == null)
 						return;
-					// // #rm -r xxx ????????xxx??????��???????????????
+					// // #rm -r xxx ????????xxx???????????????????????
 					// String killer = " rm -r " + path.toString();
 					// Process p = Runtime.getRuntime().exec("su");
 					// DataOutputStream os = new
@@ -218,7 +225,56 @@ public class Utils {
 	}
 
 
+	public static String saveBitmap2file(Bitmap bmp,String filename){
+		Bitmap.CompressFormat format= Bitmap.CompressFormat.JPEG;
+		int quality = 100;
+		OutputStream stream = null;
+		String tempDir =getSDPath();
 
+		try {
+			if(TextUtils.isEmpty(tempDir)) return "";
+			tempDir +=(URLConstants.MSG_File);
+			tempDir =createAvatarPath(tempDir,filename);
+			System.out.println("==>"+tempDir);
+			stream = new FileOutputStream(tempDir);
+			bmp.compress(format, quality, stream);
+		} catch (FileNotFoundException e) {
+// TODO Auto-generated catch block
+			e.printStackTrace();
+			tempDir = "";
+		}
+
+		return tempDir;
+	}
+
+
+	public static String createAvatarPath(String dir,String userName) {
+		File destDir = new File(dir);
+		if (!destDir.exists()) {
+			destDir.mkdirs();
+		}
+		File file;
+		if (userName != null) {
+			file = new File(dir, userName + ".png");
+		}else {
+			file = new File(dir, new DateFormat().format("yyyy_MMdd_hhmmss",
+					Calendar.getInstance(Locale.CHINA)) + ".png");
+		}
+		return file.getAbsolutePath();
+	}
+
+
+	public static String getSDPath(){
+		String sdDir = null;
+		boolean sdCardExist = Environment.getExternalStorageState()
+				.equals(Environment.MEDIA_MOUNTED);   //判断sd卡是否存在
+		if   (sdCardExist)
+		{
+			sdDir = Environment.getExternalStorageDirectory().getPath();//获取跟目录
+		}
+		return sdDir.toString();
+
+	}
 
 	public static void main(String args[]) throws ParseException {
         Date date = new Date();

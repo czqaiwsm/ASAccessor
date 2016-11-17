@@ -798,8 +798,13 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
                     headRImg.setImageBitmap(m_obj_IconBp);
                     headRImg.setTag(result.getFilePath());
 
-                    URL url = new URL(result.getAbsFilePath());
-                    JMessageClient.updateUserAvatar(new File(result.getAbsFilePath().trim().replace("http:","")), new BasicCallback() {
+                   String temp =  Utils.saveBitmap2file(m_obj_IconBp,"im_chat_head.jpg");
+                    if(TextUtils.isEmpty(temp)) {
+                        Log.e("error:","头像本地化失败");
+                        dismissLoadingDilog();
+                        return;
+                    }
+                    JMessageClient.updateUserAvatar(new File(temp), new BasicCallback() {
                         @Override
                         public void gotResult(final int status, final String desc) {
                             if (status == 0) {
@@ -894,6 +899,7 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
             msg.obj = getResources().getString(R.string.upload_fail);
             handler.removeMessages(msg.what);
             handler.sendMessage(msg);
+
         }
     }
 

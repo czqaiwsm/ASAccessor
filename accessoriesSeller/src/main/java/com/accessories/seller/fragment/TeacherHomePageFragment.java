@@ -45,7 +45,7 @@ import java.util.Map;
  * @data 2016/3/10
  * 13637055938    111111
  */
-public class TeacherHomePageFragment extends BaseFragment implements View.OnClickListener, RequsetListener {
+public class TeacherHomePageFragment extends BaseFragment implements View.OnClickListener, RequsetListener,AdapterView.OnItemClickListener {
     CustomListView callListView;//
 
     public static HomeInfo homeInfo;
@@ -157,18 +157,18 @@ public class TeacherHomePageFragment extends BaseFragment implements View.OnClic
         adapter = new ClassTypeAdpter(new SoftReference<Context>(getActivity()));
         viewForScrollView.setAdapter(adapter);
 
-        viewForScrollView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(mActivity,NewsActivity.class);
-                intent.putExtra("cityId",cityId);
-                intent.putExtra("cateId",((CateSubTypeEntity)adapter.getItem(position)).getId());
-                startActivity(intent);
-            }
-        });
+        viewForScrollView.setOnItemClickListener(this);
 
 //        view.findViewById(R.id.login).setTag(cityId);
 
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(mActivity,NewsActivity.class);
+        intent.putExtra("cityId",cityId);
+        intent.putExtra("cateId",((CateSubTypeEntity)adapter.getItem(position)).getId());
+        startActivity(intent);
     }
 
     private void onInitTabConfig() {
@@ -202,6 +202,7 @@ public class TeacherHomePageFragment extends BaseFragment implements View.OnClic
                     converView.findViewById(checkedId).setTag(cityId);
                 }
                 tepList = null;
+
             }
         });
     }
@@ -224,6 +225,7 @@ public class TeacherHomePageFragment extends BaseFragment implements View.OnClic
                     adapter.restList(commerciaList);
                     break;
             }
+
         }
     }
 
@@ -318,6 +320,7 @@ public class TeacherHomePageFragment extends BaseFragment implements View.OnClic
             homeInfo.getCatAry().clear();
             homeInfo.setCatAry(null);
             setCate(requestType);
+            viewForScrollView.setOnItemClickListener(this);
         }
 
     }

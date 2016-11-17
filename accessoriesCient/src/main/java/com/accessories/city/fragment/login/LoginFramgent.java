@@ -1,5 +1,6 @@
 package com.accessories.city.fragment.login;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -7,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.im.android.api.JMessageClient;
@@ -22,9 +24,15 @@ import com.accessories.city.fragment.BaseFragment;
 import com.accessories.city.help.RequsetListener;
 import com.accessories.city.parse.LoginInfoParse;
 import com.accessories.city.utils.BaseApplication;
+import com.accessories.city.utils.ImageLoaderUtil;
 import com.accessories.city.utils.PhoneUitl;
 import com.accessories.city.utils.URLConstants;
+import com.accessories.city.utils.Utils;
 import com.accessories.city.utils.WaitLayer;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.volley.req.net.HttpURL;
 import com.volley.req.net.RequestManager;
 import com.volley.req.net.RequestParam;
@@ -191,19 +199,44 @@ public class LoginFramgent extends BaseFragment implements View.OnClickListener,
                 }
             });
 
-            JMessageClient.updateUserAvatar(new File(URI.create(BaseApplication.getUserInfo().getUserHead())), new BasicCallback() {
+            ImageLoader.getInstance().displayImage(BaseApplication.getUserInfo().getUserHead(), new ImageView(mActivity), new ImageLoadingListener() {
                 @Override
-                public void gotResult(final int status, final String desc) {
-                    if (status == 0) {
-                        Log.i("IMInfo","头像"+BaseApplication.getUserInfo().getUserHead()+" 更新成功");
-                    } else {
-                        Log.i("IMError","头像"+BaseApplication.getUserInfo().getUserHead()+" 更新失败");
+                public void onLoadingStarted(String s, View view) {
+
+                }
+
+                @Override
+                public void onLoadingFailed(String s, View view, FailReason failReason) {
+
+
+                }
+
+                @Override
+                public void onLoadingComplete(String s, View view, Bitmap bitmap) {
+                    String temp =  Utils.saveBitmap2file(bitmap,"im_chat_head.jpg");
+                    if(TextUtils.isEmpty(temp)) {
+                        Log.e("error:","头像本地化失败");
+                        return;
+                    }
+                    JMessageClient.updateUserAvatar(new File(temp), new BasicCallback() {
+                        @Override
+                        public void gotResult(final int status, final String desc) {
+                            if (status == 0) {
+                                Log.i("IMInfo","头像"+BaseApplication.getUserInfo().getUserHead()+" 更新成功");
+                            } else {
+                                Log.i("IMError","头像"+BaseApplication.getUserInfo().getUserHead()+" 更新失败");
 //                        dismissLoadingDilog();
 //                        HandleResponseCode.onHandle(mActivity, status, false);
-                    }
+                            }
+                        }
+                    });
+                }
+
+                @Override
+                public void onLoadingCancelled(String s, View view) {
+
                 }
             });
-
             mActivity.finish();
         }
     }
