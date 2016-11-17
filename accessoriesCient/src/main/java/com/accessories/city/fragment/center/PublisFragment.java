@@ -204,7 +204,7 @@ public class PublisFragment extends BaseFragment implements View.OnClickListener
         }
     }
 
-    public void eventReq(Integer req){
+    public void onEvent(Integer req){
         if(cashType.equals(req+"")){
             if (!PhoneUitl.isPhone(phoneEt.getText().toString())){
                 toasetUtil.showInfo(R.string.phone_error);

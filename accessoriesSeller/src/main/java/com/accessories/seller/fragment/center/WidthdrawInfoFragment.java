@@ -28,7 +28,8 @@ import com.volley.req.net.inferface.IParser;
 import com.volley.req.parser.JsonParserBase;
 import com.volley.req.parser.ParserUtil;
 
-import org.greenrobot.eventbus.EventBus;
+import cn.jpush.im.android.eventbus.EventBus;
+
 import org.json.JSONObject;
 
 import java.util.HashMap;

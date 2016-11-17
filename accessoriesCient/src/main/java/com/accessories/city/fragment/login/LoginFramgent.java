@@ -111,9 +111,6 @@ public class LoginFramgent extends BaseFragment implements View.OnClickListener,
               }else if (!PhoneUitl.isPhone(login_username.getText().toString())){
                   toasetUtil.showInfo(R.string.phone_error);
               }else {
-
-                  showLoadingDilog(null);
-
                   showLoadingDilog("");
                   JMessageClient.register(login_username.getText().toString(), login_username.getText().toString(), new BasicCallback() {
 

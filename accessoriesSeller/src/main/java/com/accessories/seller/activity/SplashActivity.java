@@ -162,4 +162,15 @@ public class SplashActivity extends BaseActivity {
 			editor.commit();
 		}
 	}
+	@Override
+	protected void onPause() {
+		JPushInterface.onPause(this);
+		super.onPause();
+	}
+
+	@Override
+	protected void onResume() {
+		JPushInterface.onResume(this);
+		super.onResume();
+	}
 }

@@ -72,8 +72,6 @@ import com.volley.req.net.RequestParam;
 import com.volley.req.parser.JsonParserBase;
 import com.volley.req.parser.ParserUtil;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -91,6 +89,7 @@ import java.util.UUID;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.jpush.android.api.JPushInterface;
+import cn.jpush.im.android.eventbus.EventBus;
 
 /**
  * @desc 教师首页
@@ -223,8 +222,7 @@ public class PublisFragment extends BaseFragment implements View.OnClickListener
         }
     }
 
-    @Subscribe
-    public void eventReq(Integer req){
+    public void onEvent(Integer req){
         if(cashType.equals(req+"")){
             if (!PhoneUitl.isPhone(phoneEt.getText().toString())){
                 toasetUtil.showInfo(R.string.phone_error);

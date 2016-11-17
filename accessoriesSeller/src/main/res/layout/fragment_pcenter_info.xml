@@ -195,7 +195,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="商家入口"
+                    android:text="来电记录"
                     android:textColor="@color/color_gray"
                     android:layout_toRightOf="@+id/setImg"
                     android:textSize="@dimen/pc_txt_size" />

@@ -30,6 +30,8 @@ import cn.jpush.im.android.api.model.UserInfo;
 import cn.jpush.im.android.eventbus.EventBus;
 import cn.jpush.im.api.BasicCallback;
 import com.accessories.city.R;
+import com.accessories.city.utils.URLConstants;
+
 import io.jchat.android.activity.ChatDetailActivity;
 import io.jchat.android.activity.FriendInfoActivity;
 import io.jchat.android.activity.MeInfoActivity;
@@ -345,7 +347,7 @@ public class ChatDetailController implements OnClickListener, OnItemClickListene
     }
 
     private void getUserInfo(final String targetId, final Dialog dialog){
-        JMessageClient.getUserInfo(targetId, new GetUserInfoCallback() {
+        JMessageClient.getUserInfo(targetId, URLConstants.CONVERSATION_IM_APPKEY , new GetUserInfoCallback() {
             @Override
             public void gotResult(final int status, String desc, final UserInfo userInfo) {
                 if (mLoadingDialog != null) {

@@ -31,6 +31,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import cn.jpush.android.api.JPushInterface;
+import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.api.BasicCallback;
+import io.jchat.android.chatting.utils.HandleResponseCode;
 
 /**
  * 账户管理-修改手机号
@@ -85,8 +88,21 @@ public class PcenterModifyInfoIAFragment extends BaseFragment implements Requset
 					intent.putExtra("name",string);
 //				mActivity.setResult(Activity.RESULT_OK,intent);
 //                mActivity.finish();
-
-				requestTask();
+				showLoadingDilog(null);
+				cn.jpush.im.android.api.model.UserInfo myUserInfo = JMessageClient.getMyInfo();
+				myUserInfo.setNickname(string);
+				JMessageClient.updateMyInfo(cn.jpush.im.android.api.model.UserInfo.Field.nickname, myUserInfo, new BasicCallback() {
+					@Override
+					public void gotResult(final int status, final String desc) {
+						if (status == 0) {
+							requestData(0);
+						} else {
+							dismissLoadingDilog();
+							HandleResponseCode.onHandle(mActivity, status, false);
+						}
+					}
+				});
+//				requestTask();
 			}
 		});
 	}

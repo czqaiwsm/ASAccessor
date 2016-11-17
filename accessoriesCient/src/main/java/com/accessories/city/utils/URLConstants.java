@@ -33,6 +33,7 @@ public class URLConstants {
     /********Intent value*************/
 
     public static final String MSG_File = "/cityImg/";
+    public static final String CONVERSATION_IM_APPKEY = "09da152dba2a665c3311b27b";
 
 //    120.76.47.196:8080
 //    public static final String BASE_URL = "http://120.25.171.4/learn-interface/interface/api.action";//基础URL

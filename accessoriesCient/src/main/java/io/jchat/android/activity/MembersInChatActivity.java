@@ -38,6 +38,8 @@ import cn.jpush.im.android.api.model.GroupInfo;
 import cn.jpush.im.android.api.model.UserInfo;
 import cn.jpush.im.api.BasicCallback;
 import com.accessories.city.R;
+import com.accessories.city.utils.URLConstants;
+
 import io.jchat.android.adapter.AllMembersAdapter;
 import io.jchat.android.application.JChatDemoApplication;
 import io.jchat.android.chatting.utils.DialogCreator;
@@ -250,7 +252,7 @@ public class MembersInChatActivity extends BaseActivity {
     }
 
     private void getUserInfo(String targetId, final Dialog dialog) {
-        JMessageClient.getUserInfo(targetId, new GetUserInfoCallback() {
+        JMessageClient.getUserInfo(targetId, URLConstants.CONVERSATION_IM_APPKEY , new GetUserInfoCallback() {
             @Override
             public void gotResult(int status, String desc, UserInfo userInfo) {
                 if (mLoadingDialog != null) {

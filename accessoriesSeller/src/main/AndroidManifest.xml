@@ -4,7 +4,6 @@
           android:versionCode="6"
           android:versionName="V1.0.6">
     <uses-sdk android:minSdkVersion="10"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -22,33 +21,24 @@
     <!--添加可以向外拨打电话的权限  -->
     <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
     <permission
-            android:name="com.accessories.seller.permission.JPUSH_MESSAGE"
-            android:protectionLevel="signature" />
+        android:name="com.accessories.seller.permission.JPUSH_MESSAGE"
+        android:protectionLevel="signature" />
 
     <!-- Required  一些系统要求的权限，如访问网络等-->
     <uses-permission android:name="com.accessories.seller.permission.JPUSH_MESSAGE" />
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
     <!-- Optional for location -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
+
+
+    <!-- JMessage Demo required for record audio-->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
     <application android:label="@string/app_name"
                  android:icon="@drawable/ic_launcher"
                  android:theme="@android:style/Theme.NoTitleBar"
@@ -129,8 +119,6 @@
                   android:screenOrientation="portrait"/>
         <activity android:name=".activity.teacher.ChatMsgActivity"
                   android:screenOrientation="portrait"/>
-        <activity android:name=".activity.teacher.Cour"
-                  android:screenOrientation="portrait"/>
         <activity android:name=".activity.login.RegisterActivity"
                   android:screenOrientation="portrait"/>
         <activity android:name=".activity.login.LoginActivity"
@@ -166,20 +154,34 @@
                   android:screenOrientation="portrait"/>
 
 
+        <!-- IM Required IM SDK核心功能-->
+        <receiver
+            android:name="cn.jpush.im.android.helpers.IMReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter android:priority="1000">
+                <action android:name="cn.jpush.im.android.action.IM_RESPONSE" />
+                <action android:name="cn.jpush.im.android.action.NOTIFICATION_CLICK_PROXY" />
+
+                <category android:name="com.accessories.seller" />
+            </intent-filter>
+        </receiver>
+
+
 
         <!-- Rich push 核心功能 since 2.0.6-->
         <activity
-                android:name="cn.jpush.android.ui.PopWinActivity"
-                android:theme="@style/MyDialogStyle"
-                android:exported="false">
+            android:name="cn.jpush.android.ui.PopWinActivity"
+            android:theme="@style/MyDialogStyle"
+            android:exported="false">
         </activity>
 
         <!-- Required SDK核心功能-->
         <activity
-                android:name="cn.jpush.android.ui.PushActivity"
-                android:configChanges="orientation|keyboardHidden"
-                android:theme="@android:style/Theme.NoTitleBar"
-                android:exported="false">
+            android:name="cn.jpush.android.ui.PushActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:exported="false">
             <intent-filter>
                 <action android:name="cn.jpush.android.ui.PushActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -188,18 +190,18 @@
         </activity>
         <!-- Required  SDK核心功能-->
         <service
-                android:name="cn.jpush.android.service.DownloadService"
-                android:enabled="true"
-                android:exported="false" >
+            android:name="cn.jpush.android.service.DownloadService"
+            android:enabled="true"
+            android:exported="false" >
         </service>
 
 
         <!-- Required SDK 核心功能-->
         <!-- 可配置android:process参数将PushService放在其他进程中 -->
         <service
-                android:name="cn.jpush.android.service.PushService"
-                android:enabled="true"
-                android:exported="false">
+            android:name="cn.jpush.android.service.PushService"
+            android:enabled="true"
+            android:exported="false">
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.REGISTER" />
                 <action android:name="cn.jpush.android.intent.REPORT" />
@@ -211,9 +213,9 @@
         <!-- since 1.8.0 option 可选项。用于同一设备中不同应用的JPush服务相互拉起的功能。 -->
         <!-- 若不启用该功能可删除该组件，将不拉起其他应用也不能被其他应用拉起 -->
         <service
-                android:name="cn.jpush.android.service.DaemonService"
-                android:enabled="true"
-                android:exported="true">
+            android:name="cn.jpush.android.service.DaemonService"
+            android:enabled="true"
+            android:exported="true">
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.DaemonService" />
                 <category android:name="com.accessories.seller" />
@@ -223,9 +225,9 @@
 
         <!-- Required SDK核心功能-->
         <receiver
-                android:name="cn.jpush.android.service.PushReceiver"
-                android:enabled="true"
-                android:exported="false">
+            android:name="cn.jpush.android.service.PushReceiver"
+            android:enabled="true"
+            android:exported="false">
             <intent-filter android:priority="1000">
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />   <!--Required  显示通知栏 -->
                 <category android:name="com.accessories.seller" />
@@ -248,9 +250,9 @@
 
         <!-- User defined.  For test only  用户自定义的广播接收器-->
         <receiver
-                android:name=".service.MyReceiver"
-                android:exported="false"
-                android:enabled="true">
+            android:name=".service.MyReceiver"
+            android:exported="false"
+            android:enabled="true">
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.REGISTRATION" /> <!--Required  用户注册SDK的intent-->
                 <action android:name="cn.jpush.android.intent.UNREGISTRATION" />
@@ -266,7 +268,7 @@
 
         <!-- Required  . Enable it you can get statistics data with channel -->
         <meta-data android:name="JPUSH_CHANNEL" android:value="developer-default"/>
-        <meta-data android:name="JPUSH_APPKEY" android:value="efaa82804527665f873290fc" /> <!--  </>值来自开发者平台取得的AppKey-->
+        <meta-data android:name="JPUSH_APPKEY" android:value="09da152dba2a665c3311b27b" /> <!--  </>值来自开发者平台取得的AppKey-->
 
 
         <!--老师端-->
@@ -290,5 +292,77 @@
                 android:name="com.download.update.DownloadService"
                 android:exported="false">
         </service>
+
+
+        <activity
+            android:name="io.jchat.android.activity.BaseActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="io.jchat.android.activity.LoginActivity"
+            android:theme="@style/noTitle"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"/>
+        <activity
+            android:name="io.jchat.android.activity.MainActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="io.jchat.android.activity.RegisterActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="io.jchat.android.activity.MeInfoActivity" />
+        <activity
+            android:name="io.jchat.android.chatting.ChatActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="io.jchat.android.activity.ReloginActivity"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"/>
+        <activity
+            android:name="io.jchat.android.activity.ChatDetailActivity" />
+        <activity
+            android:name="io.jchat.android.activity.GroupSettingActivity"
+            android:theme="@style/group_setting_dialog" />
+        <activity
+            android:name="io.jchat.android.activity.FriendInfoActivity" />
+        <activity
+            android:name="io.jchat.android.activity.CreateGroupActivity" />
+        <activity
+            android:name="io.jchat.android.activity.PickPictureTotalActivity" />
+        <activity
+            android:name="io.jchat.android.activity.PickPictureActivity" />
+        <activity
+            android:name="io.jchat.android.activity.BrowserViewPagerActivity" />
+        <activity
+            android:name="io.jchat.android.activity.SettingActivity" />
+        <activity
+            android:name="io.jchat.android.activity.NotificationSettingActivity" />
+        <activity
+            android:name="io.jchat.android.activity.DisturbSettingActivity" />
+        <activity
+            android:name="io.jchat.android.activity.ResetPasswordActivity"
+            android:windowSoftInputMode="adjustResize|stateAlwaysVisible"/>
+        <activity
+            android:name="io.jchat.android.activity.FixProfileActivity"
+            android:windowSoftInputMode="adjustResize|stateAlwaysVisible" />
+        <activity
+            android:name="io.jchat.android.activity.ResetNickNameActivity"
+            android:windowSoftInputMode="adjustResize|stateAlwaysVisible"/>
+        <activity
+            android:name="io.jchat.android.activity.SelectAreaActivity"
+            android:windowSoftInputMode="adjustResize|stateAlwaysVisible"/>
+        <activity
+            android:name="io.jchat.android.activity.EditSignatureActivity"
+            android:windowSoftInputMode="adjustResize|stateAlwaysVisible"/>
+        <activity
+            android:name="io.jchat.android.activity.EditNoteNameActivity" />
+        <activity
+            android:name="io.jchat.android.activity.AboutActivity" />
+        <activity
+            android:name="io.jchat.android.activity.SelectFriendActivity"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name="io.jchat.android.activity.MembersInChatActivity" />
+        <activity
+            android:name="io.jchat.android.activity.CropImageActivity" />
     </application>
 </manifest>

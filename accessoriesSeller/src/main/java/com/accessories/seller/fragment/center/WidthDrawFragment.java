@@ -12,7 +12,8 @@ import com.accessories.seller.view.tab.ScrollingTabContainerView;
 import com.accessories.seller.view.tab.TabsActionBar;
 import com.accessories.seller.view.tab.TabsAdapter;
 
-import org.greenrobot.eventbus.EventBus;
+import cn.jpush.im.android.eventbus.EventBus;
+
 
 
 public class WidthDrawFragment extends BaseFragment {

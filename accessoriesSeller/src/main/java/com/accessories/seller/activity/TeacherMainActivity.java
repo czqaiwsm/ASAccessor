@@ -36,6 +36,8 @@ import com.volley.req.parser.ParserUtil;
 import java.util.HashMap;
 import java.util.Map;
 
+import io.jchat.android.activity.ConversationListFragment;
+
 /**
  * 老师端主页面
  */
@@ -72,7 +74,7 @@ public class TeacherMainActivity extends BaseActivity implements View.OnClickLis
         UpdateMgr.getInstance(this).checkUpdateInfo(null, false);
         setContentView(R.layout.main_activity);
         fragments = new Fragment[VIEW_COUNT];
-        fragments[0] = new MsgInfosFragment(3);
+        fragments[0] = new ConversationListFragment();
         fragments[1] =new MsgInfoFragment();
         fragments[2] = new TeacherHomePageFragment();
         fragments[3] = pCenterFragment = new PCenterInfoFragment();

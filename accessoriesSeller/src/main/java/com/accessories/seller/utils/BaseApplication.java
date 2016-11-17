@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.Vibrator;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.accessories.seller.BuildConfig;
 import com.accessories.seller.bean.SellerUserInfo;
@@ -18,15 +19,20 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
+import cn.jpush.im.android.api.JMessageClient;
+import io.jchat.android.application.JChatDemoApplication;
+import io.jchat.android.chatting.utils.SharePreferenceManager;
+import io.jchat.android.receiver.NotificationClickEventReceiver;
+
 
 /**
  * @author czq
  * @desc 请用一句话描述它
  * @date 16/3/15
  */
-public class BaseApplication extends Application {
+public class BaseApplication extends JChatDemoApplication {
 
-
+    private static final String JCHAT_CONFIGS = "JChat_configs";
     private static BaseApplication  instance;
 
     public String location[] = new String[2];// 城市、城市编码
@@ -60,6 +66,14 @@ public class BaseApplication extends Application {
 
 //        JPushInterface.setDebugMode(true); 	// 设置开启日志,发布时请关闭日志
 //        JPushInterface.init(this);     		// 初始化 JPush
+        Log.i("JpushDemoApplication", "init");
+        //初始化JMessage-sdk
+        JMessageClient.init(this);
+        SharePreferenceManager.init(getApplicationContext(), JCHAT_CONFIGS);
+        //设置Notification的模式
+        JMessageClient.setNotificationMode(JMessageClient.NOTI_MODE_DEFAULT);
+        //注册Notification点击的接收器
+        new NotificationClickEventReceiver(getApplicationContext());
 
         initImageLoader();
         appVersion = AppManager.getVersion(this);

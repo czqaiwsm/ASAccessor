@@ -32,7 +32,11 @@ public class URLConstants {
     public static final int ORDERRIGHT = 0X21;
     /********Intent value*************/
 
-//    120.76.47.196:8080
+    public static final String MSG_File = "/cityImg/";
+    public static final String CONVERSATION_IM_APPKEY = "7c32dfc4250a10d3f10ad542";
+
+
+    //    120.76.47.196:8080
 //    public static final String BASE_URL = "http://120.25.171.4/learn-interface/interface/api.action";//基础URL
 //    public static final String BASE_URL = "http://www.leishangnet.com/learn-teach/teach/api.action";//基础 teacher URL
     public static final String BASE_URL = "http://120.76.47.196:8080/learn-teach/teach/api.action";//基础 teacher URL

@@ -1,5 +1,7 @@
 package com.accessories.city.bean;
 
+import java.util.ArrayList;
+
 /**
  * @desc 请用一句话描述此文件
  * @creator caozhiqing
@@ -18,6 +20,42 @@ public class SellerInfo {
     private String phone2;//"18019585306", //手机2
     private String qq;//651339644"//QQ
     private String shopPic;//----------"//图片
+    private String account;//
+    private String phoneCalledNum;//
+    private String vip;//
+    private ArrayList<Phone> phoneAry;
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public String getPhoneCalledNum() {
+        return phoneCalledNum;
+    }
+
+    public void setPhoneCalledNum(String phoneCalledNum) {
+        this.phoneCalledNum = phoneCalledNum;
+    }
+
+    public ArrayList<Phone> getPhoneAry() {
+        return phoneAry;
+    }
+
+    public void setPhoneAry(ArrayList<Phone> phoneAry) {
+        this.phoneAry = phoneAry;
+    }
+
+    public String getVip() {
+        return vip;
+    }
+
+    public void setVip(String vip) {
+        this.vip = vip;
+    }
 
     public String getId() {
         return id;

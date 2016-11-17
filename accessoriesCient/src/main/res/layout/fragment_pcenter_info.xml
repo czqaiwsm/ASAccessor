@@ -325,7 +325,7 @@
                     android:textSize="@dimen/app_text_size_second" />
             </RelativeLayout>
             <RelativeLayout
-
+                android:visibility="gone"
                 android:id="@+id/set_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

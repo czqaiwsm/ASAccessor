@@ -30,6 +30,8 @@ import cn.jpush.im.android.api.model.Conversation;
 import cn.jpush.im.android.api.model.GroupInfo;
 import cn.jpush.im.android.api.model.UserInfo;
 import com.accessories.city.R;
+import com.accessories.city.utils.URLConstants;
+
 import io.jchat.android.activity.ConversationListFragment;
 import io.jchat.android.adapter.ConversationListAdapter;
 import io.jchat.android.application.JChatDemoApplication;
@@ -91,12 +93,12 @@ public class ConversationListController implements OnClickListener,
     }
 
     private void getUserInfo(final String targetId){
-        JMessageClient.getUserInfo(targetId, new GetUserInfoCallback() {
+        JMessageClient.getUserInfo(targetId, URLConstants.CONVERSATION_IM_APPKEY ,new GetUserInfoCallback() {
             @Override
             public void gotResult(final int status, String desc, final UserInfo userInfo) {
                 mLoadingDialog.dismiss();
                 if (status == 0) {
-                    Conversation conv = Conversation.createSingleConversation(targetId);
+                    Conversation conv = Conversation.createSingleConversation(targetId,URLConstants.CONVERSATION_IM_APPKEY);
                     if (!TextUtils.isEmpty(userInfo.getAvatar())) {
                         userInfo.getAvatarBitmap(new GetAvatarBitmapCallback() {
                             @Override

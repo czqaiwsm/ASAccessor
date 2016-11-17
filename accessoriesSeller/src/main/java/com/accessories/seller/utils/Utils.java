@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Environment;
+import android.text.TextUtils;
+import android.text.format.DateFormat;
 
 import java.io.*;
 import java.text.DecimalFormat;
@@ -13,6 +16,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class Utils {
 
@@ -217,7 +221,56 @@ public class Utils {
 		return dayForWeek;
 	}
 
+	public static String saveBitmap2file(Bitmap bmp,String filename){
+		Bitmap.CompressFormat format= Bitmap.CompressFormat.JPEG;
+		int quality = 100;
+		OutputStream stream = null;
+		String tempDir =getSDPath();
 
+		try {
+			if(TextUtils.isEmpty(tempDir)) return "";
+			tempDir +=(URLConstants.MSG_File);
+			tempDir =createAvatarPath(tempDir,filename);
+			System.out.println("==>"+tempDir);
+			stream = new FileOutputStream(tempDir);
+			bmp.compress(format, quality, stream);
+		} catch (FileNotFoundException e) {
+// TODO Auto-generated catch block
+			e.printStackTrace();
+			tempDir = "";
+		}
+
+		return tempDir;
+	}
+
+
+	public static String createAvatarPath(String dir,String userName) {
+		File destDir = new File(dir);
+		if (!destDir.exists()) {
+			destDir.mkdirs();
+		}
+		File file;
+		if (userName != null) {
+			file = new File(dir, userName + ".png");
+		}else {
+			file = new File(dir, new DateFormat().format("yyyy_MMdd_hhmmss",
+					Calendar.getInstance(Locale.CHINA)) + ".png");
+		}
+		return file.getAbsolutePath();
+	}
+
+
+	public static String getSDPath(){
+		String sdDir = null;
+		boolean sdCardExist = Environment.getExternalStorageState()
+				.equals(Environment.MEDIA_MOUNTED);   //判断sd卡是否存在
+		if   (sdCardExist)
+		{
+			sdDir = Environment.getExternalStorageDirectory().getPath();//获取跟目录
+		}
+		return sdDir.toString();
+
+	}
 
 
 	public static void main(String args[]) throws ParseException {
