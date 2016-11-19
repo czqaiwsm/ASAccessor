@@ -2,11 +2,13 @@ package com.accessories.city.fragment.center;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,6 +19,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.accessories.city.R;
 import com.accessories.city.activity.CallPhoneReceiver;
@@ -42,6 +45,15 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.android.api.callback.GetAvatarBitmapCallback;
+import cn.jpush.im.android.api.callback.GetUserInfoCallback;
+import cn.jpush.im.android.api.model.Conversation;
+import cn.jpush.im.android.api.model.UserInfo;
+import io.jchat.android.application.JChatDemoApplication;
+import io.jchat.android.chatting.ChatActivity;
+import io.jchat.android.chatting.utils.DialogCreator;
+import io.jchat.android.chatting.utils.HandleResponseCode;
 
 /**
  * 关于我们
@@ -86,6 +98,8 @@ public class SellerInfoFragment extends BaseFragment implements OnClickListener,
     TextView wx;
     @Bind(R.id.callNumTv)
     TextView callNumTv;
+    @Bind(R.id.chtMsgIv)
+    ImageView chtMsgIv;
     @Bind(R.id.wxLL)
     LinearLayout wxLL;
     @Bind(R.id.container)
@@ -162,6 +176,7 @@ public class SellerInfoFragment extends BaseFragment implements OnClickListener,
         phone2LL.setOnClickListener(this);
         tel1LL.setOnClickListener(this);
         tel2LL.setOnClickListener(this);
+        chtMsgIv.setOnClickListener(this);
     }
 
 
@@ -183,6 +198,9 @@ public class SellerInfoFragment extends BaseFragment implements OnClickListener,
             case R.id.tel2LL:
                 phoneStr = tel2.getText().toString();
                 break;
+            case R.id.chtMsgIv:
+                goChat();
+                return;
         }
 
         Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneStr));
@@ -223,6 +241,7 @@ public class SellerInfoFragment extends BaseFragment implements OnClickListener,
         RequestManager.getRequestData(getActivity(), createReqSuccessListener(requestType), createMyReqErrorListener(), param);
     }
 
+    SellerInfo balanceInfo = null;
     @Override
     public void handleRspSuccess(int requestType, Object obj) {
         switch (requestType) {
@@ -230,7 +249,7 @@ public class SellerInfoFragment extends BaseFragment implements OnClickListener,
 
                 JsonParserBase<SellerInfo> jsonParserBase = ParserUtil.fromJsonBase(obj.toString(), new TypeToken<JsonParserBase<SellerInfo>>() {
                 }.getType());
-                SellerInfo balanceInfo = jsonParserBase.getObj();
+                 balanceInfo = jsonParserBase.getObj();
                 if (balanceInfo == null) return;
                 ImageLoader.getInstance().displayImage(balanceInfo.getShopPic(), img);
                 selleName.setText(balanceInfo.getShopName());
@@ -272,14 +291,58 @@ public class SellerInfoFragment extends BaseFragment implements OnClickListener,
                 }
                 break;
             case 2:
-
                 break;
-
         }
-
 
     }
 
+    private void goChat(){
+        if(balanceInfo == null || TextUtils.isEmpty(balanceInfo.getAccount())) return;
+
+        String targetId = balanceInfo.getAccount();
+        if (TextUtils.isEmpty(targetId)) {
+            HandleResponseCode.onHandle(mActivity, 801001, true);
+        } else if (targetId.equals(JMessageClient.getMyInfo().getUserName())
+                || targetId.equals(JMessageClient.getMyInfo().getNickname())) {
+            Toast.makeText(mActivity,
+                    mActivity.getString(R.string.user_add_self_toast),
+                    Toast.LENGTH_SHORT).show();
+            return;
+        } else if (isExistConv(targetId)) {
+            Toast.makeText(mActivity,
+                    mActivity.getString(R.string.jmui_user_already_exist_toast),
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            showLoadingDilog("正在开启会话...");
+            getUserInfo(targetId);
+        }
+    }
+
+    private void getUserInfo(final String targetId){
+        JMessageClient.getUserInfo(targetId, URLConstants.CONVERSATION_IM_APPKEY ,new GetUserInfoCallback() {
+            @Override
+            public void gotResult(final int status, String desc, final UserInfo userInfo) {
+                dismissLoadingDilog();
+                if (status == 0) {
+                    Conversation conv = Conversation.createSingleConversation(targetId,URLConstants.CONVERSATION_IM_APPKEY);
+                        String targetId = ((UserInfo) conv.getTargetInfo()).getUserName();
+                       Intent intent = new Intent(mActivity, ChatActivity.class);
+                       intent.putExtra(JChatDemoApplication.TARGET_ID, targetId);
+                        intent.putExtra(JChatDemoApplication.TARGET_APP_KEY, conv.getTargetAppKey());
+                        Log.d("ConversationList", "Target app key from conversation: " + conv.getTargetAppKey());
+                        intent.putExtra(JChatDemoApplication.DRAFT, "");
+                        startActivity(intent);
+                } else {
+                    HandleResponseCode.onHandle(mActivity, status, true);
+                }
+            }
+        });
+    }
+
+    private boolean isExistConv(String targetId) {
+        Conversation conv = JMessageClient.getSingleConversation(targetId);
+        return conv != null;
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

@@ -6,7 +6,7 @@ import android.widget.EditText;
 import com.accessories.seller.utils.AppManager;
 import com.toast.ToasetUtil;
 
-public class BaseActivity extends FragmentActivity {
+public class BaseActivity extends io.jchat.android.activity.BaseActivity {
 
 	public ToasetUtil toasetUtil = null;
 	private EditText editText = null;

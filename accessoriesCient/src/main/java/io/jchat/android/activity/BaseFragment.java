@@ -17,6 +17,10 @@ import cn.jpush.im.android.api.JMessageClient;
 import cn.jpush.im.android.api.event.LoginStateChangeEvent;
 import cn.jpush.im.android.api.model.UserInfo;
 import com.accessories.city.R;
+import com.accessories.city.activity.TeacherMainActivity;
+import com.accessories.city.utils.AppManager;
+import com.accessories.city.utils.BaseApplication;
+
 import io.jchat.android.chatting.utils.DialogCreator;
 import io.jchat.android.chatting.utils.FileHelper;
 import io.jchat.android.chatting.utils.SharePreferenceManager;
@@ -65,18 +69,22 @@ public class BaseFragment extends Fragment {
         @Override
         public void onClick(View v) {
             dialog.dismiss();
-            Intent intent = new Intent();
-            if (null != myInfo) {
-                intent.setClass(getActivity(), ReloginActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                getActivity().finish();
-            } else {
-                Log.d(TAG, "user info is null! Jump to Login activity");
-                intent.setClass(getActivity(), LoginActivity.class);
-                startActivity(intent);
-                getActivity().finish();
-            }
+            BaseApplication.saveUserInfo(null);
+            BaseApplication.setMt_token("");
+            TeacherMainActivity.exit = true;
+            AppManager.getAppManager().finishAllActivity();
+//            Intent intent = new Intent();
+//            if (null != myInfo) {
+//                intent.setClass(getActivity(), ReloginActivity.class);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                startActivity(intent);
+//                getActivity().finish();
+//            } else {
+//                Log.d(TAG, "user info is null! Jump to Login activity");
+//                intent.setClass(getActivity(), LoginActivity.class);
+//                startActivity(intent);
+//                getActivity().finish();
+//            }
         }
     };
 
@@ -116,11 +124,15 @@ public class BaseFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         dialog.dismiss();
-                        Intent intent = new Intent();
-                        intent.setClass(mContext, LoginActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-                        BaseFragment.this.getActivity().finish();
+                        BaseApplication.saveUserInfo(null);
+                        BaseApplication.setMt_token("");
+                        TeacherMainActivity.exit = true;
+                        AppManager.getAppManager().finishAllActivity();
+//                        Intent intent = new Intent();
+//                        intent.setClass(mContext, LoginActivity.class);
+//                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                        startActivity(intent);
+//                        BaseFragment.this.getActivity().finish();
                     }
                 };
                 title = mContext.getString(R.string.user_logout_dialog_title);

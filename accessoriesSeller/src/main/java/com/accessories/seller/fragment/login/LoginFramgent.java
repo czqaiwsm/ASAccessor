@@ -13,7 +13,9 @@ import android.widget.TextView;
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.im.android.api.JMessageClient;
 import cn.jpush.im.api.BasicCallback;
+import io.jchat.android.chatting.utils.FileHelper;
 import io.jchat.android.chatting.utils.HandleResponseCode;
+import io.jchat.android.chatting.utils.SharePreferenceManager;
 
 import com.accessories.seller.R;
 import com.accessories.seller.activity.TeacherMainActivity;
@@ -229,6 +231,45 @@ public class LoginFramgent extends BaseFragment implements View.OnClickListener,
             });
 
             mActivity.finish();
+        }
+    }
+
+    @Override
+    protected void errorRespone() {
+        super.errorRespone();
+        loginIm();
+    }
+
+    @Override
+    protected void failRespone() {
+        super.failRespone();
+        loginIm();
+    }
+
+    //退出登录
+    public void logoutIM() {
+        // TODO Auto-generated method stub
+//        final Intent intent = new Intent();
+        cn.jpush.im.android.api.model.UserInfo info = JMessageClient.getMyInfo();
+        if (null != info) {
+//            intent.putExtra("userName", info.getUserName());
+            File file = info.getAvatarFile();
+            if (file != null && file.isFile()) {
+//                intent.putExtra("avatarFilePath", file.getAbsolutePath());
+            } else {
+                String path = FileHelper.getUserAvatarPath(info.getUserName());
+                file = new File(path);
+                if (file.exists()) {
+//                    intent.putExtra("avatarFilePath", file.getAbsolutePath());
+                }
+            }
+            SharePreferenceManager.setCachedUsername(info.getUserName());
+            SharePreferenceManager.setCachedAvatarPath(file.getAbsolutePath());
+            JMessageClient.logout();
+//            intent.setClass(mContext, ReloginActivity.class);
+//            startActivity(intent);
+        } else {
+            Log.i("TAG", "user info is null!");
         }
     }
 

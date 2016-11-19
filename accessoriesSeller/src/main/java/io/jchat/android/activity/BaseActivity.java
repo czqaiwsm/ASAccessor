@@ -12,6 +12,9 @@ import android.view.View;
 import android.view.WindowManager;
 
 import com.accessories.seller.R;
+import com.accessories.seller.activity.TeacherMainActivity;
+import com.accessories.seller.utils.AppManager;
+import com.accessories.seller.utils.BaseApplication;
 
 import java.io.File;
 
@@ -59,18 +62,21 @@ public class BaseActivity extends FragmentActivity {
         @Override
         public void onClick(View v) {
             dialog.dismiss();
-            Intent intent = new Intent();
-            if (null != myInfo) {
-                intent.setClass(BaseActivity.this, ReloginActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                BaseActivity.this.finish();
-            } else {
-                Log.d(TAG, "user info is null! Jump to Login activity");
-                intent.setClass(BaseActivity.this, LoginActivity.class);
-                startActivity(intent);
-                BaseActivity.this.finish();
-            }
+            BaseApplication.saveSellerUserInfo(null);
+            TeacherMainActivity.exit = true;
+            AppManager.getAppManager().finishAllActivity();
+//            Intent intent = new Intent();
+//            if (null != myInfo) {
+//                intent.setClass(BaseActivity.this, ReloginActivity.class);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                startActivity(intent);
+//                BaseActivity.this.finish();
+//            } else {
+//                Log.d(TAG, "user info is null! Jump to Login activity");
+//                intent.setClass(BaseActivity.this, LoginActivity.class);
+//                startActivity(intent);
+//                BaseActivity.this.finish();
+//            }
         }
     };
 
@@ -110,11 +116,14 @@ public class BaseActivity extends FragmentActivity {
                     @Override
                     public void onClick(View v) {
                         dialog.dismiss();
-                        Intent intent = new Intent();
-                        intent.setClass(BaseActivity.this, LoginActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-                        BaseActivity.this.finish();
+                        BaseApplication.saveSellerUserInfo(null);
+                        TeacherMainActivity.exit = true;
+                        AppManager.getAppManager().finishAllActivity();
+//                        Intent intent = new Intent();
+//                        intent.setClass(BaseActivity.this, LoginActivity.class);
+//                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                        startActivity(intent);
+//                        BaseActivity.this.finish();
                     }
                 };
                 title = mContext.getString(R.string.user_logout_dialog_title);

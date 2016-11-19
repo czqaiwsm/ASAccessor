@@ -6,7 +6,7 @@
     android:background="@android:color/white"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context="com.hylsmart.template.MainActivity" >
+     >
 
     <ImageView
         android:id="@+id/id_splash_iv1"

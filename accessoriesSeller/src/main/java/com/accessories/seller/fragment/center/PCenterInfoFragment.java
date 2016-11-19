@@ -188,8 +188,7 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
             public void onClick(View v) {
                 if(BaseApplication.isLogin()){
                     logoutIM();
-                    BaseApplication.saveUserInfo(null);
-                    BaseApplication.setMt_token("");
+                    BaseApplication.saveSellerUserInfo(null);
                 }
                 TeacherMainActivity.exit = true;
                 AppManager.getAppManager().finishAllActivity();

@@ -76,7 +76,7 @@ public class GuideFragment extends Fragment {
 	private ViewPager m_obj_viewPager = null;
 	private PagerAdapter m_obj_adapter = null;
 	private View m_obj_Layoutview = null;
-	private int ids[] = { R.drawable.guide_01, R.drawable.guide_02};
+	private int ids[] = { R.drawable.guide_01, R.drawable.guide_02, R.drawable.guide_03};
 	private int TO_THE_END = 0;// 到达最后一张图片
 	private int LEAVE_FROM_END = 1;// 离开最后一张图片
 

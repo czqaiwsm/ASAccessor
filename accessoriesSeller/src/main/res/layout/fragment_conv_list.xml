@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+              android:layerType="software"
     android:background="#ffffff">
 
     <RelativeLayout
@@ -39,5 +40,6 @@
         android:layout_height="match_parent"
         android:divider="@color/conv_list_split_line_color"
         android:headerDividersEnabled="false"
+        android:footerDividersEnabled="true"
         android:dividerHeight="1dp"/>
 </LinearLayout>

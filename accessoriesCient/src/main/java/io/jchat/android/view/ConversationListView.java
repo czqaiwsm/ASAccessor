@@ -38,6 +38,7 @@ public class ConversationListView {
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mHeader = (LinearLayout) inflater.inflate(R.layout.conv_list_head_view, mConvListView, false);
         mConvListView.addHeaderView(mHeader);
+		mConvListView.addFooterView(new View(mContext));
 	}
 	
 	public void setConvListAdapter(ListAdapter adapter) {
