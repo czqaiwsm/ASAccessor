@@ -11,14 +11,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.accessories.city.R;
+import com.accessories.city.activity.center.WidthdrawInfoActivity;
 import com.accessories.city.activity.home.ChooseActivity;
 import com.accessories.city.bean.CertifyStatus;
+import com.accessories.city.bean.FloatValue;
+import com.accessories.city.bean.Value;
 import com.accessories.city.fragment.BaseFragment;
 import com.accessories.city.help.RequestHelp;
 import com.accessories.city.help.RequsetListener;
+import com.accessories.city.utils.AlertDialogUtils;
 import com.accessories.city.utils.BaseApplication;
 import com.accessories.city.utils.SmartToast;
 import com.accessories.city.utils.URLConstants;
+import com.accessories.city.utils.Utils;
 import com.google.gson.internal.bind.TimeTypeAdapter;
 import com.google.gson.reflect.TypeToken;
 import com.volley.req.net.HttpURL;
@@ -56,6 +61,9 @@ public class WidthdrawInfoFragment extends BaseFragment implements View.OnClickL
     private CertifyStatus certifyStatus;
 
     private String cashType = "-1";//0支付宝 1微信
+
+    FloatValue floatValue = null;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,10 +92,7 @@ public class WidthdrawInfoFragment extends BaseFragment implements View.OnClickL
         if("1".equals(cashType)){
             accountEt.setHint("请输入微信账号");
             accountNameEt.setHint("请输入微信对应的姓名");
-
         }
-
-
     }
 
 
@@ -110,25 +115,40 @@ public class WidthdrawInfoFragment extends BaseFragment implements View.OnClickL
                     SmartToast.showText("您的积分不足,请输入较小积分!");
                     return;
                 }
-                requestTask(1);
+
+                if(floatValue == null){
+                    requestTask(2);
+                }else {
+                    alertDraw();
+                }
                 break;
         }
     }
-
 
     @Override
     protected void requestData(int requestType) {
 
         HttpURL url = new HttpURL();
-        url.setmBaseUrl(URLConstants.ADD_CASH);
         Map postParams = new HashMap();
         RequestParam param = new RequestParam();
-        postParams.put("userId", BaseApplication.getUserInfo().getId());
-        postParams.put("cashType",cashType);
-        postParams.put("cashAccount",accountEt.getText().toString());
-        postParams.put("cashName",accountNameEt.getText().toString());
-        postParams.put("cashIntegral",scoreEt.getText().toString());
-        postParams.put("cashMone","1000");
+        switch (requestType){
+            case 1:
+                url.setmBaseUrl(URLConstants.ADD_CASH);
+                postParams.put("userId", BaseApplication.getUserInfo().getId());
+                postParams.put("cashType",cashType);
+                postParams.put("cashAccount",accountEt.getText().toString());
+                postParams.put("cashName",accountNameEt.getText().toString());
+                postParams.put("cashIntegral",scoreEt.getText().toString());
+                postParams.put("cashMoney","1000");
+                break;
+            case 2:
+                url.setmBaseUrl(URLConstants.CONSTANT);
+                param = new RequestParam();
+                postParams.put("type", "exchange_ratio");
+                postParams.put("key","1");
+                break;
+        }
+
         param.setmPostMap(postParams);
         param.setmHttpURL(url);
         param.setPostRequestMethod();
@@ -138,9 +158,38 @@ public class WidthdrawInfoFragment extends BaseFragment implements View.OnClickL
 
     @Override
     public void handleRspSuccess(int requestType, Object obj) {
-        SmartToast.showText("提现成功!");
-        EventBus.getDefault().post(BaseApplication.getUserInfo());
-        mActivity.finish();
+        switch (requestType){
+            case 1:
+                SmartToast.showText("提现成功!");
+                EventBus.getDefault().post(BaseApplication.getUserInfo());
+                mActivity.finish();
+                break;
+            case 2:
+                JsonParserBase<FloatValue> jsonBase =  ParserUtil.fromJsonBase(obj.toString(), new TypeToken<JsonParserBase<FloatValue>>() {
+                }.getType());
+                floatValue = jsonBase.getObj();
+                if(floatValue != null && !TextUtils.isEmpty(floatValue.getValue()+"")){
+                    alertDraw();
+                }else {
+                    floatValue = null;
+                }
+                break;
+        }
+
+    }
+
+    private void alertDraw(){
+
+        AlertDialogUtils.displayMyAlertChoice(mActivity, "温馨提示", "您提现的积分可兑换" +
+                Utils.floatDecimla((Double.valueOf(scoreEt.getText().toString())*floatValue.getValue())+"",null) + "元,是否确认兑换?"
+                , new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        requestTask(1);
+                    }
+                }, null);
+
+
     }
 
 

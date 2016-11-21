@@ -230,6 +230,7 @@ public class PublisFragment extends BaseFragment implements View.OnClickListener
         Map postParams = new HashMap();
         postParams.put("userId", BaseApplication.getUserInfo().getId());
         postParams.put("msgType",cashType);
+        postParams.put("flag","0");
         postParams.put("msgContent",contentEt.getText().toString());
         postParams.put("phone",phoneEt.getText().toString());
         postParams.put("address",addressTv.getText().toString());

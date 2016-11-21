@@ -276,6 +276,7 @@ public class Utils {
 
 	}
 
+
 	public static void main(String args[]) throws ParseException {
         Date date = new Date();
 		Calendar c = Calendar.getInstance();
@@ -285,6 +286,27 @@ public class Utils {
 		System.out.println(c.get(Calendar.DAY_OF_MONTH));
 
 
+	}
+
+
+
+	/**
+	 *
+	 * @param str
+	 * @param format
+	 * @return
+	 */
+	public static String floatDecimla(String str,String format){
+
+		if(TextUtils.isEmpty(str)){
+			return "";
+		}
+		if(TextUtils.isEmpty(format)){
+			format = "#.##";
+		}
+		java.text.DecimalFormat df = new java.text.DecimalFormat(format);
+		double   d= Double.parseDouble(str);
+		return  (df.format(d))+"";
 	}
 
 }

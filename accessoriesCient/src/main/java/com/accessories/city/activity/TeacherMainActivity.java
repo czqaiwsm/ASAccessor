@@ -57,8 +57,8 @@ public class TeacherMainActivity extends BaseActivity implements View.OnClickLis
         UpdateMgr.getInstance(this).checkUpdateInfo(null, false);
         setContentView(R.layout.main_activity);
         fragments = new Fragment[VIEW_COUNT];
-        fragments[0] =new MsgInfoFragment();
-        fragments[1] = new TeacherHomePageFragment();
+        fragments[0] =new TeacherHomePageFragment();
+        fragments[1] = new MsgInfoFragment();
         fragments[2] = new ConversationListFragment();;
         fragments[3] = pCenterFragment = new PCenterInfoFragment();
 
@@ -80,8 +80,8 @@ public class TeacherMainActivity extends BaseActivity implements View.OnClickLis
         unreadLabel = (TextView) findViewById(R.id.unread_msg_number);
         unreadAddressLable = (TextView) findViewById(R.id.unread_address_number);
         mTabs = new Button[VIEW_COUNT];
-        mTabs[0] = (Button) findViewById(R.id.btn_conversation);
-        mTabs[1] = (Button) findViewById(R.id.btn_address_list);
+        mTabs[0] = (Button) findViewById(R.id.btn_address_list);
+        mTabs[1] = (Button) findViewById(R.id.btn_conversation);
         mTabs[2] = (Button) findViewById(R.id.btn_setting);
         mTabs[3] = (Button) findViewById(R.id.btn_center);
         // 把第一个tab设为选中状态
@@ -99,11 +99,11 @@ public class TeacherMainActivity extends BaseActivity implements View.OnClickLis
     public void onClick(View v) {
         int index = 0;
         switch (v.getId()){
-            case R.id.btn_conversation:
-                currentFragment = fragments[0];
-                index = 0;
-                break;
             case R.id.btn_address_list:
+            currentFragment = fragments[0];
+            index = 0;
+            break;
+            case R.id.btn_conversation:
                 currentFragment = fragments[1];
                 index = 1;
                 break;
