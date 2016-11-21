@@ -237,13 +237,13 @@ public class LoginFramgent extends BaseFragment implements View.OnClickListener,
     @Override
     protected void errorRespone() {
         super.errorRespone();
-        loginIm();
+        logoutIM();
     }
 
     @Override
     protected void failRespone() {
         super.failRespone();
-        loginIm();
+        logoutIM();
     }
 
     //退出登录

@@ -1,5 +1,6 @@
 package com.accessories.seller.fragment.center;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -38,6 +39,7 @@ import java.util.Map;
  * @creator caozhiqing
  * @data 2016/3/10
  */
+@SuppressLint({"NewApi", "ValidFragment"})
 public class OrderPayFragment extends BaseFragment implements RequsetListener,CustomListView.OnLoadMoreListener,View.OnClickListener{
 
     private CustomListView customListView = null;

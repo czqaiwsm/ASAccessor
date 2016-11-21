@@ -1,5 +1,6 @@
 package com.accessories.seller.fragment.msg;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import com.accessories.seller.adapter.GuideViewPagerAdapter;
 import com.accessories.seller.bean.BannerImgInfo;
 import com.accessories.seller.bean.CateListBean;
 import com.accessories.seller.bean.CateSubTypeEntity;
+import com.accessories.seller.bean.MsgInfo;
 import com.accessories.seller.fragment.BaseFragment;
 import com.accessories.seller.fragment.TeacherHomePageFragment;
 import com.accessories.seller.help.RequsetListener;
@@ -35,7 +37,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+@SuppressLint({"NewApi", "ValidFragment"})
 public class MsgInfosFragment extends BaseFragment implements RequsetListener {
 
     private CustomListView callListView;//
@@ -53,6 +55,7 @@ public class MsgInfosFragment extends BaseFragment implements RequsetListener {
     private boolean isInit = false;
 
     private int type = 0;//1 汽车配件 2 汽车用品 3 商用车配件 4
+
 
     public MsgInfosFragment(int type){
         this.type = type;

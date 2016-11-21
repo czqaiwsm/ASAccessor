@@ -16,6 +16,7 @@ import com.accessories.city.bean.Value;
 import com.accessories.city.bean.msg.ListBase;
 import com.accessories.city.fragment.PullRefreshFragment;
 import com.accessories.city.help.RequsetListener;
+import com.accessories.city.utils.AlertDialogUtils;
 import com.accessories.city.utils.BaseApplication;
 import com.accessories.city.utils.SmartToast;
 import com.accessories.city.utils.URLConstants;
@@ -68,13 +69,15 @@ public class MsgInfoFragment extends PullRefreshFragment implements RequsetListe
         setRightHeadIcon(R.drawable.publis_righter, new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
+
                 v.setClickable(false);
                 v.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                       v.setClickable(true);
+                        v.setClickable(true);
                     }
                 },10*1000);
+
                 requestTask(2);
 
             }
@@ -119,10 +122,9 @@ public class MsgInfoFragment extends PullRefreshFragment implements RequsetListe
                 postParams.put("cityId",BaseApplication.getInstance().location[1]+"");
                 break;
             case 2:
-                url.setmBaseUrl(URLConstants.CONSTANT);
+                url.setmBaseUrl(URLConstants.INTEGRAL_INFO);
                 param = new RequestParam();
-                postParams.put("type", "integral_type");
-                postParams.put("key","cash");
+                postParams.put("userId",BaseApplication.getUserInfo().getId());
                 break;
         }
 
@@ -146,14 +148,23 @@ public class MsgInfoFragment extends PullRefreshFragment implements RequsetListe
             case 2:
                 JsonParserBase<Value> jsonBase =  ParserUtil.fromJsonBase(obj.toString(), new TypeToken<JsonParserBase<Value>>() {
                 }.getType());
-                if(jsonBase.getObj().getValue()< Integer.valueOf(BaseApplication.getUserInfo().getIntegral())){
-                    Intent intent = new Intent(mActivity,WidthdrawInfoActivity.class);
-                    intent.setFlags(2);
-                    startActivityForResult(intent,100);
-                }else {
-                    SmartToast.showText("您的积分不足,不能发布哦!");
-                }
+                Value value = null;
+                if((value = jsonBase.getObj()) != null){
+                    if(value.getMsgSendMinIntegral()< value.getUserIntegral() && value.getMsgIntegral()<value.getUserIntegral()){
 
+                        AlertDialogUtils.displayMyAlertChoice(mActivity, "温馨提示", "发布消息需消耗60积分哦~", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View vi) {
+                                Intent intent = new Intent(mActivity,WidthdrawInfoActivity.class);
+                                intent.setFlags(2);
+                                startActivityForResult(intent,100);
+                            }
+                        },null);
+
+                    }else {
+                        SmartToast.showText("您的积分不足,不能发布哦!");
+                    }
+                }
                 break;
 
         }

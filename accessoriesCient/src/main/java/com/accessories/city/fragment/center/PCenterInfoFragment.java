@@ -49,6 +49,7 @@ import com.accessories.city.bean.Value;
 import com.accessories.city.fragment.BaseFragment;
 import com.accessories.city.help.RequsetListener;
 import com.accessories.city.parse.LoginInfoParse;
+import com.accessories.city.utils.AlertDialogUtils;
 import com.accessories.city.utils.AppLog;
 import com.accessories.city.utils.AppManager;
 import com.accessories.city.utils.BaseApplication;
@@ -187,13 +188,21 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
         setHeaderRightText(R.string.login_out, new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(BaseApplication.isLogin()){
-                    logoutIM();
-                    BaseApplication.saveUserInfo(null);
-                    BaseApplication.setMt_token("");
-                }
-                TeacherMainActivity.exit = true;
-                AppManager.getAppManager().finishAllActivity();
+
+                AlertDialogUtils.displayMyAlertChoice(mActivity, "提示", "确定退出应用!", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        if(BaseApplication.isLogin()){
+                            logoutIM();
+                            BaseApplication.saveUserInfo(null);
+                            BaseApplication.setMt_token("");
+                        }
+                        TeacherMainActivity.exit = true;
+                        AppManager.getAppManager().finishAllActivity();
+                    }
+                },null);
+
             }
         });
 //        setRightHeadIcon(R.drawable.pc_search_right,new OnClickListener() {
@@ -286,7 +295,7 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
     }
 
     private void setData(UserInfo userInfo) {
-        account_customname.setText("0791-85232660");
+        account_customname.setText("0791-86275003");
         if(userInfo != null){
 
             String money = "<span>"+getString(R.string.integeral, userInfo.getIntegral())+"<font color='#0099FF'>(￥"+userInfo.getMoney()+")</font></span>";

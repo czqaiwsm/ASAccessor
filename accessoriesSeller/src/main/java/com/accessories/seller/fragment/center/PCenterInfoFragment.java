@@ -50,6 +50,7 @@ import com.accessories.seller.bean.UserInfo;
 import com.accessories.seller.fragment.BaseFragment;
 import com.accessories.seller.help.RequsetListener;
 import com.accessories.seller.parse.LoginInfoParse;
+import com.accessories.seller.utils.AlertDialogUtils;
 import com.accessories.seller.utils.AppLog;
 import com.accessories.seller.utils.AppManager;
 import com.accessories.seller.utils.BaseApplication;
@@ -186,12 +187,18 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
         setHeaderRightText(R.string.login_out, new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(BaseApplication.isLogin()){
-                    logoutIM();
-                    BaseApplication.saveSellerUserInfo(null);
-                }
-                TeacherMainActivity.exit = true;
-                AppManager.getAppManager().finishAllActivity();
+                AlertDialogUtils.displayMyAlertChoice(mActivity, "提示", "确定退出应用!", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        if(BaseApplication.isLogin()){
+                            logoutIM();
+                            BaseApplication.saveSellerUserInfo(null);
+                        }
+                        TeacherMainActivity.exit = true;
+                        AppManager.getAppManager().finishAllActivity();
+                    }
+                },null);
             }
         });
 //        setRightHeadIcon(R.drawable.pc_search_right,new OnClickListener() {
@@ -285,7 +292,7 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
     }
 
     private void setData(SellerUserInfo userInfo) {
-        account_customname.setText("0791-85232660");
+        account_customname.setText("0791-86275003");
         if(userInfo != null){
 
 //            String money = "<span>"+getString(R.string.integeral, userInfo.getIntegral())+"<font color='#0099FF'>(￥"+userInfo.getMoney()+")</font></span>";

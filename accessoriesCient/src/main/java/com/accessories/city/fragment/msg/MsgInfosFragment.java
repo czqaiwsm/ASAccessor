@@ -1,5 +1,6 @@
 package com.accessories.city.fragment.msg;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -36,6 +37,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@SuppressLint({"NewApi", "ValidFragment"})
 public class MsgInfosFragment extends BaseFragment implements RequsetListener {
 
     private CustomListView callListView;//

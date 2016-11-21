@@ -12,6 +12,7 @@ import com.accessories.seller.R;
 import com.accessories.seller.activity.center.WidthdrawInfoActivity;
 import com.accessories.seller.adapter.MsgInfoAdpter;
 import com.accessories.seller.bean.MsgInfo;
+import com.accessories.seller.bean.SellerInfo;
 import com.accessories.seller.bean.Value;
 import com.accessories.seller.bean.msg.ListBase;
 import com.accessories.seller.fragment.PullRefreshFragment;
@@ -68,13 +69,23 @@ public class MsgInfoFragment extends PullRefreshFragment implements RequsetListe
         setRightHeadIcon(R.drawable.publis_righter, new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-               if("1".equals(BaseApplication.getSellerUserInfo().getVip())){
-                   Intent intent = new Intent(mActivity,WidthdrawInfoActivity.class);
-                   intent.setFlags(2);
-                   startActivityForResult(intent,100);
-               }else {
-                   SmartToast.showText("您还不是VIP用户,不能发布!");
-               }
+                v.setClickable(false);
+                v.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        v.setClickable(true);
+                    }
+                },10*1000);
+
+                requestTask(2);
+
+//               if("1".equals(BaseApplication.getSellerUserInfo().getVip())){
+//                   Intent intent = new Intent(mActivity,WidthdrawInfoActivity.class);
+//                   intent.setFlags(2);
+//                   startActivityForResult(intent,100);
+//               }else {
+//                   SmartToast.showText("您还不是VIP用户,不能发布!");
+//               }
             }
         });
         onLoade();
@@ -117,10 +128,12 @@ public class MsgInfoFragment extends PullRefreshFragment implements RequsetListe
                 postParams.put("cityId",BaseApplication.getInstance().location[1]+"");
                 break;
             case 2:
-                url.setmBaseUrl(URLConstants.CONSTANT);
-                param = new RequestParam();
-                postParams.put("type", "integral_type");
-                postParams.put("key","cash");
+//                url.setmBaseUrl(URLConstants.CONSTANT);
+//                param = new RequestParam();
+//                postParams.put("type", "integral_type");
+//                postParams.put("key","cash");
+                url.setmBaseUrl(URLConstants.SHOPDETAIL);
+                postParams.put("shopId", BaseApplication.getSellerUserInfo().getShopId());
                 break;
         }
 
@@ -142,15 +155,29 @@ public class MsgInfoFragment extends PullRefreshFragment implements RequsetListe
         super.handleRspSuccess(requestType, obj);
         switch (requestType){
             case 2:
-                JsonParserBase<Value> jsonBase =  ParserUtil.fromJsonBase(obj.toString(), new TypeToken<JsonParserBase<Value>>() {
+
+                JsonParserBase<SellerInfo> jsonParserBase = ParserUtil.fromJsonBase(obj.toString(), new TypeToken<JsonParserBase<SellerInfo>>() {
                 }.getType());
-                if(jsonBase.getObj().getValue()< Integer.valueOf(BaseApplication.getUserInfo().getIntegral())){
+                SellerInfo balanceInfo = null;
+                if ((balanceInfo = jsonParserBase.getObj()) == null) return;
+
+                if("1".equals(balanceInfo.getVip())){
                     Intent intent = new Intent(mActivity,WidthdrawInfoActivity.class);
                     intent.setFlags(2);
                     startActivityForResult(intent,100);
                 }else {
-                    SmartToast.showText("您的积分不足,不能发布哦!");
+                    SmartToast.showText("您还不是VIP用户,不能发布!");
                 }
+
+//                JsonParserBase<Value> jsonBase =  ParserUtil.fromJsonBase(obj.toString(), new TypeToken<JsonParserBase<Value>>() {
+//                }.getType());
+//                if(jsonBase.getObj().getValue()< Integer.valueOf(BaseApplication.getUserInfo().getIntegral())){
+//                    Intent intent = new Intent(mActivity,WidthdrawInfoActivity.class);
+//                    intent.setFlags(2);
+//                    startActivityForResult(intent,100);
+//                }else {
+//                    SmartToast.showText("您的积分不足,不能发布哦!");
+//                }
 
                 break;
 
