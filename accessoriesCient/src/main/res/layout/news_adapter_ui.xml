@@ -10,7 +10,7 @@
         <ImageView
                 android:id="@+id/head_photo"
                 android:layout_width="@dimen/round_img_size"
-                android:layout_height="@dimen/round_img_size"
+                android:layout_height="@dimen/round_img_height"
                 android:layout_margin="@dimen/msg_margin"
                 android:scaleType="fitXY"
                 android:src="@drawable/rr"
@@ -55,7 +55,6 @@
                   android:layout_marginRight="@dimen/msg_margin"
                   android:lineSpacingExtra="3dp"
                   android:textSize="@dimen/msg_time"
-                  android:text="大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎大众轮胎"
                 />
 
         <TextView android:id="@+id/time"

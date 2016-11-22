@@ -9,6 +9,7 @@
     <color name="bottom_bar_normal_bg">#2D2F31</color>
     <color name="main_txt_black">#5E5E5E</color>
     <color name="bg_color">#F4F4F4</color>
+    <color name="color_FFE5030A">#FFE5030A</color>
 
     <color name="found_focus">#FFbebebe</color>
     <color name="found_press">#FFb17f67</color>

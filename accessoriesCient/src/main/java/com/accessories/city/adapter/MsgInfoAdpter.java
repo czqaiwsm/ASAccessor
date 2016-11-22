@@ -1,6 +1,8 @@
 package com.accessories.city.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,6 +45,15 @@ public class MsgInfoAdpter extends MainAdapter {
             ImageLoader.getInstance().displayImage(msgInfo.getUserHead(), holder.headPhoto);
             holder.nameTv.setText(msgInfo.getNickname());
             holder.telTv.setText(Html.fromHtml("Tel:<font color='#799cc2'>"+msgInfo.getPhone()+"</font>"));
+            holder.telTv.setTag(msgInfo.getPhone());
+            holder.telTv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //用intent启动拨打电话
+                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+v.getTag()));
+                    mContext.get().startActivity(intent);
+                }
+            });
 //            danyijiangnan
             if(msgInfo.getPicAry() != null && msgInfo.getPicAry().size()==1){
                 holder.oneImg.setVisibility(View.VISIBLE);
@@ -63,6 +74,7 @@ public class MsgInfoAdpter extends MainAdapter {
             holder.contentTv.setText(msgInfo.getContent());
             holder.timeTv.setText(msgInfo.getTime());
             holder.addressTv.setText(msgInfo.getAddress());
+
 
         }
         return convertView;

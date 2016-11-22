@@ -63,8 +63,10 @@ public class NewsAdpter extends BaseAdapter {
             holder.name.setText(obj.getShopName());
             holder.msgContent.setText(obj.getShopDesc());
             if("1".equals(obj.getVip())){
+                holder.name.setTextColor(mContext.getResources().getColor(R.color.color_FFE5030A));
                 holder.isVipLl.setVisibility(View.VISIBLE);
             }else {
+                holder.name.setTextColor(mContext.getResources().getColor(R.color.black));
                 holder.isVipLl.setVisibility(View.GONE);
             }
         }

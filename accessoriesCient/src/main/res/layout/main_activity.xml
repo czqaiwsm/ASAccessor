@@ -48,6 +48,26 @@
                     android:textSize="@dimen/maint_bottom_txt_size"
                     android:visibility="invisible" />
         </RelativeLayout>
+
+        <RelativeLayout
+                android:id="@+id/btn_container_setting"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="3dp"
+                android:layout_weight="1" >
+
+            <Button
+                    android:id="@+id/btn_setting"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawableTop="@drawable/tab_session_bg"
+                    android:paddingBottom="@dimen/maint_bottom_marginbot"
+                    android:scaleType="matrix"
+                    android:text="会话列表"
+                    android:textColor="@color/main_botton_text_color"
+                    android:background="@null"
+                    android:textSize="@dimen/maint_bottom_txt_size" />
+        </RelativeLayout>
         <RelativeLayout
             android:id="@+id/btn_container_conversation"
             android:layout_width="0dp"
@@ -78,25 +98,6 @@
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/maint_bottom_txt_size"
                 android:visibility="invisible" />
-        </RelativeLayout>
-        <RelativeLayout
-                android:id="@+id/btn_container_setting"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="3dp"
-                android:layout_weight="1" >
-
-            <Button
-                    android:id="@+id/btn_setting"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:drawableTop="@drawable/tab_session_bg"
-                    android:paddingBottom="@dimen/maint_bottom_marginbot"
-                    android:scaleType="matrix"
-                    android:text="会话列表"
-                    android:textColor="@color/main_botton_text_color"
-                    android:background="@null"
-                    android:textSize="@dimen/maint_bottom_txt_size" />
         </RelativeLayout>
         <RelativeLayout
                 android:id="@+id/btn_container_center"
