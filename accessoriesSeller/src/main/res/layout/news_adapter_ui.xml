@@ -13,6 +13,7 @@
                 android:layout_height="@dimen/round_img_height"
                 android:layout_margin="@dimen/msg_margin"
                 android:scaleType="fitXY"
+                android:layout_centerVertical="true"
                 android:src="@drawable/rr"
                 />
 
@@ -51,7 +52,7 @@
                   android:layout_below="@+id/Name"
                   android:layout_marginTop="3dp"
                   android:ellipsize="end"
-                  android:maxLines="3"
+                  android:maxLines="2"
                   android:layout_marginRight="@dimen/msg_margin"
                   android:lineSpacingExtra="3dp"
                   android:textSize="@dimen/msg_time"

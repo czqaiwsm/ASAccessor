@@ -560,11 +560,11 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
         // 设置裁剪
         intent.putExtra("crop", true);
         // aspectX aspectY 是宽高的比例
-        intent.putExtra("aspectX", 10);
-        intent.putExtra("aspectY", 9);
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
         // outputX outputY 是裁剪图片宽高
-        intent.putExtra("outputX", 800);
-        intent.putExtra("outputY", 720);
+        intent.putExtra("outputX", 200);
+        intent.putExtra("outputY", 200);
         intent.putExtra("return-data", true);
         startActivityForResult(intent, RESULT_REQUEST);
     }
@@ -916,7 +916,7 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
         if (null == bitmap) {
             return null;
         }
-        bitmap = ImageFactory.ratio(bitmap,800,720);
+        bitmap = ImageFactory.ratio(bitmap,200,200);
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
         byte[] byteArray = stream.toByteArray();
