@@ -132,6 +132,7 @@ public class SellerInfoFragment extends BaseFragment implements OnClickListener,
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                phoneStr = ((Phone)phoneAdapter.getItem(position)).getPhone();
                 Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + ((Phone)phoneAdapter.getItem(position)).getPhone()));
                 startActivity(intent);
             }
@@ -211,7 +212,8 @@ public class SellerInfoFragment extends BaseFragment implements OnClickListener,
                 break;
             case 2:
                 url.setmBaseUrl(URLConstants.CALL);
-                postParams.put("phone", shopId);
+                postParams.put("osType", "1");//安卓  1   IOS  2
+                postParams.put("phone", phoneStr);
                 postParams.put("shopId", shopId);
                 postParams.put("userId", BaseApplication.getUserInfo().getId());
                 break;

@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -326,6 +327,28 @@ public class PublisFragment extends BaseFragment implements View.OnClickListener
     }
 
     /**
+     * 保存裁剪之后的图片数据
+     */
+    private void getImageToView() {
+        /********** 上传图片 ***************/
+//        m_obj_IconBp = bitmap;// 用于上传服务器
+        setLoadingDilog(WaitLayer.DialogType.MODALESS);
+        showLoadingDilog("正在上传...");
+        if (NetUtils.isConnected(getActivity())) {
+            new Thread(new Runnable() {
+
+                @Override
+                public void run() {
+                    uploadFileM();
+                }
+            }, "upPic1").start();
+        } else {
+            toasetUtil.showInfo("网络连接出错,无法上传头像");
+        }
+
+    }
+
+    /**
      * @param uri The Uri to check.
      * @return Whether the Uri authority is ExternalStorageProvider.
      */
@@ -497,14 +520,18 @@ public class PublisFragment extends BaseFragment implements View.OnClickListener
                     if (data == null) {
                         if (SDCardUtils.checkSDCardStatus()) {
                             File tempFile = new File(Environment.getExternalStorageDirectory(), IMAGE_FILE_NAME);
-                            startPhotoZoom(Uri.fromFile(tempFile));
+                            m_obj_IconBp = BitmapFactory.decodeFile(tempFile.getPath());
+                            getImageToView();
+//                            startPhotoZoom(Uri.fromFile(tempFile));
                         } else {
                             Toast.makeText(getActivity(), "未找到存储卡，无法存储照片！", Toast.LENGTH_LONG).show();
                         }
                     } else if (data.getExtras() != null) {
                         if (SDCardUtils.checkSDCardStatus()) {
                             File tempFile = new File(Environment.getExternalStorageDirectory(), IMAGE_FILE_NAME);
-                            startPhotoZoom(Uri.fromFile(tempFile));
+                            m_obj_IconBp = BitmapFactory.decodeFile(tempFile.getPath());
+                            getImageToView();
+//                            startPhotoZoom(Uri.fromFile(tempFile));
                         } else {
                             Toast.makeText(getActivity(), "未找到存储卡，无法存储照片！", Toast.LENGTH_LONG).show();
                         }
@@ -514,12 +541,14 @@ public class PublisFragment extends BaseFragment implements View.OnClickListener
                     if (data != null) {
                         Uri mImageUri = data.getData();
                         String path = getPath(getActivity(), mImageUri);
-                        mImageUri = Uri.fromFile(new File(path));
-                        try {
-                            startPhotoZoom(mImageUri);
-                        } catch (NullPointerException e) {
-                            e.printStackTrace();
-                        }
+                        m_obj_IconBp = BitmapFactory.decodeFile(path);
+                        getImageToView();
+//                        mImageUri = Uri.fromFile(new File(path));
+//                        try {
+//                            startPhotoZoom(mImageUri);
+//                        } catch (NullPointerException e) {
+//                            e.printStackTrace();
+//                        }
                     }
                     break;
                 case RESULT_REQUEST:// 保存修改的头像并上传服务器

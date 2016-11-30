@@ -292,7 +292,7 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
     }
 
     private void setData(SellerUserInfo userInfo) {
-        account_customname.setText("0791-86275003");
+        account_customname.setText("0791-85250050");
         if(userInfo != null){
 
 //            String money = "<span>"+getString(R.string.integeral, userInfo.getIntegral())+"<font color='#0099FF'>(￥"+userInfo.getMoney()+")</font></span>";

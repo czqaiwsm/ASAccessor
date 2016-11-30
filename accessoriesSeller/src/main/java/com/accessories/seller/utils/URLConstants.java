@@ -42,9 +42,8 @@ public class URLConstants {
     public static final String BASE_URL = "http://120.76.47.196:8080/learn-teach/teach/api.action";//基础 teacher URL
     public static final String TEACHER_UPLOAD = "http://120.76.47.196:8080/learn-teach/teach/upload.action";
 
-//    public static final String ACBASE_URL = "http://121.41.75.147:8081/carfashion/json";//车时尚 基础URL
-
-    public static final String ACBASE_HOST = "http://121.41.75.147:8081/carfashion_test";//车时尚 基础URL
+//    public static final String ACBASE_HOST = "http://121.41.75.147:8081/carfashion_test";//车时尚 基础URL
+    public static final String ACBASE_HOST = "http://139.224.197.56:8081/carfashion";//车时尚(正式版) 基础URL
     public static final String ACBASE_URL = ACBASE_HOST+"/json";//车时尚 基础URL
 
 

@@ -158,12 +158,14 @@ public abstract class PullRefreshFragment extends BaseFragment implements Requse
             list.addAll(teacherInfos);
         }
 
-        if(teacherInfos==null || teacherInfos.size()==0){//显示无数据
+        if(list==null || list.size()==0){//显示无数据
             if(list.size()==0){
                 noData.setVisibility(View.VISIBLE);
+                customListView.setVisibility(View.GONE);
             }
         }else {
             noData.setVisibility(View.GONE);
+            customListView.setVisibility(View.VISIBLE);
             if(teacherInfos.size()>=pageSize){//有足够的数据,可以下拉刷新
                 customListView.setCanLoadMore(true);
                 customListView.setOnLoadListener(this);
