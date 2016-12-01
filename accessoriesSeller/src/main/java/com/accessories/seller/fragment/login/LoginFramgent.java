@@ -191,6 +191,7 @@ public class LoginFramgent extends BaseFragment implements View.OnClickListener,
                 }
             });
 
+
             ImageLoader.getInstance().displayImage(BaseApplication.getSellerUserInfo().getShopPic(), new ImageView(mActivity), new ImageLoadingListener() {
                 @Override
                 public void onLoadingStarted(String s, View view) {

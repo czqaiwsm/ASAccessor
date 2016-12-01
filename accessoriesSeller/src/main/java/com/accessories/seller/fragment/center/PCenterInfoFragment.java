@@ -297,7 +297,9 @@ public class PCenterInfoFragment extends BaseFragment implements OnClickListener
 
 //            String money = "<span>"+getString(R.string.integeral, userInfo.getIntegral())+"<font color='#0099FF'>(￥"+userInfo.getMoney()+")</font></span>";
 //            account_ordername.setText(Html.fromHtml(money));
-            ImageLoader.getInstance().displayImage(userInfo.getShopPic(), headRImg);
+            if(!TextUtils.isEmpty(userInfo.getShopPic())){
+                ImageLoader.getInstance().displayImage(userInfo.getShopPic(), headRImg);
+            }
             name.setText(TextUtils.isEmpty(userInfo.getShopName())?"":userInfo.getShopName());
         }
 
