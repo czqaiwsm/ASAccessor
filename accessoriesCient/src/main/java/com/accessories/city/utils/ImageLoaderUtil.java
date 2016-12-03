@@ -30,8 +30,8 @@ public class ImageLoaderUtil {
 //    public static DisplayImageOptions mUserIconLoaderOptions = new DisplayImageOptions.Builder().showImageForEmptyUri(R.drawable.default_user_portrait).bitmapConfig(Config.RGB_565)
 //            .showImageOnFail(R.drawable.default_user_portrait).cacheInMemory(true).cacheOnDisk(true).showImageOnLoading(R.drawable.default_user_portrait).displayer(new SimpleBitmapDisplayer()).build();
 
-    public static DisplayImageOptions mHallIconLoaderOptions = new DisplayImageOptions.Builder().showImageForEmptyUri(R.drawable.rr).showImageOnLoading(R.drawable.rr).bitmapConfig(Config.RGB_565)
-            .showImageOnFail(R.drawable.rr).cacheInMemory(true).cacheOnDisk(true).displayer(new SimpleBitmapDisplayer()).build();
+    public static DisplayImageOptions mHallIconLoaderOptions = new DisplayImageOptions.Builder().showImageForEmptyUri(R.drawable.default_car).showImageOnLoading(R.drawable.default_car).bitmapConfig(Config.RGB_565)
+            .showImageOnFail(R.drawable.default_car).cacheInMemory(true).cacheOnDisk(false).displayer(new SimpleBitmapDisplayer()).build();
 
 	/*
      * public static DisplayImageOptions mCollectCaterOptions=new

@@ -36,13 +36,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.accessories.city.R;
+import com.accessories.city.activity.center.WidthdrawInfoActivity;
 import com.accessories.city.bean.UploadBean;
+import com.accessories.city.bean.Value;
 import com.accessories.city.fragment.BaseFragment;
 import com.accessories.city.help.RequsetListener;
 import com.accessories.city.utils.AlertDialogUtils;
 import com.accessories.city.utils.AppLog;
 import com.accessories.city.utils.BaseApplication;
 import com.accessories.city.utils.ImageFactory;
+import com.accessories.city.utils.ImageLoaderUtil;
 import com.accessories.city.utils.NetUtils;
 import com.accessories.city.utils.PhoneUitl;
 import com.accessories.city.utils.SDCardUtils;
@@ -53,9 +56,11 @@ import com.accessories.city.utils.WaitLayer;
 import com.accessories.city.view.AddPopwindow;
 import com.accessories.city.view.UpdateAvatarPopupWindow;
 import com.google.gson.reflect.TypeToken;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.volley.req.net.HttpURL;
 import com.volley.req.net.RequestManager;
 import com.volley.req.net.RequestParam;
+import com.volley.req.parser.JsonParserBase;
 import com.volley.req.parser.ParserUtil;
 
 
@@ -105,6 +110,8 @@ public class PublisFragment extends BaseFragment implements View.OnClickListener
     private Bitmap m_obj_IconBp = null;
 
     private AddPopwindow popwindow = null;
+
+    private Value value = null;//求购发布需要验证积分
 
     UpdateAvatarPopupWindow m_obj_menuWindow ;
     private static final int REQUEST_PHOTO = 4;// 相册选择头像
@@ -206,7 +213,23 @@ public class PublisFragment extends BaseFragment implements View.OnClickListener
     }
 
     public void onEvent(Integer req){
-        if(cashType.equals(req+"")){
+        if(cashType.equals(req+"")) {
+
+            if ("1".equals(cashType)) {//0供应 1求购
+                publishReq();
+            } else if ("0".equals(cashType)) {
+                if(value != null){
+                    publishReq();
+                }else {
+                    requestTask(2);
+                }
+
+            }
+        }
+    }
+
+
+    private void publishReq(){
             if (!PhoneUitl.isPhone(phoneEt.getText().toString())){
                 toasetUtil.showInfo(R.string.phone_error);
                 return;
@@ -220,40 +243,75 @@ public class PublisFragment extends BaseFragment implements View.OnClickListener
                 return;
             }
             requestTask(1);
-        }
 
     }
+
 
     @Override
     protected void requestData(int requestType) {
         HttpURL url = new HttpURL();
-        url.setmBaseUrl(URLConstants.ADD_MEMBER_MESSAGE);
         Map postParams = new HashMap();
-        postParams.put("userId", BaseApplication.getUserInfo().getId());
-        postParams.put("msgType",cashType);
-        postParams.put("flag","0");
-        postParams.put("msgContent",contentEt.getText().toString());
-        postParams.put("phone",phoneEt.getText().toString());
-        postParams.put("address",addressTv.getText().toString());
-        postParams.put("cityId",BaseApplication.getInstance().location[1]);
 
-        String tempPath = workLog1Rl.getVisibility() == View.VISIBLE?workLog1Rl.getTag().toString()+",":"";
-        tempPath += workLog2Rl.getVisibility() == View.VISIBLE?workLog2Rl.getTag().toString():"";
+        switch (requestType){
+            case 1:
+                url.setmBaseUrl(URLConstants.ADD_MEMBER_MESSAGE);
+                postParams.put("userId", BaseApplication.getUserInfo().getId());
+                postParams.put("msgType",cashType);
+                postParams.put("flag","0");
+                postParams.put("msgContent",contentEt.getText().toString());
+                postParams.put("phone",phoneEt.getText().toString());
+                postParams.put("address",addressTv.getText().toString());
+                postParams.put("cityId",BaseApplication.getInstance().location[1]);
+                String tempPath = workLog1Rl.getVisibility() == View.VISIBLE?workLog1Rl.getTag().toString()+",":"";
+                tempPath += workLog2Rl.getVisibility() == View.VISIBLE?workLog2Rl.getTag().toString():"";
+                postParams.put("msgPic",tempPath);
+                break;
+            case 2:
+                url.setmBaseUrl(URLConstants.INTEGRAL_INFO);
+                postParams.put("userId",BaseApplication.getUserInfo().getId());
 
-        postParams.put("msgPic",tempPath);
+                break;
+        }
+
         RequestParam param = new RequestParam();
         param.setmPostMap(postParams);
         param.setmHttpURL(url);
         param.setPostRequestMethod();
-        RequestManager.getRequestData(getActivity(), createReqSuccessListener(),createMyReqErrorListener(), param);
+        RequestManager.getRequestData(getActivity(), createReqSuccessListener(requestType),createMyReqErrorListener(), param);
 
     }
 
     @Override
     public void handleRspSuccess(int requestType,Object obj) {
-        SmartToast.showText("发布成功");
-        mActivity.setResult(Activity.RESULT_OK);
-        mActivity.finish();
+        switch (requestType){
+            case 1:
+                SmartToast.showText("发布成功");
+                mActivity.setResult(Activity.RESULT_OK);
+                mActivity.finish();
+                break;
+            case 2:
+                JsonParserBase<Value> jsonBase =  ParserUtil.fromJsonBase(obj.toString(), new TypeToken<JsonParserBase<Value>>() {
+                }.getType());
+                if((value = jsonBase.getObj()) != null){
+                    if(value.getMsgSendMinIntegral()< value.getUserIntegral() && value.getMsgIntegral()<value.getUserIntegral()){
+
+                        AlertDialogUtils.displayMyAlertChoice(mActivity, "温馨提示", "发布消息需消耗"+value.getMsgIntegral()+"积分哦~", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View vi) {
+                                publishReq();
+//                                Intent intent = new Intent(mActivity,WidthdrawInfoActivity.class);
+//                                intent.setFlags(2);
+//                                startActivityForResult(intent,100);
+                            }
+                        },null);
+
+                    }else {
+                        SmartToast.showText("您的积分不足,不能发布哦!");
+                    }
+                }
+                break;
+        }
+
     }
     @Override
     public void onDestroyView() {
@@ -521,7 +579,12 @@ public class PublisFragment extends BaseFragment implements View.OnClickListener
                         if (SDCardUtils.checkSDCardStatus()) {
                             File tempFile = new File(Environment.getExternalStorageDirectory(), IMAGE_FILE_NAME);
                             m_obj_IconBp = BitmapFactory.decodeFile(tempFile.getPath());
-                            getImageToView();
+
+                            if(m_obj_IconBp != null){
+                                getImageToView();
+                            }else {
+                                SmartToast.showText("您没有操作此图的权限!");
+                            }
 //                            startPhotoZoom(Uri.fromFile(tempFile));
                         } else {
                             Toast.makeText(getActivity(), "未找到存储卡，无法存储照片！", Toast.LENGTH_LONG).show();
@@ -530,7 +593,11 @@ public class PublisFragment extends BaseFragment implements View.OnClickListener
                         if (SDCardUtils.checkSDCardStatus()) {
                             File tempFile = new File(Environment.getExternalStorageDirectory(), IMAGE_FILE_NAME);
                             m_obj_IconBp = BitmapFactory.decodeFile(tempFile.getPath());
-                            getImageToView();
+                            if(m_obj_IconBp != null){
+                                getImageToView();
+                            }else {
+                                SmartToast.showText("您没有操作此图的权限!");
+                            }
 //                            startPhotoZoom(Uri.fromFile(tempFile));
                         } else {
                             Toast.makeText(getActivity(), "未找到存储卡，无法存储照片！", Toast.LENGTH_LONG).show();
@@ -542,7 +609,11 @@ public class PublisFragment extends BaseFragment implements View.OnClickListener
                         Uri mImageUri = data.getData();
                         String path = getPath(getActivity(), mImageUri);
                         m_obj_IconBp = BitmapFactory.decodeFile(path);
-                        getImageToView();
+                        if(m_obj_IconBp != null){
+                            getImageToView();
+                        }else {
+                            SmartToast.showText("您没有操作此图的权限!");
+                        }
 //                        mImageUri = Uri.fromFile(new File(path));
 //                        try {
 //                            startPhotoZoom(mImageUri);
@@ -554,6 +625,8 @@ public class PublisFragment extends BaseFragment implements View.OnClickListener
                 case RESULT_REQUEST:// 保存修改的头像并上传服务器
                     if (data != null) {
                         getImageToView(data);
+                    }else {
+                        SmartToast.showText("您没有操作此图的权限!");
                     }
                     break;
             }
@@ -572,13 +645,16 @@ public class PublisFragment extends BaseFragment implements View.OnClickListener
                 }.getType());
                 if (result != null && URLConstants.SUCCESS_CODE.equals(result.getResult())) {
                     if(workLog1Rl.getVisibility() == View.GONE){
-                        workLog1Img.setImageBitmap(m_obj_IconBp);
+//                        workLog1Img.setImageBitmap(m_obj_IconBp);
                         workLog1Rl.setVisibility(View.VISIBLE);
                         workLog1Rl.setTag(result.getFilePath());
+
+                        ImageLoader.getInstance().displayImage(result.getAbsFilePath(),workLog1Img, ImageLoaderUtil.mHallIconLoaderOptions);
                     }else {
-                        workLog2Img.setImageBitmap(m_obj_IconBp);
+//                        workLog2Img.setImageBitmap(m_obj_IconBp);
                         workLog2Rl.setVisibility(View.VISIBLE);
                         workLog2Rl.setTag(result.getFilePath());
+                        ImageLoader.getInstance().displayImage(result.getAbsFilePath(),workLog2Img, ImageLoaderUtil.mHallIconLoaderOptions);
                     }
 
                     if(workLog1Rl.getVisibility() == View.VISIBLE
@@ -587,6 +663,7 @@ public class PublisFragment extends BaseFragment implements View.OnClickListener
 
                     }
 
+                    m_obj_IconBp = null;
                 } else {
                     toasetUtil.showInfo("上传失败,请重新上传!");
                 }

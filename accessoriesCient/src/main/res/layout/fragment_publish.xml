@@ -41,7 +41,7 @@
             <ImageView
                 android:id="@+id/workLog1Img"
                 style="@style/style_log_img"
-                android:background="@drawable/abaose"/>
+                />
 
             <ImageView
                 style="@style/style_log_img_delete"
@@ -58,7 +58,7 @@
             <ImageView
                 android:id="@+id/workLog2Img"
                 style="@style/style_log_img"
-                android:background="@drawable/abaose"/>
+                />
 
             <ImageView
                 style="@style/style_log_img_delete"

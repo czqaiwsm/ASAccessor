@@ -542,7 +542,11 @@ public class PublisFragment extends BaseFragment implements View.OnClickListener
                             File tempFile = new File(Environment.getExternalStorageDirectory(), IMAGE_FILE_NAME);
 
                             m_obj_IconBp = BitmapFactory.decodeFile(tempFile.getPath());
-                            getImageToView();
+                            if(m_obj_IconBp != null){
+                                getImageToView();
+                            }else {
+                                SmartToast.showText("您没有操作此图的权限!");
+                            }
 //                            startPhotoZoom(Uri.fromFile(tempFile));
                         } else {
                             Toast.makeText(getActivity(), "未找到存储卡，无法存储照片！", Toast.LENGTH_LONG).show();
@@ -553,7 +557,11 @@ public class PublisFragment extends BaseFragment implements View.OnClickListener
 
 //                            startPhotoZoom(Uri.fromFile(tempFile));
                             m_obj_IconBp = BitmapFactory.decodeFile(tempFile.getPath());
-                            getImageToView();
+                            if(m_obj_IconBp != null){
+                                getImageToView();
+                            }else {
+                                SmartToast.showText("您没有操作此图的权限!");
+                            }
                         } else {
                             Toast.makeText(getActivity(), "未找到存储卡，无法存储照片！", Toast.LENGTH_LONG).show();
                         }
@@ -565,7 +573,11 @@ public class PublisFragment extends BaseFragment implements View.OnClickListener
                         String path = getPath(getActivity(), mImageUri);
 
                         m_obj_IconBp = BitmapFactory.decodeFile(path);
-                        getImageToView();
+                        if(m_obj_IconBp != null){
+                            getImageToView();
+                        }else {
+                            SmartToast.showText("您没有操作此图的权限!");
+                        }
 //                        mImageUri = Uri.fromFile(new File(path));
 //                        try {
 //                            startPhotoZoom(mImageUri);
@@ -595,13 +607,16 @@ public class PublisFragment extends BaseFragment implements View.OnClickListener
                 }.getType());
                 if (result != null && URLConstants.SUCCESS_CODE.equals(result.getResult())) {
                     if(workLog1Rl.getVisibility() == View.GONE){
-                        workLog1Img.setImageBitmap(m_obj_IconBp);
+//                        workLog1Img.setImageBitmap(m_obj_IconBp);
                         workLog1Rl.setVisibility(View.VISIBLE);
                         workLog1Rl.setTag(result.getFilePath());
+                        ImageLoader.getInstance().displayImage(result.getAbsFilePath(),workLog1Img, ImageLoaderUtil.mHallIconLoaderOptions);
+
                     }else {
-                        workLog2Img.setImageBitmap(m_obj_IconBp);
+//                        workLog2Img.setImageBitmap(m_obj_IconBp);
                         workLog2Rl.setVisibility(View.VISIBLE);
                         workLog2Rl.setTag(result.getFilePath());
+                        ImageLoader.getInstance().displayImage(result.getAbsFilePath(),workLog2Img, ImageLoaderUtil.mHallIconLoaderOptions);
                     }
 
                     if(workLog1Rl.getVisibility() == View.VISIBLE
@@ -609,7 +624,7 @@ public class PublisFragment extends BaseFragment implements View.OnClickListener
                         addRl.setVisibility(View.GONE);
 
                     }
-
+                    m_obj_IconBp = null;
                 } else {
                     toasetUtil.showInfo("上传失败,请重新上传!");
                 }

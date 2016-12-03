@@ -58,12 +58,12 @@ public class MsgInfoAdpter extends MainAdapter {
             if(msgInfo.getPicAry() != null && msgInfo.getPicAry().size()==1){
                 holder.oneImg.setVisibility(View.VISIBLE);
                 holder.twoImgLl.setVisibility(View.GONE);
-                ImageLoader.getInstance().displayImage(msgInfo.getPicAry().get(0),holder.oneImg);
+                ImageLoader.getInstance().displayImage(msgInfo.getPicAry().get(0),holder.oneImg,ImageLoaderUtil.mHallIconLoaderOptions);
             }else {
                 holder.oneImg.setVisibility(View.GONE);
                 holder.twoImgLl.setVisibility(View.VISIBLE);
-                ImageLoader.getInstance().displayImage(msgInfo.getPicAry().get(0),holder.img1);
-                ImageLoader.getInstance().displayImage(msgInfo.getPicAry().get(1),holder.img2);
+                ImageLoader.getInstance().displayImage(msgInfo.getPicAry().get(0),holder.img1,ImageLoaderUtil.mHallIconLoaderOptions);
+                ImageLoader.getInstance().displayImage(msgInfo.getPicAry().get(1),holder.img2,ImageLoaderUtil.mHallIconLoaderOptions);
             }
             if("1".equals(msgInfo.getMsgType())){
                 holder.typeTv.setText("求购");

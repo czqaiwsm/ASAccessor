@@ -70,15 +70,17 @@ public class MsgInfoFragment extends PullRefreshFragment implements RequsetListe
             @Override
             public void onClick(final View v) {
 
-                v.setClickable(false);
-                v.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        v.setClickable(true);
-                    }
-                },10*1000);
-
-                requestTask(2);
+//                v.setClickable(false);
+//                v.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        v.setClickable(true);
+//                    }
+//                },10*1000);
+//                requestTask(2);
+                Intent intent = new Intent(mActivity,WidthdrawInfoActivity.class);
+                intent.setFlags(2);
+                startActivityForResult(intent,100);
 
             }
         });
