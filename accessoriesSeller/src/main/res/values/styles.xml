@@ -101,6 +101,13 @@
         <item name="android:windowEnterAnimation">@anim/popu_bottom_show</item>
         <item name="android:windowExitAnimation">@anim/popu_bottom_diss</item>
     </style>
+    <style name="query_car_txt_sty2">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/text_size_second</item>
+        <item name="android:maxWidth">230dp</item>
+    </style>
 
     <!-- 评价等级样式 -->
     <style name="customRatingBarLarge" parent="@android:style/Widget.RatingBar">

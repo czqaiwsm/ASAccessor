@@ -58,8 +58,32 @@ public class QueryCarFragment extends BaseFragment implements View.OnClickListen
     TextView gearsNumTv;
     @Bind(R.id.powerTv)
     TextView powerTv;
+    @Bind(R.id.modelNameTv)
+    TextView modelNameTv;
+    @Bind(R.id.saleNameTv)
+    TextView saleNameTv;
+    @Bind(R.id.jetTypeTv)
+    TextView jetTypeTv;
+    @Bind(R.id.fuelTypeTv)
+    TextView fuelTypeTv;
+    @Bind(R.id.cylinderNumberTv)
+    TextView cylinderNumberTv;
+    @Bind(R.id.cylinderFormTv)
+    TextView cylinderFormTv;
+    @Bind(R.id.airBagT)
+    TextView airBagT;
+    @Bind(R.id.seatNumT)
+    TextView seatNumT;
+    @Bind(R.id.vehicleLevelTv)
+    TextView vehicleLevelTv;
+    @Bind(R.id.doorNumTv)
+    TextView doorNumTv;
     @Bind(R.id.carBodyTv)
     TextView carBodyTv;
+    @Bind(R.id.carWeight)
+    TextView carWeight;
+    @Bind(R.id.assemblyFactoryTv)
+    TextView assemblyFactoryTv;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -91,12 +115,11 @@ public class QueryCarFragment extends BaseFragment implements View.OnClickListen
         String strUrl = "https://route.showapi.com/1142-1?" +
                 "showapi_appid=25683&showapi_sign=" +
                 "091582443591405e8f0c1387b74ee566" +
-                "&vin="+searchEdit.getText().toString(); //
+                "&vin=" + searchEdit.getText().toString(); //
         HttpURL url = new HttpURL();
         url.setmBaseUrl(strUrl);
         RequestParam param = new RequestParam();
         param.setmHttpURL(url);
-        param.setPostRequestMethod();
         RequestManager.getRequestData(getActivity(), new Response.Listener<Object>() {
             @Override
             public void onResponse(Object object) {
@@ -104,24 +127,37 @@ public class QueryCarFragment extends BaseFragment implements View.OnClickListen
                 System.out.println("vinRes==>" + object.toString());
                 VinBean jsonParserBase = ParserUtil.fromJson(object.toString(), new TypeToken<VinBean>() {
                 }.getType());
-                VinBean.VinInfo  vinInfo = null ;
+                VinBean.VinInfo vinInfo = null;
 
                 if ("0".equals(jsonParserBase.showapi_res_code) && (vinInfo = jsonParserBase.showapi_res_body) != null) {
-                        if("0".equals(vinInfo.ret_code)){
-                            brandNameTv.setText(vinInfo.brand_name);
-                            manufacturerTv.setText(vinInfo.manufacturer);
-                            carTypeTv.setText(vinInfo.car_type);
-                            madeYearTv.setText(vinInfo.made_year);
-                            engineTypeTv.setText(vinInfo.engine_type);
-                            transmissionTypeTv.setText(vinInfo.transmission_type);
-                            outputVolumeTv.setText(vinInfo.output_volume);
-                            gearsNumTv.setText(vinInfo.gears_num);
-                            powerTv.setText(vinInfo.power);
-                            gearsNumTv.setText(vinInfo.gears_num);
-                            carBodyTv.setText(vinInfo.car_body);
-                        }else {
-                            SmartToast.showText(vinInfo.remark);
-                        }
+                    if ("0".equals(vinInfo.ret_code)) {
+                        brandNameTv.setText(vinInfo.brand_name);
+                        manufacturerTv.setText(vinInfo.manufacturer);
+                        carTypeTv.setText(vinInfo.car_type);
+                        madeYearTv.setText(vinInfo.made_year);
+                        engineTypeTv.setText(vinInfo.engine_type);
+                        transmissionTypeTv.setText(vinInfo.transmission_type);
+                        outputVolumeTv.setText(vinInfo.output_volume);
+                        gearsNumTv.setText(vinInfo.gears_num);
+                        powerTv.setText(vinInfo.power);
+                        gearsNumTv.setText(vinInfo.gears_num);
+
+                        modelNameTv.setText(vinInfo.model_name);
+                        saleNameTv.setText(vinInfo.sale_name);
+                        jetTypeTv.setText(vinInfo.jet_type);
+                        fuelTypeTv.setText(vinInfo.fuel_Type);
+                        cylinderNumberTv.setText(vinInfo.cylinder_number);
+                        cylinderFormTv.setText(vinInfo.cylinder_form);
+                        airBagT.setText(vinInfo.air_bag);
+                        seatNumT.setText(vinInfo.seat_num);
+                        vehicleLevelTv.setText(vinInfo.vehicle_level);
+                        doorNumTv.setText(vinInfo.door_num);
+                        carBodyTv.setText(vinInfo.car_body);
+                        carWeight.setText(vinInfo.car_weight);
+                        assemblyFactoryTv.setText(vinInfo.assembly_factory);
+                    } else {
+                        SmartToast.showText(vinInfo.remark);
+                    }
 
                 } else {
                     brandNameTv.setText("");
@@ -135,6 +171,20 @@ public class QueryCarFragment extends BaseFragment implements View.OnClickListen
                     powerTv.setText("");
                     gearsNumTv.setText("");
                     carBodyTv.setText("");
+
+                    modelNameTv.setText("");
+                    saleNameTv.setText("");
+                    jetTypeTv.setText("");
+                    fuelTypeTv.setText("");
+                    cylinderNumberTv.setText("");
+                    cylinderFormTv.setText("");
+                    airBagT.setText("");
+                    seatNumT.setText("");
+                    vehicleLevelTv.setText("");
+                    doorNumTv.setText("");
+                    carBodyTv.setText("");
+                    carWeight.setText("");
+                    assemblyFactoryTv.setText("");
                     SmartToast.showText(jsonParserBase.showapi_res_error);
                 }
 
@@ -151,9 +201,9 @@ public class QueryCarFragment extends BaseFragment implements View.OnClickListen
                 searchEdit.setText("");
                 break;
             case R.id.search_btn:
-                if(!TextUtils.isEmpty(searchEdit.getText())){
+                if (!TextUtils.isEmpty(searchEdit.getText())) {
                     requestData(1);
-                }else {
+                } else {
                     SmartToast.showText("请输入要搜索的VIN码!");
                 }
                 break;

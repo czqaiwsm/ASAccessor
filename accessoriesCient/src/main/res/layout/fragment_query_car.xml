@@ -56,7 +56,7 @@
                      android:paddingLeft="10dp"
                      android:paddingRight="10dp"
                      android:paddingTop="6dp"
-                     android:visibility="gone"
+                     android:visibility="visible"
                      android:textSize="@dimen/text_size_second"/>-->
 
             <ImageView
@@ -110,66 +110,71 @@
             <LinearLayout android:layout_width="match_parent"
                           android:layout_height="wrap_content"
                           android:layout_marginTop="15dp"
+                          android:visibility="visible"
                 >
                 <TextView
                     style="@style/query_car_txt_sty"
                     android:layout_weight="1"
-                    android:text="品牌"
+                    android:text="品牌名称"
                     />
                 <TextView
                     android:id="@+id/brandNameTv"
                     android:textColor = "@color/color_666"
-                    style="@style/query_car_txt_sty"/>
+                    style="@style/query_car_txt_sty2"/>
 
             </LinearLayout>
             <LinearLayout android:layout_width="match_parent"
                           android:layout_height="wrap_content"
                           android:layout_marginTop="15dp"
+                          android:visibility="visible"
                 >
                 <TextView
                     style="@style/query_car_txt_sty"
                     android:layout_weight="1"
-                    android:text="厂家名称"
+                    android:text="车型名称"
                     />
                 <TextView
-                    android:id="@+id/manufacturerTv"
+                    android:id="@+id/modelNameTv"
                     android:textColor = "@color/color_666"
-                    style="@style/query_car_txt_sty"/>
+                    style="@style/query_car_txt_sty2"/>
 
             </LinearLayout>
             <LinearLayout android:layout_width="match_parent"
                           android:layout_height="wrap_content"
                           android:layout_marginTop="15dp"
+                          android:visibility="visible"
                 >
                 <TextView
                     style="@style/query_car_txt_sty"
                     android:layout_weight="1"
-                    android:text="车型"
+                    android:text="销售名称"
+                    />
+                <TextView
+                    android:id="@+id/saleNameTv"
+                    android:textColor = "@color/color_666"
+                    style="@style/query_car_txt_sty2"/>
+
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="15dp"
+                          android:visibility="visible"
+                >
+                <TextView
+                    style="@style/query_car_txt_sty"
+                    android:layout_weight="1"
+                    android:text="车辆类型"
                     />
                 <TextView
                     android:id="@+id/carTypeTv"
                     android:textColor = "@color/color_666"
-                    style="@style/query_car_txt_sty"/>
+                    style="@style/query_car_txt_sty2"/>
 
             </LinearLayout>
             <LinearLayout android:layout_width="match_parent"
                           android:layout_height="wrap_content"
                           android:layout_marginTop="15dp"
-                >
-                <TextView
-                    style="@style/query_car_txt_sty"
-                    android:layout_weight="1"
-                    android:text="年份"
-                    />
-                <TextView
-                    android:id="@+id/madeYearTv"
-                    android:textColor = "@color/color_666"
-                    style="@style/query_car_txt_sty"/>
-
-            </LinearLayout>
-            <LinearLayout android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          android:layout_marginTop="15dp"
+                          android:visibility="visible"
                 >
                 <TextView
                     style="@style/query_car_txt_sty"
@@ -179,7 +184,55 @@
                 <TextView
                     android:id="@+id/engineTypeTv"
                     android:textColor = "@color/color_666"
-                    style="@style/query_car_txt_sty"/>
+                    style="@style/query_car_txt_sty2"/>
+
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="15dp"
+                          android:visibility="visible"
+                >
+                <TextView
+                    style="@style/query_car_txt_sty"
+                    android:layout_weight="1"
+                    android:text="功率/转速"
+                    />
+                <TextView
+                    android:id="@+id/powerTv"
+                    android:textColor = "@color/color_666"
+                    style="@style/query_car_txt_sty2"/>
+
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="15dp"
+                          android:visibility="visible"
+                >
+                <TextView
+                    style="@style/query_car_txt_sty"
+                    android:layout_weight="1"
+                    android:text="发动机喷射类型"
+                    />
+                <TextView
+                    android:id="@+id/jetTypeTv"
+                    android:textColor = "@color/color_666"
+                    style="@style/query_car_txt_sty2"/>
+
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="15dp"
+                          android:visibility="visible"
+                >
+                <TextView
+                    style="@style/query_car_txt_sty"
+                    android:layout_weight="1"
+                    android:text="燃油类型"
+                    />
+                <TextView
+                    android:id="@+id/fuelTypeTv"
+                    android:textColor = "@color/color_666"
+                    style="@style/query_car_txt_sty2"/>
 
             </LinearLayout>
             <LinearLayout android:layout_width="match_parent"
@@ -189,12 +242,42 @@
                 <TextView
                     style="@style/query_car_txt_sty"
                     android:layout_weight="1"
-                    android:text="变速器型号"
+                    android:text="变速器类型"
                     />
                 <TextView
                     android:id="@+id/transmissionTypeTv"
                     android:textColor = "@color/color_666"
-                    style="@style/query_car_txt_sty"/>
+                    style="@style/query_car_txt_sty2"/>
+
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="15dp"
+                >
+                <TextView
+                    style="@style/query_car_txt_sty"
+                    android:layout_weight="1"
+                    android:text="发动机缸数"
+                    />
+                <TextView
+                    android:id="@+id/cylinderNumberTv"
+                    android:textColor = "@color/color_666"
+                    style="@style/query_car_txt_sty2"/>
+
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="15dp"
+                >
+                <TextView
+                    style="@style/query_car_txt_sty"
+                    android:layout_weight="1"
+                    android:text="气缸形式"
+                    />
+                <TextView
+                    android:id="@+id/cylinderFormTv"
+                    android:textColor = "@color/color_666"
+                    style="@style/query_car_txt_sty2"/>
 
             </LinearLayout>
             <LinearLayout android:layout_width="match_parent"
@@ -209,7 +292,7 @@
                 <TextView
                     android:id="@+id/outputVolumeTv"
                     android:textColor = "@color/color_666"
-                    style="@style/query_car_txt_sty"/>
+                    style="@style/query_car_txt_sty2"/>
 
             </LinearLayout>
             <LinearLayout android:layout_width="match_parent"
@@ -219,14 +302,30 @@
                 <TextView
                     style="@style/query_car_txt_sty"
                     android:layout_weight="1"
-                    android:text="档位数"
+                    android:text="生产年份"
                     />
                 <TextView
-                    android:id="@+id/gearsNumTv"
+                    android:id="@+id/madeYearTv"
                     android:textColor = "@color/color_666"
-                    style="@style/query_car_txt_sty"/>
+                    android:maxWidth="@dimen/_150dp"
+                    style="@style/query_car_txt_sty2"/>
 
             </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                                         android:layout_height="wrap_content"
+                                         android:layout_marginTop="15dp"
+            >
+            <TextView
+                style="@style/query_car_txt_sty"
+                android:layout_weight="1"
+                android:text="安全气囊"
+                />
+            <TextView
+                android:id="@+id/airBagT"
+                android:textColor = "@color/color_666"
+                style="@style/query_car_txt_sty2"/>
+
+        </LinearLayout>
             <LinearLayout android:layout_width="match_parent"
                           android:layout_height="wrap_content"
                           android:layout_marginTop="15dp"
@@ -234,12 +333,41 @@
                 <TextView
                     style="@style/query_car_txt_sty"
                     android:layout_weight="1"
-                    android:text="功率转速"
+                    android:text="座位数"
                     />
                 <TextView
-                    android:id="@+id/powerTv"
+                    android:id="@+id/seatNumT"
                     android:textColor = "@color/color_666"
-                    style="@style/query_car_txt_sty"/>
+                    style="@style/query_car_txt_sty2"/>
+
+            </LinearLayout><LinearLayout android:layout_width="match_parent"
+                                         android:layout_height="wrap_content"
+                                         android:layout_marginTop="15dp"
+            >
+            <TextView
+                style="@style/query_car_txt_sty"
+                android:layout_weight="1"
+                android:text="车辆级别"
+                />
+            <TextView
+                android:id="@+id/vehicleLevelTv"
+                android:textColor = "@color/color_666"
+                style="@style/query_car_txt_sty2"/>
+
+        </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="15dp"
+                >
+                <TextView
+                    style="@style/query_car_txt_sty"
+                    android:layout_weight="1"
+                    android:text="车门数"
+                    />
+                <TextView
+                    android:id="@+id/doorNumTv"
+                    android:textColor = "@color/color_666"
+                    style="@style/query_car_txt_sty2"/>
 
             </LinearLayout>
             <LinearLayout android:layout_width="match_parent"
@@ -254,7 +382,67 @@
                 <TextView
                     android:id="@+id/carBodyTv"
                     android:textColor = "@color/color_666"
-                    style="@style/query_car_txt_sty"/>
+                    style="@style/query_car_txt_sty2"/>
+
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="15dp"
+                >
+                <TextView
+                    style="@style/query_car_txt_sty"
+                    android:layout_weight="1"
+                    android:text="厂家名称"
+                    />
+                <TextView
+                    android:id="@+id/manufacturerTv"
+                    android:textColor = "@color/color_666"
+                    style="@style/query_car_txt_sty2"/>
+
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="15dp"
+                >
+                <TextView
+                    style="@style/query_car_txt_sty"
+                    android:layout_weight="1"
+                    android:text="档位数"
+                    />
+                <TextView
+                    android:id="@+id/gearsNumTv"
+                    android:textColor = "@color/color_666"
+                    style="@style/query_car_txt_sty2"/>
+
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="15dp"
+                >
+                <TextView
+                    style="@style/query_car_txt_sty"
+                    android:layout_weight="1"
+                    android:text="装备质量"
+                    />
+                <TextView
+                    android:id="@+id/carWeight"
+                    android:textColor = "@color/color_666"
+                    style="@style/query_car_txt_sty2"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="15dp"
+                >
+                <TextView
+                    style="@style/query_car_txt_sty"
+                    android:layout_weight="1"
+                    android:text="组装厂"
+                    />
+                <TextView
+                    android:id="@+id/assemblyFactoryTv"
+                    android:textColor = "@color/color_666"
+                    style="@style/query_car_txt_sty2"/>
 
             </LinearLayout>
         </LinearLayout>
