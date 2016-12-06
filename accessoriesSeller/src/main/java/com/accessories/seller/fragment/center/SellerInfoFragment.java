@@ -240,10 +240,7 @@ public class SellerInfoFragment extends BaseFragment implements OnClickListener,
                 callNumTv.setText(TextUtils.isEmpty(balanceInfo.getPhoneCalledNum())?"0":balanceInfo.getPhoneCalledNum());
 
                 if(balanceInfo.getPhoneAry() == null || balanceInfo.getPhoneAry().size()==0){
-                    if (!TextUtils.isEmpty(balanceInfo.getShopAddr())) {
-                        address.setText(balanceInfo.getShopAddr());
-                        addressLL.setVisibility(View.VISIBLE);
-                    }
+
                     if (!TextUtils.isEmpty(balanceInfo.getPhone())) {
                         phone1.setText(balanceInfo.getPhone());
                         phone1LL.setVisibility(View.VISIBLE);
@@ -262,6 +259,11 @@ public class SellerInfoFragment extends BaseFragment implements OnClickListener,
                     }
                 }else {
                     phoneAdapter.addList(balanceInfo.getPhoneAry());
+                }
+
+                if (!TextUtils.isEmpty(balanceInfo.getShopAddr())) {
+                    address.setText(balanceInfo.getShopAddr());
+                    addressLL.setVisibility(View.VISIBLE);
                 }
 
                 if (!TextUtils.isEmpty(balanceInfo.getQq())) {
