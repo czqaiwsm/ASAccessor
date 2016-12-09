@@ -114,18 +114,19 @@ public class LoginFramgent extends BaseFragment implements View.OnClickListener,
                   toasetUtil.showInfo(R.string.phone_error);
               }else {
                   showLoadingDilog("");
-                  JMessageClient.register(login_username.getText().toString(), login_username.getText().toString(), new BasicCallback() {
-
-                      @Override
-                      public void gotResult(final int status, final String desc) {
-                          if (status == 0 || status ==1002 || status==898001) {//极光注册成功
-                              loginIm();
-                          } else {
-                              dismissLoadingDilog();
-                              HandleResponseCode.onHandle(mActivity, status, false);
-                          }
-                      }
-                  });
+                  loginIm();
+//                  JMessageClient.register(login_username.getText().toString(), login_username.getText().toString(), new BasicCallback() {
+//
+//                      @Override
+//                      public void gotResult(final int status, final String desc) {
+//                          if (status == 0 || status ==1002 || status==898001) {//极光注册成功
+//                              loginIm();
+//                          } else {
+//                              dismissLoadingDilog();
+//                              HandleResponseCode.onHandle(mActivity, status, false);
+//                          }
+//                      }
+//                  });
               }
               break;
           case R.id.register_text:
@@ -178,6 +179,8 @@ public class LoginFramgent extends BaseFragment implements View.OnClickListener,
     public void handleRspSuccess(int requestType,Object obj) {
         JsonParserBase<UserInfo> jsonParserBase = (JsonParserBase<UserInfo>)obj;
         if ((jsonParserBase != null)){
+            try{
+
             BaseApplication.saveUserInfo(jsonParserBase.getObj());
             BaseApplication.setMt_token(jsonParserBase.getObj().getId());
             toClassActivity(LoginFramgent.this, TeacherMainActivity.class.getName());//老师
@@ -236,7 +239,12 @@ public class LoginFramgent extends BaseFragment implements View.OnClickListener,
 
                 }
             });
-            mActivity.finish();
+            }catch (Exception e){
+                e.printStackTrace();
+            }finally {
+                mActivity.finish();
+            }
+
         }
     }
 

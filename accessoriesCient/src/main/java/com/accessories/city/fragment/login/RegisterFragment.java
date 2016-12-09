@@ -128,24 +128,24 @@ public class RegisterFragment extends BaseFragment implements OnClickListener,Re
 			return;
 		}
 
-		requetType = 2;
+//		requetType = 2;
 
-		requestTask(2);
+//		requestTask(2);
 
-//		showLoadingDilog("");
-//		JMessageClient.register(register_phone.getText().toString(), register_phone.getText().toString(), new BasicCallback() {
-//
-//			@Override
-//			public void gotResult(final int status, final String desc) {
-//				if (status == 0 || status ==1002) {//极光注册成功
-//					requetType = 2;
-//					requestData(2);
-//				} else {
-//					dismissLoadingDilog();
-//					HandleResponseCode.onHandle(mActivity, status, false);
-//				}
-//			}
-//		});
+		showLoadingDilog("");
+		JMessageClient.register(register_phone.getText().toString(), register_phone.getText().toString(), new BasicCallback() {
+
+			@Override
+			public void gotResult(final int status, final String desc) {
+				if (status == 0 || status ==1002 || status==898001) {//极光注册成功
+					requetType = 2;
+					requestData(2);
+				} else {
+					dismissLoadingDilog();
+					HandleResponseCode.onHandle(mActivity, status, false);
+				}
+			}
+		});
 
 
 

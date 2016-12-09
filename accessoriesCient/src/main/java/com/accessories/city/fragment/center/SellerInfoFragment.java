@@ -362,6 +362,8 @@ public class SellerInfoFragment extends BaseFragment implements OnClickListener,
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+        CallPhoneReceiver.mHandler = null;
+
     }
 
     public class PhoneAdapter extends BaseAdapter {
