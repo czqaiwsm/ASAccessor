@@ -161,6 +161,7 @@ public class TeacherCertifyFragment extends BaseFragment implements View.OnClick
             chooseCertifyRl.setClickable(false);
         }else  if("2".equalsIgnoreCase(satus)){
             schoolCertifyStatus.setText("认证通过");
+            chooseCertifyRl.setClickable(false);
         }else if("3".equalsIgnoreCase(satus)){
             schoolCertifyStatus.setText("认证不通过");
         }

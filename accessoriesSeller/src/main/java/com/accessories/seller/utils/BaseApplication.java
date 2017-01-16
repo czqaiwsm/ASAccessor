@@ -83,6 +83,8 @@ public class BaseApplication extends JChatDemoApplication {
         locationUitl.startLocation();
         location[0] = "南昌市";
         location[1] = "115";
+        getLocation();
+
         diviceId = ((TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE )).getDeviceId();
     }
 
@@ -134,6 +136,21 @@ public class BaseApplication extends JChatDemoApplication {
 
     public static boolean isLogin(){
         return getSellerUserInfo() != null && !TextUtils.isEmpty(sellerUserInfo.getShopId());
+    }
+
+    public  void saveLocation(String cityName,String cityId){
+        location[0] = cityName;
+        location[1] = cityId;
+        ContextUtils.saveObj2SP(BaseApplication.getInstance(),location,"location");
+    }
+
+
+    public  void getLocation(){
+        String locat[] = ContextUtils.getObjFromSp(BaseApplication.getInstance(),"location");
+
+        if(locat != null && locat.length >0){
+            location = locat;
+        }
     }
 
     private void initImageLoader() {

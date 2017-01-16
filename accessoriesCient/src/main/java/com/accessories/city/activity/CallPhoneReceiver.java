@@ -47,7 +47,7 @@ public class CallPhoneReceiver extends BroadcastReceiver {
                 case TelephonyManager.CALL_STATE_IDLE:
                     if (isOFFHOOK && isOutGoingCall) {
                         time = (System.currentTimeMillis() - time) / 1000;
-                        if (time > 20) {
+                        if (time > 10) {
                             // TODO: 16/8/3  请求接口
                             if(mHandler != null){
                                 mHandler.sendEmptyMessage(1);

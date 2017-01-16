@@ -139,7 +139,7 @@ public class RegisterFragment extends BaseFragment implements OnClickListener,Re
 			public void gotResult(final int status, final String desc) {
 				if (status == 0 || status ==1002 || status==898001) {//极光注册成功
 					requetType = 2;
-					requestData(2);
+					requestData(2);//注册app
 				} else {
 					dismissLoadingDilog();
 					HandleResponseCode.onHandle(mActivity, status, false);

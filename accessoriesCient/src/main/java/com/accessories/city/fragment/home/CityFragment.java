@@ -17,6 +17,7 @@ import com.accessories.city.bean.CityList;
 import com.accessories.city.fragment.BaseFragment;
 import com.accessories.city.help.RequsetListener;
 import com.accessories.city.parse.CityChooseParse;
+import com.accessories.city.utils.BaseApplication;
 import com.accessories.city.utils.URLConstants;
 import com.volley.req.net.HttpURL;
 import com.volley.req.net.RequestManager;
@@ -92,6 +93,8 @@ public class CityFragment extends BaseFragment implements RequsetListener{
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 City city = list.get(groupPosition).getCityList().get(childPosition);
                 if(city != null){
+
+                    BaseApplication.getInstance().saveLocation(city.getCityName(),city.getCityId());
                     Intent intent = new Intent();
                     intent.putExtra("cityId",city.getCityId());
                     intent.putExtra("cityName",city.getCityName());
