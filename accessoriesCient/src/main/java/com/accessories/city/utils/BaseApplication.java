@@ -13,10 +13,14 @@ import com.accessories.city.bean.UserInfo;
 import com.accessories.city.service.LocationService;
 import com.accessories.city.service.LocationUitl;
 import com.baidu.location.BDLocation;
+import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
 import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.nostra13.universalimageloader.utils.StorageUtils;
+
+import java.io.File;
 
 import cn.jpush.im.android.api.JMessageClient;
 import io.jchat.android.application.JChatDemoApplication;
@@ -146,8 +150,10 @@ public class BaseApplication extends JChatDemoApplication {
         // or you can create default_car configuration by
         // ImageLoaderConfiguration.createDefault(this);
         // method.
+        File cacheDir = StorageUtils.getOwnCacheDirectory(getApplicationContext(), "access/Cache");
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).threadPriority(Thread.NORM_PRIORITY - 2).denyCacheImageMultipleSizesInMemory()
                 .memoryCache(new LruMemoryCache(5 * 1024 * 1024)).memoryCacheSize(5 * 1024 * 1024).diskCacheSize(50 * 1024 * 1024).diskCacheFileCount(100)
+                .discCache(new UnlimitedDiscCache(cacheDir))
                 .tasksProcessingOrder(QueueProcessingType.LIFO) // Not
                 .build();
         // Initialize ImageLoader with configuration.
